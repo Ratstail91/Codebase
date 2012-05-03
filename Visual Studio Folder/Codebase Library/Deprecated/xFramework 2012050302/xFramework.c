@@ -115,7 +115,7 @@ int xSetEventCallback(Uint8 s, xEventCallback cb, Uint8 e) {
 }
 
 /* Body of the xFramework */
-Uint8 xAlloc(Uint8 num) {
+int xAlloc(Uint8 num) {
 	Uint8 i, j;
 
 	if (g_pSceneArray != NULL) return 2;
@@ -143,7 +143,7 @@ Uint8 xAlloc(Uint8 num) {
 	return 0;
 }
 
-Uint8 xSwitch(Uint8 i) {
+int xSwitch(Uint8 i) {
 	if (g_pSceneArray == NULL) return 2;
 	if (i >= g_uiSceneCount) return 1;
 

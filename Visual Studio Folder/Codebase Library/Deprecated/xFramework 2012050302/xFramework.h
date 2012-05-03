@@ -49,10 +49,10 @@ int xSetRenderCallback	(Uint8, xBasicCallback);
 int xSetEventCallback	(Uint8, xEventCallback, Uint8);
 
 /* Body of the xFramework */
-Uint8 xAlloc	(Uint8);
-Uint8 xSwitch	(Uint8);
-int xQuit		(int);
-int xProc		();
+int xAlloc	(Uint8);
+int xSwitch	(Uint8);
+int xQuit	(int);
+int xProc	();
 
 #ifdef __cplusplus
 } //extern "C"
