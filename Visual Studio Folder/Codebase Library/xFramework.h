@@ -23,7 +23,7 @@
  *     This framework contains no initialisation or rendering code.
 */
 #ifndef KR_XFRAMEWORK_H_
-#define KR_XFRAMEWORK_H_ 20120503
+#define KR_XFRAMEWORK_H_ 2012050302
 
 #ifdef __cplusplus
 extern "C" {
@@ -36,19 +36,22 @@ extern "C" {
 typedef void (*xBasicCallback)(void);
 typedef void (*xEventCallback)(SDL_Event const* const);
 
-/* xFramework functions */
+/* xFramework accessors and mutators */
 int xSetInitCallback	(xBasicCallback);
 int xSetQuitCallback	(xBasicCallback);
 
-int xSetHeadCallback	(xBasicCallback);
-int xSetTailCallback	(xBasicCallback);
-int xSetUpdateCallback	(xBasicCallback);
-int xSetRenderCallback	(xBasicCallback);
+int xSetHeadCallback	(Uint8, xBasicCallback);
+int xSetTailCallback	(Uint8, xBasicCallback);
+int xSetUpdateCallback	(Uint8, xBasicCallback);
+int xSetRenderCallback	(Uint8, xBasicCallback);
 
-int xSetEventCallback	(xEventCallback, Uint8);
+int xSetEventCallback	(Uint8, xEventCallback, Uint8);
 
-void xProc();
-void xQuit();
+/* Body of the xFramework */
+Uint8 xAlloc	(Uint8);
+Uint8 xSwitch	(Uint8);
+int xQuit		(int);
+int xProc		();
 
 #ifdef __cplusplus
 } //extern "C"

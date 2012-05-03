@@ -36,83 +36,158 @@
 
 /* xFramework internals */
 int g_bRunning = TRUE;
+Uint8 g_uiSceneCount = 0;
+Uint8 g_uiSceneThis = 0;
+Uint8 g_uiSceneNext = 0;
+int g_iReturn = 0;
 
 xBasicCallback g_fpInit = NULL;
 xBasicCallback g_fpQuit = NULL;
 
-xBasicCallback g_fpHead = NULL;
-xBasicCallback g_fpTail = NULL;
-xBasicCallback g_fpUpdate = NULL;
-xBasicCallback g_fpRender = NULL;
+typedef struct xScene {
+	xBasicCallback m_fpHead;
+	xBasicCallback m_fpTail;
+	xBasicCallback m_fpUpdate;
+	xBasicCallback m_fpRender;
 
-xEventCallback g_fpEvents[SDL_NUMEVENTS] = {LIST_32(NULL)};
+	xEventCallback m_fpEvents[SDL_NUMEVENTS];
+}xScene;
 
-/* xFramework functions */
-int  xSetInitCallback(xBasicCallback cb) {
+xScene* g_pSceneArray = NULL;
+
+/* xFramework accessors and mutators */
+int xSetInitCallback(xBasicCallback cb) {
 	if (g_fpInit != NULL) return 1;
+
 	g_fpInit = cb;
+
 	return 0;
 }
 
 int xSetQuitCallback(xBasicCallback cb) {
 	if (g_fpQuit != NULL) return 1;
+
 	g_fpQuit = cb;
+
 	return 0;
 }
 
-int xSetHeadCallback(xBasicCallback cb) {
-	if (g_fpHead != NULL) return 1;
-	g_fpHead = cb;
+int xSetHeadCallback(Uint8 s, xBasicCallback cb) {
+	if (g_pSceneArray == NULL || s >= g_uiSceneCount) return 2;
+	if (g_pSceneArray[s].m_fpHead != NULL) return 1;
+
+	g_pSceneArray[s].m_fpHead = cb;
+
 	return 0;
 }
 
-int xSetTailCallback(xBasicCallback cb) {
-	if (g_fpTail != NULL) return 1;
-	g_fpTail = cb;
+int xSetTailCallback(Uint8 s, xBasicCallback cb) {
+	if (g_pSceneArray == NULL || s >= g_uiSceneCount) return 2;
+	if (g_pSceneArray[s].m_fpTail != NULL) return 1;
+
+	g_pSceneArray[s].m_fpTail = cb;
+
 	return 0;
 }
 
-int xSetUpdateCallback(xBasicCallback cb) {
-	if (g_fpUpdate != NULL) return 1;
-	g_fpUpdate = cb;
+int xSetUpdateCallback(Uint8 s, xBasicCallback cb) {
+	if (g_pSceneArray == NULL || s >= g_uiSceneCount) return 2;
+	if (g_pSceneArray[s].m_fpUpdate != NULL) return 1;
+
+	g_pSceneArray[s].m_fpUpdate = cb;
+
 	return 0;
 }
 
-int xSetRenderCallback(xBasicCallback cb) {
-	if (g_fpRender != NULL) return 1;
-	g_fpRender = cb;
+int xSetRenderCallback(Uint8 s, xBasicCallback cb) {
+	if (g_pSceneArray == NULL || s >= g_uiSceneCount) return 2;
+	if (g_pSceneArray[s].m_fpRender != NULL) return 1;
+
+	g_pSceneArray[s].m_fpRender = cb;
+
 	return 0;
 }
 
-int xSetEventCallback(xEventCallback cb, Uint8 e) {
-	if (e >= SDL_NUMEVENTS) return 2;
-	if (g_fpEvents[e] != NULL) return 1;
-	g_fpEvents[e] = cb;
+int xSetEventCallback(Uint8 s, xEventCallback cb, Uint8 e) {
+	if (e >= SDL_NUMEVENTS) return 3;
+	if (g_pSceneArray == NULL || s >= g_uiSceneCount) return 2;
+	if (g_pSceneArray[s].m_fpEvents[e] != NULL) return 1;
+
+	g_pSceneArray[s].m_fpEvents[e] = cb;
+
 	return 0;
 }
 
-void xProc() {
+/* Body of the xFramework */
+Uint8 xAlloc(Uint8 num) {
+	Uint8 i, j;
+
+	if (g_pSceneArray != NULL) return 2;
+
+	g_uiSceneCount = num;
+
+	g_pSceneArray = malloc( g_uiSceneCount * sizeof(xScene) );
+
+	if (g_pSceneArray == NULL) return 1;
+
+	/* Zero the array */
+	for (i = 0; i < g_uiSceneCount; i++) {
+		g_pSceneArray[i].m_fpHead = NULL;
+		g_pSceneArray[i].m_fpTail = NULL;
+
+		g_pSceneArray[i].m_fpUpdate = NULL;
+		g_pSceneArray[i].m_fpRender = NULL;
+
+		/* Zero the event arrays */
+		for (j = 0; j < SDL_NUMEVENTS; j++) {
+			g_pSceneArray[i].m_fpEvents[j] = NULL;
+		}
+	}
+
+	return 0;
+}
+
+Uint8 xSwitch(Uint8 i) {
+	if (g_pSceneArray == NULL) return 2;
+	if (i >= g_uiSceneCount) return 1;
+
+	g_uiSceneNext = i;
+
+	return 0;
+}
+
+int xQuit(int i) {
+	if (g_iReturn != 0 || g_bRunning == FALSE) return -1;
+
+	g_bRunning = FALSE;
+
+	return 0;
+}
+
+int xProc() {
 	SDL_Event event;
+
+	if (g_pSceneArray == NULL) return 2;
 
 	if (g_fpInit != NULL) g_fpInit();
 
 	while(g_bRunning) {
-		if (g_fpHead != NULL) g_fpHead();
+		g_uiSceneThis = g_uiSceneNext;
+
+		if (g_pSceneArray[g_uiSceneThis].m_fpHead != NULL) g_pSceneArray[g_uiSceneThis].m_fpHead();
 
 		while(SDL_PollEvent(&event)) {
-			if (g_fpEvents[event.type] != NULL)
-				g_fpEvents[event.type](&event);
+			if (g_pSceneArray[g_uiSceneThis].m_fpEvents[event.type] != NULL)
+				g_pSceneArray[g_uiSceneThis].m_fpEvents[event.type](&event);
 		}
 
-		if (g_fpUpdate != NULL) g_fpUpdate();
-		if (g_fpRender != NULL) g_fpRender();
+		if (g_pSceneArray[g_uiSceneThis].m_fpUpdate != NULL) g_pSceneArray[g_uiSceneThis].m_fpUpdate();
+		if (g_pSceneArray[g_uiSceneThis].m_fpRender != NULL) g_pSceneArray[g_uiSceneThis].m_fpRender();
 
-		if (g_fpTail != NULL) g_fpTail();
+		if (g_pSceneArray[g_uiSceneThis].m_fpTail != NULL) g_pSceneArray[g_uiSceneThis].m_fpTail();
 	}
 
 	if (g_fpQuit != NULL) g_fpQuit();
-}
 
-void xQuit() {
-	g_bRunning = FALSE;
+	return g_iReturn;
 }
