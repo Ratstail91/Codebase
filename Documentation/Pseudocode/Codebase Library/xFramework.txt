@@ -1,0 +1,28 @@
+function pointers:
+
+init
+quit
+
+scene:
+	head
+	tail
+	update
+	render
+	events[32]
+end
+
+-------------------------
+
+setInit
+setQuit
+
+setHead		(int, basic)
+setTail		(int, basic)
+setUpdate	(int, basic)
+setRender	(int, basic)
+setEvent	(int, event)
+
+reserve(int) -the number of scene space to reserve
+proc() -the main guts of the program
+quit() -exit the program
+
