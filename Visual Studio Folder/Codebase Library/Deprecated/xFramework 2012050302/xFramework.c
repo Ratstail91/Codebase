@@ -21,15 +21,11 @@
  * Description: 
  *     This is a simple framework written in C, based on Simple DirectMedia Layer (SDL).
  *     This framework contains no initialisation or rendering code.
+ *     This version handles multiple scenes.
 */
 #include "xFramework.h"
 
 /* Preprocessor directives */
-#define LIST_02(X) X,X
-#define LIST_04(X) LIST_02(X),LIST_02(X)
-#define LIST_08(X) LIST_04(X),LIST_04(X)
-#define LIST_16(X) LIST_08(X),LIST_08(X)
-#define LIST_32(X) LIST_16(X),LIST_16(X)
 
 #define FALSE 0
 #define TRUE 1

@@ -21,6 +21,7 @@
  * Description: 
  *     This is a simple framework written in C, based on Simple DirectMedia Layer (SDL).
  *     This framework contains no initialisation or rendering code.
+ *     This version handles multiple scenes.
 */
 #ifndef KR_XFRAMEWORK_H_
 #define KR_XFRAMEWORK_H_ 2012050302

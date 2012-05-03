@@ -21,6 +21,7 @@
  * Description: 
  *     This is a simple framework written in C, based on Simple DirectMedia Layer (SDL).
  *     This framework contains no initialisation or rendering code.
+ *     This version handles only one scene.
 */
 #include "xFramework.h"
 
