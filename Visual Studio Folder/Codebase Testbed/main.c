@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "SDL.h"
-#include "Deprecated\xFramework 2012050302\xFramework.h"
+#include "xFramework_m.h"
 
 /* globals */
 SDL_Surface* g_pScreen = NULL;

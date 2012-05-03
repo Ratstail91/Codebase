@@ -23,7 +23,7 @@
  *     This framework contains no initialisation or rendering code.
  *     This version handles multiple scenes.
 */
-#include "xFramework.h"
+#include "xFramework_m.h"
 
 /* Preprocessor directives */
 

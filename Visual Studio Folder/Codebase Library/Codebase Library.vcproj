@@ -162,31 +162,47 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Deprecated"
+			Name="xFramework"
 			>
 			<Filter
-				Name="xFramework 2012050301"
+				Name="Single Scene"
 				Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 				UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 				>
 				<File
-					RelativePath=".\Deprecated\xFramework 2012050301\xFramework.c"
+					RelativePath=".\xFramework_s.c"
 					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\Deprecated\xFramework 2012050301\xFramework.h"
+					RelativePath=".\xFramework_s.h"
 					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
 				</File>
 			</Filter>
 			<Filter
-				Name="xFramework 2012050302"
+				Name="Multiple Scenes"
 				>
 				<File
-					RelativePath=".\Deprecated\xFramework 2012050302\xFramework.c"
+					RelativePath=".\xFramework_m.c"
 					>
 				</File>
 				<File
-					RelativePath=".\Deprecated\xFramework 2012050302\xFramework.h"
+					RelativePath=".\xFramework_m.h"
 					>
 				</File>
 			</Filter>

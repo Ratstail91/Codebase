@@ -23,7 +23,7 @@
  *     This framework contains no initialisation or rendering code.
  *     This version handles only one scene.
 */
-#include "xFramework.h"
+#include "xFramework_s.h"
 
 /* Preprocessor directives */
 #define LIST_02(X) X,X
