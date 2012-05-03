@@ -150,20 +150,6 @@
 	</References>
 	<Files>
 		<Filter
-			Name="xFramework"
-			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
-			>
-			<File
-				RelativePath=".\xFramework.c"
-				>
-			</File>
-			<File
-				RelativePath=".\xFramework.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="Documentation"
 			>
 			<File
@@ -174,6 +160,36 @@
 				RelativePath="..\..\Documentation\Pseudocode\Codebase Library\xFramework.txt"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="Deprecated"
+			>
+			<Filter
+				Name="xFramework 2012050301"
+				Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
+				UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+				>
+				<File
+					RelativePath=".\Deprecated\xFramework 2012050301\xFramework.c"
+					>
+				</File>
+				<File
+					RelativePath=".\Deprecated\xFramework 2012050301\xFramework.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="xFramework 2012050302"
+				>
+				<File
+					RelativePath=".\Deprecated\xFramework 2012050302\xFramework.c"
+					>
+				</File>
+				<File
+					RelativePath=".\Deprecated\xFramework 2012050302\xFramework.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

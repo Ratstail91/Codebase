@@ -1,3 +1,5 @@
+this referers to xFramework 2012050302, which is deprecated
+
 function pointers:
 
 init
