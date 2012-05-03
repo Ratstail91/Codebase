@@ -185,5 +185,7 @@ int xProc() {
 
 	if (g_fpQuit != NULL) g_fpQuit();
 
+	free(g_pSceneArray);
+
 	return g_iReturn;
 }
