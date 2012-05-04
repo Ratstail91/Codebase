@@ -150,7 +150,7 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Documentation"
+			Name="-Documentation"
 			>
 			<File
 				RelativePath="..\..\Documentation\Pseudocode\Codebase Library\Pseudocode.txt"
@@ -162,7 +162,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Callback Frameworks"
+			Name="Frameworks"
 			>
 			<Filter
 				Name="Simple Callbacks"
@@ -172,13 +172,6 @@
 				<File
 					RelativePath=".\simple_callbacks.c"
 					>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\simple_callbacks.h"
@@ -204,6 +197,30 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="Image"
+			>
+			<File
+				RelativePath=".\image.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\image.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Origin"
+			>
+			<File
+				RelativePath=".\origin.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\origin.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
