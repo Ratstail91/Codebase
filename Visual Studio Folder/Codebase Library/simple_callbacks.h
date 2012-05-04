@@ -1,6 +1,6 @@
-/* File Name: xFramework.h
+/* File Name: simple_callbacks.h
  * Author: Kayne Ruse
- * Date: 3/5/2012
+ * Date: 4/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -21,10 +21,14 @@
  * Description: 
  *     This is a simple framework written in C, based on Simple DirectMedia Layer (SDL).
  *     This framework contains no initialisation or rendering code.
- *     This version handles only one scene.
+ *     This version handles only one scene; see "complex callbacks" for multiple scenes.
+ * 
+ * Notes:
+ *     The "sc_" prefix for the globals is to differentiate these variables from identical
+ *     variables in "complex callbacks".
 */
-#ifndef KR_XFRAMEWORK_H_
-#define KR_XFRAMEWORK_H_ 2012050301
+#ifndef KR_SIMPLECALLBACKS_H_
+#define KR_SIMPLECALLBACKS_H_ 2012050401
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,22 +38,22 @@ extern "C" {
 #include "SDL.h"
 
 /* Callback types */
-typedef void (*xBasicCallback)(void);
-typedef void (*xEventCallback)(SDL_Event const* const);
+typedef void (*scBasicCallback)(void);
+typedef void (*scEventCallback)(SDL_Event const* const);
 
-/* xFramework functions */
-int xSetInitCallback	(xBasicCallback);
-int xSetQuitCallback	(xBasicCallback);
+/* Simple callback functions */
+int scSetInitCallback	(scBasicCallback);
+int scSetQuitCallback	(scBasicCallback);
 
-int xSetHeadCallback	(xBasicCallback);
-int xSetTailCallback	(xBasicCallback);
-int xSetUpdateCallback	(xBasicCallback);
-int xSetRenderCallback	(xBasicCallback);
+int scSetHeadCallback	(scBasicCallback);
+int scSetTailCallback	(scBasicCallback);
+int scSetUpdateCallback	(scBasicCallback);
+int scSetRenderCallback	(scBasicCallback);
 
-int xSetEventCallback	(xEventCallback, Uint8);
+int scSetEventCallback	(scEventCallback, Uint8);
 
-void xProc();
-void xQuit();
+void scProc();
+void scQuit();
 
 #ifdef __cplusplus
 } //extern "C"

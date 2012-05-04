@@ -1,6 +1,6 @@
-/* File Name: xFramework.h
+/* File Name: complex_callbacks.h
  * Author: Kayne Ruse
- * Date: 3/5/2012
+ * Date: 4/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -21,10 +21,14 @@
  * Description: 
  *     This is a simple framework written in C, based on Simple DirectMedia Layer (SDL).
  *     This framework contains no initialisation or rendering code.
- *     This version handles multiple scenes.
+ *     This version handles multiple scenes; see "simple callbacks" for a single scene.
+ * 
+ * Notes:
+ *     The "cc_" prefix for the globals is to differentiate these variables from identical
+ *     variables in "simple callbacks".
 */
-#ifndef KR_XFRAMEWORK_H_
-#define KR_XFRAMEWORK_H_ 2012050302
+#ifndef KR_COMPLEXCALLBACKS_H_
+#define KR_COMPLEXCALLBACKS_H_ 2012050401
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,25 +38,25 @@ extern "C" {
 #include "SDL.h"
 
 /* Callback types */
-typedef void (*xBasicCallback)(void);
-typedef void (*xEventCallback)(SDL_Event const* const);
+typedef void (*ccBasicCallback)(void);
+typedef void (*ccEventCallback)(SDL_Event const* const);
 
-/* xFramework accessors and mutators */
-int xSetInitCallback	(xBasicCallback);
-int xSetQuitCallback	(xBasicCallback);
+/* Complex callbacks accessors and mutators */
+int ccSetInitCallback	(ccBasicCallback);
+int ccSetQuitCallback	(ccBasicCallback);
 
-int xSetHeadCallback	(Uint8, xBasicCallback);
-int xSetTailCallback	(Uint8, xBasicCallback);
-int xSetUpdateCallback	(Uint8, xBasicCallback);
-int xSetRenderCallback	(Uint8, xBasicCallback);
+int ccSetHeadCallback	(Uint8, ccBasicCallback);
+int ccSetTailCallback	(Uint8, ccBasicCallback);
+int ccSetUpdateCallback	(Uint8, ccBasicCallback);
+int ccSetRenderCallback	(Uint8, ccBasicCallback);
 
-int xSetEventCallback	(Uint8, xEventCallback, Uint8);
+int ccSetEventCallback	(Uint8, ccEventCallback, Uint8);
 
-/* Body of the xFramework */
-int xAlloc	(Uint8);
-int xSwitch	(Uint8);
-int xQuit	(int);
-int xProc	();
+/* Body of the complex callbacks */
+int ccAlloc		(Uint8);
+int ccSwitch	(Uint8);
+int ccQuit		(int);
+int ccProc		();
 
 #ifdef __cplusplus
 } //extern "C"

@@ -162,19 +162,18 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="xFramework"
+			Name="Callback Frameworks"
 			>
 			<Filter
-				Name="Single Scene"
+				Name="Simple Callbacks"
 				Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 				UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 				>
 				<File
-					RelativePath=".\xFramework_s.c"
+					RelativePath=".\simple_callbacks.c"
 					>
 					<FileConfiguration
 						Name="Release|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCLCompilerTool"
@@ -182,11 +181,10 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\xFramework_s.h"
+					RelativePath=".\simple_callbacks.h"
 					>
 					<FileConfiguration
 						Name="Release|Win32"
-						ExcludedFromBuild="true"
 						>
 						<Tool
 							Name="VCCustomBuildTool"
@@ -195,14 +193,14 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Multiple Scenes"
+				Name="Complex Callbacks"
 				>
 				<File
-					RelativePath=".\xFramework_m.c"
+					RelativePath=".\complex_callbacks.c"
 					>
 				</File>
 				<File
-					RelativePath=".\xFramework_m.h"
+					RelativePath=".\complex_callbacks.h"
 					>
 				</File>
 			</Filter>
