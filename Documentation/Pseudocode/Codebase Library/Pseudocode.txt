@@ -1,7 +1,12 @@
 TODO:
 
 	import/format:
-		image
+		BaseSceneMgr
+		BaseScene
+			or
+		SceneMgr
+		BaseScene
+		
 		origin
 		all utilities
 	end
@@ -10,3 +15,8 @@ TODO:
 	add entry and exit functions to the frameworks, not-unlike constructors/destructors?
 		the callback systems don't cleanup after themselfs well.
 		lay off the frameworks :\
+	
+end
+
+-------------------------
+
