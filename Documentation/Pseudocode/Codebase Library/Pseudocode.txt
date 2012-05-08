@@ -1,5 +1,7 @@
 TODO:
 
+rename begin/end to head/tail
+figure out what to do
 	import/format:
 		BaseSceneMgr
 		BaseScene

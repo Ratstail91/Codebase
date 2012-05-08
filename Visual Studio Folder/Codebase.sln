@@ -8,6 +8,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Codebase Testbed", "Codebas
 		{E4691596-9FA8-42F1-86F5-B39E1AA092E4} = {E4691596-9FA8-42F1-86F5-B39E1AA092E4}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Quick Start", "Quick Start\Quick Start.vcproj", "{971E9A59-8A42-4492-9EB6-0F0AD3054942}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E4691596-9FA8-42F1-86F5-B39E1AA092E4} = {E4691596-9FA8-42F1-86F5-B39E1AA092E4}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -22,6 +27,10 @@ Global
 		{7B98105E-E17D-4476-905B-221A49811108}.Debug|Win32.Build.0 = Debug|Win32
 		{7B98105E-E17D-4476-905B-221A49811108}.Release|Win32.ActiveCfg = Release|Win32
 		{7B98105E-E17D-4476-905B-221A49811108}.Release|Win32.Build.0 = Release|Win32
+		{971E9A59-8A42-4492-9EB6-0F0AD3054942}.Debug|Win32.ActiveCfg = Debug|Win32
+		{971E9A59-8A42-4492-9EB6-0F0AD3054942}.Debug|Win32.Build.0 = Debug|Win32
+		{971E9A59-8A42-4492-9EB6-0F0AD3054942}.Release|Win32.ActiveCfg = Release|Win32
+		{971E9A59-8A42-4492-9EB6-0F0AD3054942}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
