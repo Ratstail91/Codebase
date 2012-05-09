@@ -133,7 +133,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib SDLmain.lib cb.lib"
+				AdditionalDependencies="SDL.lib SDLmain.lib SDL_net.lib cb.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(SolutionDir)$(ConfigurationName)\Codebase Library\lib"
 				GenerateDebugInformation="false"
@@ -169,15 +169,63 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Source Files"
+			Name="Entity"
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\main.cpp"
+				RelativePath=".\entity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\entity.h"
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Scene List"
+			>
+			<File
+				RelativePath=".\scene_list.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="SceneMgr"
+			>
+			<File
+				RelativePath=".\scene_mgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\scene_mgr.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="ScenePrime"
+			>
+			<File
+				RelativePath=".\scene_prime.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\scene_prime.h"
+				>
+			</File>
+		</Filter>
+		<File
+			RelativePath=".\main.cpp"
+			>
+			<FileConfiguration
+				Name="Release|Win32"
+				ExcludedFromBuild="true"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+				/>
+			</FileConfiguration>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

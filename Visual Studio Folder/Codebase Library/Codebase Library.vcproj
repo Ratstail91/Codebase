@@ -266,6 +266,58 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="CameraUtility"
+			>
+			<File
+				RelativePath=".\camera_utility.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\camera_utility.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="ConfigUtility"
+			>
+			<File
+				RelativePath=".\config_utility.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\config_utility.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="FPSUtility"
+			>
+			<File
+				RelativePath=".\fps_utility.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\fps_utility.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Network Systems"
+			>
+			<Filter
+				Name="UDPNetwork"
+				>
+				<File
+					RelativePath=".\udp_network.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\udp_network.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
