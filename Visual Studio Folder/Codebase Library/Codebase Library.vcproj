@@ -142,7 +142,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="xcopy &quot;$(SolutionDir)\$(ProjectName)\*.h&quot; &quot;$(OutDir)\include&quot; /D /S /Y /I"
+				CommandLine="CALL &quot;$(SolutionDir)dir-build.bat&quot;"
 			/>
 		</Configuration>
 	</Configurations>
