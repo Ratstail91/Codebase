@@ -16,6 +16,14 @@
 //Public access members
 //-------------------------
 
+SceneMgr::SceneMgr() {
+	//
+}
+
+SceneMgr::~SceneMgr() {
+	//
+}
+
 //void SceneMgr::Init() {
 //	//
 //}
@@ -31,14 +39,6 @@
 //-------------------------
 //Protected access members
 //-------------------------
-
-SceneMgr::SceneMgr() {
-	//
-}
-
-SceneMgr::~SceneMgr() {
-	//
-}
 
 void SceneMgr::LoadScene() {
 	delete GetScene();
@@ -58,11 +58,11 @@ void SceneMgr::LoadScene() {
 using namespace std;
 
 int SDL_main(int, char**) {
-	SceneMgr* pSceneMgr = Singleton<SceneMgr>::GetSingletonPtr();
+	SceneMgr app;
 
-	pSceneMgr->Init();
-	pSceneMgr->Loop();
-	pSceneMgr->Quit();
+	app.Init();
+	app.Loop();
+	app.Quit();
 
 	return 0;
 }

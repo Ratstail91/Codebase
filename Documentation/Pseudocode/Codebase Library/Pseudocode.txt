@@ -1,5 +1,6 @@
 TODO:
 
+Make SceneMgr static?
 add accessor for UDPNetwork's socket
 change ConfigUtility::Real() to a float return
 rename begin/end to head/tail
