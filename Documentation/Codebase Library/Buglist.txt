@@ -1,0 +1,11 @@
+1
+>	ConfigUtility's concatenation functions can't return a local string, since that would go out of scope.
+	Fixed by creating an element of ConfigUtility called "__reserved" to hold the return value.
+
+2
+>	CameraUtility isn't compatible with this version of Image.
+	Removed the TARGET functionality. Not really a fix, but fine for now.
+
+3
+>	ConfigUtility crashes when '#' is followed by EOF rather than newline.
+	Fixed by adding 'is.eof()' to the comment eater loop.

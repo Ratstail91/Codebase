@@ -153,15 +153,23 @@
 			Name="-Documentation"
 			>
 			<File
-				RelativePath="..\..\Documentation\Pseudocode\Codebase Library\Pseudocode.txt"
+				RelativePath="..\..\Documentation\Codebase Library\Buglist.txt"
 				>
 			</File>
 			<File
-				RelativePath="..\..\Documentation\Pseudocode\Codebase Library\Scene System.txt"
+				RelativePath="..\..\Documentation\Codebase Library\Pseudocode.txt"
 				>
 			</File>
 			<File
-				RelativePath="..\..\Documentation\Pseudocode\Codebase Library\xFramework.txt"
+				RelativePath="..\..\Documentation\Codebase Library\Scene System.txt"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Documentation\Codebase Library\TODO.txt"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Documentation\Codebase Library\xFramework.txt"
 				>
 			</File>
 		</Filter>
