@@ -161,15 +161,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\Documentation\Codebase Library\Scene System.txt"
-				>
-			</File>
-			<File
 				RelativePath="..\..\Documentation\Codebase Library\TODO.txt"
-				>
-			</File>
-			<File
-				RelativePath="..\..\Documentation\Codebase Library\xFramework.txt"
 				>
 			</File>
 		</Filter>
@@ -239,76 +231,84 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="Image"
+			Name="Utilities"
 			>
-			<File
-				RelativePath=".\image.cpp"
+			<Filter
+				Name="FPSUtility"
 				>
-			</File>
-			<File
-				RelativePath=".\image.h"
+				<File
+					RelativePath=".\fps_utility.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\fps_utility.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ConfigUtility"
 				>
-			</File>
+				<File
+					RelativePath=".\config_utility.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\config_utility.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="CameraUtility"
+				>
+				<File
+					RelativePath=".\camera_utility.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\camera_utility.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
-			Name="Origin"
+			Name="Instance System"
 			>
-			<File
-				RelativePath=".\origin.cpp"
+			<Filter
+				Name="Image"
 				>
-			</File>
-			<File
-				RelativePath=".\origin.h"
+				<File
+					RelativePath=".\image.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\image.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="BBox"
 				>
-			</File>
-		</Filter>
-		<Filter
-			Name="BBox"
-			>
-			<File
-				RelativePath=".\bbox.cpp"
+				<File
+					RelativePath=".\bbox.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\bbox.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Origin"
 				>
-			</File>
-			<File
-				RelativePath=".\bbox.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="CameraUtility"
-			>
-			<File
-				RelativePath=".\camera_utility.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\camera_utility.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="ConfigUtility"
-			>
-			<File
-				RelativePath=".\config_utility.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\config_utility.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="FPSUtility"
-			>
-			<File
-				RelativePath=".\fps_utility.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\fps_utility.h"
-				>
-			</File>
+				<File
+					RelativePath=".\origin.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\origin.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Network Systems"

@@ -1,29 +1,62 @@
 -------------------------
+
 Check each module's code consistency.
+
+Key:
+	>	Complete
+	*	Todo
+	-	Backburner
+end
+
 -------------------------
 
 Code base:
->	BaseScene
->	BaseSceneMgr
 
->	Singleton
+>	Frameworks
+	>	Scene System
+		>	BaseSceneMgr
+		>	BaseScene
+	end
+	
+	>	Simple Callbacks
+	>	Complex Callbacks
+end
 
->	BBox
->	Image
->	Origin
+>	Instance System
+	>	Image
+	>	Origin
+	>	BBox
+end
 
->	CameraUtility
->	ConfigUtility
->	FPSUtility
+>	Utilities
+	>	CameraUtility
+	>	ConfigUtility
+	>	FPSUtility
+end
 
->	UDPNetwork
-*	TCPNetwork
+>	Network Systems
+	>	UDPNetwork
+	*	TCPNetwork
+end
 
-quick setup files:
->	SceneList
->	SceneMgr
->	ScenePrime
->	Entity
+-	Map Systems
+	//"tools" build the maps, while "utilities" read the map data
+	-	MapTool
+	-	MapUtility
+	-	WaypointTool
+	-	WaypointUtility
+	-	PositionTool
+	-	PositionUtility
+end
+
+>	Quick Setup:
+	>	SceneList
+	>	SceneMgr
+	>	ScenePrime
+	>	Entity
+	-	ImageRot
+	-	EntityRot
+end
 
 -------------------------
 Document known bugs.
@@ -41,9 +74,21 @@ Consider possible additions
 *	Image::SetPosition(x, y)
 *	Entity::GetX() //just (int)GetRealX()
 *	"Disable" option in CameraUtility
-*	Move the Scene macros to quick start from BaseScene
-*	Rename SceneMgr to GameMgr
-*	New modules such as TCP networking, animation, rotation, or sound management
+*	"Target" option in CameraUtility, targeting an origin?
+*	Rename SceneMgr to GameMgr?
+*	New modules such as TCP networking, animation, rotation(done), or sound management
+*	Sound manager(SDL_mixer)
 *	Upgrading and compatabilities with SDL 1.3
--	Generic "single base class"
--	Particle system?
+*	add accessor for UDPNetwork's socket
+*	change ConfigUtility::Real() to a float return
+*	rename begin/end to head/tail
+-	Move the Scene macros to quick start from BaseScene
+-	add entry and exit functions to the frameworks, not-unlike constructors/destructors?
+-	the callback systems don't cleanup after themselfs well.
+-	Rename Origin to Origin2D
+-	Generic "single base class" (Does Simple Callbacks count as this? No, I need an actual class)
+-	Particle system? (boost the popularity!)
+-	Make SceneMgr static?
+
+-------------------------
+
