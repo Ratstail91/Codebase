@@ -326,6 +326,14 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="Code Generators"
+			>
+			<File
+				RelativePath=".\boilerplate.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
