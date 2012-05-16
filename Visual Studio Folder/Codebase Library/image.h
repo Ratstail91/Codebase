@@ -22,7 +22,7 @@
  *     A wrapper for SDL_Surface, and it's rendering functionality.
 */
 #ifndef KR_IMAGE_H_
-#define KR_IMAGE_H_ 2012051601
+#define KR_IMAGE_H_ 2012051602
 
 #include "SDL.h"
 
@@ -44,6 +44,8 @@ public:
 	virtual void DrawTo(SDL_Surface* const, int iCamX=0, int iCamY=0);
 
 	/* Accessors and mutators */
+	void SetImagePosition(int x, int y);
+
 	int SetImageX(int);
 	int SetImageY(int);
 	int SetImageW(int);

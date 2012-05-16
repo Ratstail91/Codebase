@@ -125,6 +125,11 @@ void Image::DrawTo(SDL_Surface* const pDest, int iCamX, int iCamY) {
 //Accessors and mutators
 //-------------------------
 
+void Image::SetImagePosition(int x, int y) {
+	m_dclip.x = x;
+	m_dclip.y = y;
+}
+
 int Image::SetImageX(int x) {
 	return m_dclip.x = x;
 }
