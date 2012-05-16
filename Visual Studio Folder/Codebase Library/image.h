@@ -1,6 +1,6 @@
 /* File Name: image.h
  * Author: Kayne Ruse
- * Date: 20/3/2012
+ * Date: 16/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -20,10 +20,9 @@
  * 
  * Description: 
  *     A wrapper for SDL_Surface, and it's rendering functionality.
- *     This is the oldest and most stable piece of code I own.
 */
 #ifndef KR_IMAGE_H_
-#define KR_IMAGE_H_ 2012032001
+#define KR_IMAGE_H_ 2012051601
 
 #include "SDL.h"
 
@@ -35,29 +34,25 @@ public:
 	Image(SDL_Surface* pSurface,  int x=0, int y=0, int w=0, int h=0);
 	virtual ~Image();
 
-	void Load(const char* szFileName, int x=0, int y=0, int w=0, int h=0);
-	void Unload();
-	virtual void DrawTo(SDL_Surface* const, int iCamX=0, int iCamY=0);
+	void LoadImage(const char* szFileName, int x=0, int y=0, int w=0, int h=0);
+	void LoadImage(SDL_Surface* pSurface,  int x=0, int y=0, int w=0, int h=0);
+	void UnloadImage();
 
 	void SetColorKey(int iRed=255, int iGreen=0, int iBlue=255);
 	void ClearColorKey();
 
-	bool Local();
-
-	/* Overloaded oprators */
-	Image& operator=(Image&);
-	Image& operator=(SDL_Surface*);
+	virtual void DrawTo(SDL_Surface* const, int iCamX=0, int iCamY=0);
 
 	/* Accessors and mutators */
-	int SetX(int);
-	int SetY(int);
-	int SetW(int);
-	int SetH(int);
+	int SetImageX(int);
+	int SetImageY(int);
+	int SetImageW(int);
+	int SetImageH(int);
 
-	int GetX();
-	int GetY();
-	int GetW();
-	int GetH();
+	int GetImageX();
+	int GetImageY();
+	int GetImageW();
+	int GetImageH();
 
 	int SetSheetX(int);
 	int SetSheetY(int);
@@ -67,13 +62,7 @@ public:
 	int GetSheetW();
 	int GetSheetH();
 
-	/* Preferences */
-	int SetWidth		(int i) { return SetW(i); }
-	int SetHeight		(int i) { return SetH(i); }
-	int GetWidth		() { return GetW(); }
-	int GetHeight		() { return GetH(); }
-	int GetSheetWidth	() { return GetSheetW(); }
-	int GetSheetHeight	() { return GetSheetH(); }
+	bool Local();
 
 protected:
 	/* Protected access members */
@@ -82,6 +71,8 @@ protected:
 
 private:
 	/* Private access members */
+	void Init();
+
 	SDL_Rect m_sclip;
 	SDL_Rect m_dclip;
 	SDL_Surface* m_pSurface;

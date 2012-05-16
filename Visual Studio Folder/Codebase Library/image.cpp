@@ -1,6 +1,6 @@
 /* File Name: image.cpp
  * Author: Kayne Ruse
- * Date: 20/3/2012
+ * Date: 16/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -20,7 +20,6 @@
  * 
  * Description: 
  *     A wrapper for SDL_Surface, and it's rendering functionality.
- *     This is the oldest and most stable piece of code I own.
 */
 #include <exception>
 #include "image.h"
@@ -29,6 +28,7 @@
 //Preprocessor
 //-------------------------
 
+//lazy shortcut
 #define CHECK_LOADED if (m_pSurface == NULL) throw(std::exception("No bitmap loaded"))
 #define CHECK_UNLOADED if (m_pSurface != NULL) throw(std::exception("Bitmap loaded"))
 
@@ -37,40 +37,27 @@
 //-------------------------
 
 Image::Image() {
-	m_pSurface = NULL;
-	m_bLocal = false;
-
-	m_sclip.x = 0;
-	m_sclip.y = 0;
-	m_sclip.w = 0;
-	m_sclip.h = 0;
-	m_dclip.x = 0;
-	m_dclip.y = 0;
+	Init();
 }
 
 Image::Image(const char* szFileName, int x, int y, int w, int h) {
-	Load(szFileName, x, y, w, h);
+	Init();
+	LoadImage(szFileName, x, y, w, h);
 }
 
 Image::Image(SDL_Surface* pSurface,  int x, int y, int w, int h) {
-	m_pSurface = pSurface;
-	m_bLocal = false;
-
-	m_sclip.x = 0;
-	m_sclip.y = 0;
-	m_sclip.w = (w == 0) ? m_pSurface->w : w;
-	m_sclip.h = (h == 0) ? m_pSurface->h : h;
-	m_dclip.x = x;
-	m_dclip.y = y;
+	Init();
+	LoadImage(pSurface, x, y, w, h);
 }
 
 Image::~Image() {
-	Unload();
+	UnloadImage();
 }
 
-void Image::Load(const char* szFileName, int x, int y, int w, int h) {
-	CHECK_UNLOADED;
+void Image::LoadImage(const char* szFileName, int x, int y, int w, int h) {
+	UnloadImage();
 	m_pSurface = SDL_LoadBMP(szFileName);
+
 	CHECK_LOADED;
 
 	m_bLocal = true;
@@ -85,22 +72,31 @@ void Image::Load(const char* szFileName, int x, int y, int w, int h) {
 	m_dclip.y = y;
 }
 
-void Image::Unload() {
-	if (m_bLocal)
-		SDL_FreeSurface(m_pSurface);
-	m_pSurface = NULL;
+void Image::LoadImage(SDL_Surface* pSurface, int x, int y, int w, int h) {
+	UnloadImage();
+
+	if (pSurface == NULL) return; //dh protection
+
+	m_pSurface = pSurface;
 	m_bLocal = false;
+
+	m_sclip.x = 0;
+	m_sclip.y = 0;
+	m_sclip.w = (w == 0) ? m_pSurface->w : w;
+	m_sclip.h = (h == 0) ? m_pSurface->h : h;
+	m_dclip.x = x;
+	m_dclip.y = y;
 }
 
-void Image::DrawTo(SDL_Surface* const pDest, int iCamX, int iCamY) {
-	CHECK_LOADED;
+void Image::UnloadImage() {
+	if (m_pSurface == NULL)
+		return;
 
-	SDL_Rect dclip = m_dclip;
+	if (m_bLocal)
+		SDL_FreeSurface(m_pSurface);
 
-	dclip.x += iCamX;
-	dclip.y += iCamY;
-
-	SDL_BlitSurface(m_pSurface, &m_sclip, pDest, &dclip);
+	m_pSurface = NULL;
+	m_bLocal = false;
 }
 
 void Image::SetColorKey(int iRed, int iGreen, int iBlue) {
@@ -113,77 +109,51 @@ void Image::ClearColorKey() {
 	SDL_SetColorKey(m_pSurface, 0, 0);
 }
 
-bool Image::Local() {
-	return m_bLocal;
-}
+void Image::DrawTo(SDL_Surface* const pDest, int iCamX, int iCamY) {
+	CHECK_LOADED;
 
-//-------------------------
-//Overloaded oprators
-//-------------------------
+	//local dclip to compensate the camera hooks
+	SDL_Rect dclip = m_dclip;
 
-Image& Image::operator=(Image& other) {
-	m_pSurface = other.m_pSurface;
-	m_bLocal = false;
+	dclip.x += iCamX;
+	dclip.y += iCamY;
 
-	//deep copy
-	m_sclip.x = other.m_sclip.x;
-	m_sclip.y = other.m_sclip.y;
-	m_sclip.w = other.m_sclip.w;
-	m_sclip.h = other.m_sclip.h;
-	m_dclip.x = other.m_dclip.x;
-	m_dclip.y = other.m_dclip.y;
-
-	return *this;
-}
-
-Image& Image::operator=(SDL_Surface* other) {
-	m_pSurface = other;
-	m_bLocal = false;
-
-	//defaults
-//	m_sclip.x = 0;
-//	m_sclip.y = 0;
-//	m_sclip.w = m_pSurface->w;
-//	m_sclip.h = m_pSurface->h;
-//	m_dclip.x
-//	m_dclip.y
-
-	return *this;
+	SDL_BlitSurface(m_pSurface, &m_sclip, pDest, &dclip);
 }
 
 //-------------------------
 //Accessors and mutators
 //-------------------------
 
-int Image::SetX(int x) {
+int Image::SetImageX(int x) {
 	return m_dclip.x = x;
 }
 
-int Image::SetY(int y) {
+int Image::SetImageY(int y) {
 	return m_dclip.y = y;
 }
 
-int Image::SetW(int w) {
+int Image::SetImageW(int w) {
 	return m_sclip.w = w;
 }
 
-int Image::SetH(int h) {
+int Image::SetImageH(int h) {
 	return m_sclip.h = h;
 }
 
-int Image::GetX() {
+int Image::GetImageX() {
 	return m_dclip.x;
 }
 
-int Image::GetY() {
+int Image::GetImageY() {
 	return m_dclip.y;
 }
 
-int Image::GetW() {
+int Image::GetImageW() {
 	return m_sclip.w;
 }
 
-int Image::GetH() {
+int Image::GetImageH() {
 	return m_sclip.h;
 }
 
@@ -213,6 +183,10 @@ int Image::GetSheetH() {
 	return m_pSurface->h;
 }
 
+bool Image::Local() {
+	return m_bLocal;
+}
+
 //-------------------------
 //Protected access members
 //-------------------------
@@ -223,4 +197,20 @@ SDL_Surface* Image::SetSurface(SDL_Surface* pSurface) {
 
 SDL_Surface* Image::GetSurface() {
 	return m_pSurface;
+}
+
+//-------------------------
+//Private access members
+//-------------------------
+
+void Image::Init() {
+	m_sclip.x = 0;
+	m_sclip.y = 0;
+	m_sclip.w = 0;
+	m_sclip.h = 0;
+	m_dclip.x = 0;
+	m_dclip.y = 0;
+
+	m_pSurface = NULL;
+	m_bLocal = false;
 }
