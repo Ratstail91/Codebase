@@ -1,6 +1,6 @@
-/* File Name: origin.h
+/* File Name: origin_2d.h
  * Author: Kayne Ruse
- * Date: 3/1/2012
+ * Date: 16/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -21,46 +21,46 @@
  * Description: 
  *     Handle position and motion on a 2D plane.
 */
-#ifndef KR_ORIGIN_H_
-#define KR_ORIGIN_H_ 2012010301
+#ifndef KR_ORIGIN2D_H_
+#define KR_ORIGIN2D_H_ 2012051601
 
-class Origin {
+class Origin2D {
 public:
 	/* Public access members */
-	Origin(float fRealX = 0, float fRealY = 0);
+	Origin2D(float x = 0, float y = 0);
 
 	virtual void Update(int iDelta);
 
-	/* Real positon */
-	void SetRealPosition	(float fRealX, float fRealY);
-	float SetRealX			(float fRealX);
-	float SetRealY			(float fRealY);
+	/* Positon in 2D */
+	void SetOriginPosition		(float x, float y);
+	float SetOriginX			(float x);
+	float SetOriginY			(float y);
 
-	void ShiftRealPosition	(float fRealX, float fRealY);
-	float ShiftRealX		(float fRealX);
-	float ShiftRealY		(float fRealY);
+	void ShiftOriginPosition	(float x, float y);
+	float ShiftOriginX			(float x);
+	float ShiftOriginY			(float y);
 
-	float GetRealX			();
-	float GetRealY			();
+	float GetOriginX			();
+	float GetOriginY			();
 
-	/* Real motion */
-	void SetMotion			(float fMotionX, float fMotionY);
-	float SetMotionX		(float fMotionX);
-	float SetMotionY		(float fMotionY);
+	/* Motion in 2D */
+	void SetMotion		(float x, float y);
+	float SetMotionX	(float x);
+	float SetMotionY	(float y);
 
-	void ShiftMotion		(float fMotionX, float fMotionY);
-	float ShiftMotionX		(float fMotionX);
-	float ShiftMotionY		(float fMotionY);
+	void ShiftMotion	(float x, float y);
+	float ShiftMotionX	(float x);
+	float ShiftMotionY	(float y);
 
-	float GetMotionX		();
-	float GetMotionY		();
+	float GetMotionX	();
+	float GetMotionY	();
 
-	void StopMotion			();
+	void StopMotion		();
 
 private:
 	/* Private access members */
-	float m_fRealX;
-	float m_fRealY;
+	float m_fOriginX;
+	float m_fOriginY;
 	float m_fMotionX;
 	float m_fMotionY;
 };
