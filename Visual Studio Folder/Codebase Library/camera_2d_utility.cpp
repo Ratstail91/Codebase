@@ -1,6 +1,6 @@
-/* File Name: camera_utility.cpp
+/* File Name: camera_2d_utility.cpp
  * Author: Kayne Ruse
- * Date: 12/1/2012
+ * Date: 16/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -19,57 +19,60 @@
  * along with Codebase Library.  If not, see <http://www.gnu.org/licenses/>.
  * 
  * Description: 
- *     Allow for dynamic (and smooth) movement of the camera.
+ *     Allow for dynamic (and smooth) movement of the camera on  2D plane.
 */
 #include <exception>
-#include "camera_utility.h"
+#include "camera_2d_utility.h"
 
 //-------------------------
 //Preprocessor
 //-------------------------
 
-#if KR_ORIGIN_H_ != 2012010301
-#error Origin may be incorrect version for CameraUtility
+#if KR_ORIGIN2D_H_ != KR_CAMERA2DUTILITY_H_
+#error Origin2D version is incompatible with Camera2DUtility
 #endif
 
 //-------------------------
 //Public access members
 //-------------------------
 
-CameraUtility::CameraUtility() {
+Camera2DUtility::Camera2DUtility() {
 	m_eMode = NORMAL;
 	m_iScreenW = 0;
 	m_iScreenH = 0;
 }
 
-int CameraUtility::GetCamX() {
+int Camera2DUtility::GetCamX() {
 	switch(m_eMode) {
-		case NORMAL: return -(int)GetRealX();
-		case CENTER: return -((int)GetRealX() - (m_iScreenW/2));
+		case NORMAL: return -(int)GetOriginX();
+		case CENTER: return -((int)GetOriginX() - (m_iScreenW/2));
+//		case TARGET: //unknown
+		case DISABLE: return 0;
+		default: throw(std::exception("Invalid Camera Mode found"));
 	}
-
-	throw(std::exception("Unknown CameraUtility::Mode found"));
 }
 
-int CameraUtility::GetCamY() {
+int Camera2DUtility::GetCamY() {
 	switch(m_eMode) {
-		case NORMAL: return -(int)GetRealY();
-		case CENTER: return -((int)GetRealY() - (m_iScreenH/2));
+		case NORMAL: return -(int)GetOriginY();
+		case CENTER: return -((int)GetOriginY() - (m_iScreenH/2));
+//		case TARGET: //unknown
+		case DISABLE: return 0;
+		default: throw(std::exception("Invalid Camera Mode found"));
 	}
-
-	throw(std::exception("Unknown CameraUtility::Mode found"));
 }
 
 //-------------------------
 //Mode
 //-------------------------
 
-CameraUtility::Mode CameraUtility::SetMode(Mode eMode) {
+Camera2DUtility::Mode Camera2DUtility::SetMode(Camera2DUtility::Mode eMode) {
 	//possibility for a "position correction" here, that would prevent the "jump" when the mode is changed
+	if (eMode <= _BEGIN || eMode >= _END) throw(std::exception("Invalid Camera Mode"));
 	return m_eMode = eMode;
 }
 
-CameraUtility::Mode CameraUtility::GetMode() {
+Camera2DUtility::Mode Camera2DUtility::GetMode() {
 	return m_eMode;
 }
 
@@ -77,23 +80,23 @@ CameraUtility::Mode CameraUtility::GetMode() {
 //Screen size
 //-------------------------
 
-void CameraUtility::SetScreenSize(int w, int h) {
+void Camera2DUtility::SetScreenSize(int w, int h) {
 	m_iScreenW = w;
 	m_iScreenH = h;
 }
 
-int CameraUtility::SetScreenWidth(int w) {
+int Camera2DUtility::SetScreenWidth(int w) {
 	return m_iScreenW = w;
 }
 
-int CameraUtility::SetScreenHeight(int h) {
+int Camera2DUtility::SetScreenHeight(int h) {
 	return m_iScreenH = h;
 }
 
-int CameraUtility::GetScreenWidth() {
+int Camera2DUtility::GetScreenWidth() {
 	return m_iScreenW;
 }
 
-int CameraUtility::GetScreenHeight() {
+int Camera2DUtility::GetScreenHeight() {
 	return m_iScreenH;
 }

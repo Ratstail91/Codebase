@@ -1,6 +1,6 @@
-/* File Name: camera_utility.h
+/* File Name: camera_2d_utility.h
  * Author: Kayne Ruse
- * Date: 12/1/2012
+ * Date: 16/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -19,23 +19,29 @@
  * along with Codebase Library.  If not, see <http://www.gnu.org/licenses/>.
  * 
  * Description: 
- *     Allow for dynamic (and smooth) movement of the camera.
+ *     Allow for dynamic (and smooth) movement of the camera on  2D plane.
 */
-#ifndef KR_CAMERAUTILITY_H_
-#define KR_CAMERAUTILITY_H_ 2012011201
+#ifndef KR_CAMERA2DUTILITY_H_
+#define KR_CAMERA2DUTILITY_H_ 2012051601
 
-#include "origin.h"
+#include "origin_2d.h"
 
-class CameraUtility : public Origin {
+class Camera2DUtility : public Origin2D {
 public:
 	/* Mode enum */
 	enum Mode {
+		_BEGIN = 0, //bounding
+
 		NORMAL,
-		CENTER
+		CENTER,
+//		TARGET,
+		DISABLE,
+
+		_END //bounding
 	};
 
 	/* Public access members */
-	CameraUtility();
+	Camera2DUtility();
 
 	int GetCamX();
 	int GetCamY();
