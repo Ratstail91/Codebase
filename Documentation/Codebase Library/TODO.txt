@@ -15,10 +15,10 @@ Deprecate the necessary components.
 
 Code base:
 
-*	Frameworks
-	*	Scene System
-		*	BaseSceneMgr
-		*	BaseScene
++	Frameworks
+	+	Scene System
+		+	BaseSceneMgr
+		+	BaseScene
 	end
 	
 	^	Simple Callbacks
@@ -58,11 +58,11 @@ end
 	-	PositionUtility
 end
 
-*	Quick Setup:
-	*	SceneList
-	*	SceneMgr
-	*	ScenePrime
-	*	Entity
++	Quick Setup:
+	+	SceneList
+	+	SceneMgr
+	+	ScenePrime
+	+	Entity
 	-	ImageRot
 	-	EntityRot
 end
@@ -80,13 +80,10 @@ Document known bugs.
 Consider possible additions
 -------------------------
 
-*	Entity::GetX() //just (int)GetRealX()
 *	"Target" option in CameraUtility, targeting an origin?
 *	New modules such as TCP networking, animation, rotation(done), or sound management
 *	Sound manager(SDL_mixer)
-*	rename begin/end to head/tail
 *	GitHub wiki needs to be fleshed out
-*	Version macros in QuickStart
 
 -	Upgrading and compatabilities with SDL 1.3
 -	Rename SceneMgr to GameMgr?
