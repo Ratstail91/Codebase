@@ -1,6 +1,6 @@
 /* File Name: base_scene_mgr.h
  * Author: Kayne Ruse
- * Date: 3/1/2012
+ * Date: 16/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -22,7 +22,7 @@
  *     The base class for managing a series of classes derived from BaseScene.
 */
 #ifndef KR_BASESCENEMGR_H_
-#define KR_BASESCENEMGR_H_ 2012010301
+#define KR_BASESCENEMGR_H_ 2012051601
 
 #include "base_scene.h"
 
@@ -30,7 +30,7 @@ class BaseSceneMgr {
 public:
 	/* Public access members */
 	virtual void Init();
-	virtual void Loop();
+	virtual void Proc();
 	virtual void Quit();
 
 protected:

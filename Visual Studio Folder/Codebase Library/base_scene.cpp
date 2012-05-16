@@ -1,6 +1,6 @@
 /* File Name: base_scene.cpp
  * Author: Kayne Ruse
- * Date: 11/2/2012
+ * Date: 16/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -19,7 +19,7 @@
  * along with Codebase Library.  If not, see <http://www.gnu.org/licenses/>.
  * 
  * Description: 
- *     The abstract base class for implementing scenes in a game.
+ *     The abstract base class for implementing scenes in the scene framework.
 */
 #include <exception>
 #include "base_scene.h"
@@ -49,7 +49,7 @@ SDL_Surface* BaseScene::GetScreen() {
 //-------------------------
 
 BaseScene::BaseScene() {
-	m_iReturn = SCENE_NULL;
+	m_iNextScene = SCENE_NULL;
 }
 
 BaseScene::~BaseScene() {
@@ -61,27 +61,23 @@ BaseScene::~BaseScene() {
 //-------------------------
 
 void BaseScene::RunFrame() {
-	BeginLoop	();
+	Head();
 
-	Input		();
-	Update		();
-	Draw		(ms_pScreen);
+	Input();
+	Update();
+	Render(ms_pScreen);
 
-	SDL_Flip	(ms_pScreen);
+	SDL_Flip(ms_pScreen);
 
-	EndLoop		();
+	Tail();
 }
 
-int BaseScene::Return() {
-	return m_iReturn;
+int BaseScene::GetNextScene() {
+	return m_iNextScene;
 }
 
-int BaseScene::Return(int i) {
-	return m_iReturn = i;
-}
-
-void BaseScene::Quit() {
-	Return(SCENE_EXIT);
+int BaseScene::SetNextScene(int i) {
+	return m_iNextScene = i;
 }
 
 //-------------------------
@@ -92,11 +88,9 @@ void BaseScene::Input() {
 	SDL_Event event;
 
 	while(SDL_PollEvent(&event)) {
-		Event(event);
-
 		switch(event.type) {
 			case SDL_QUIT:
-				Quit();
+				QuitEvent();
 				break;
 
 			case SDL_VIDEORESIZE:
@@ -123,13 +117,9 @@ void BaseScene::Input() {
 				KeyUp(event.key);
 				break;
 
-			case SDL_USEREVENT:
-				UserEvent(event.user);
-				break;
-
-			default:
-				UnknownEvent(event);
-				break;
+//			default:
+//				UnknownEvent(event);
+//				break;
 		}
 	}
 }

@@ -1,6 +1,6 @@
 /* File Name: base_scene_mgr.cpp
  * Author: Kayne Ruse
- * Date: 3/1/2012
+ * Date: 16/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -27,6 +27,14 @@
 using namespace std;
 
 //-------------------------
+//Preprocessor directives
+//-------------------------
+
+#if KR_BASESCENE_H_ != KR_BASESCENEMGR_H_
+#error BaseScene version is incompatible with BaseSceneMgr
+#endif
+
+//-------------------------
 //Public access members
 //-------------------------
 
@@ -37,19 +45,19 @@ void BaseSceneMgr::Init() {
 	BaseScene::SetScreen(800, 600, 32, SDL_HWSURFACE|SDL_DOUBLEBUF);
 }
 
-void BaseSceneMgr::Loop() {
+void BaseSceneMgr::Proc() {
 	try {
 		LoadScene();
-		m_iNext = m_pScene->Return();
+		m_iNext = m_pScene->GetNextScene();
 
-		while(m_iNext != SCENE_EXIT) {
-			if (m_iNext != SCENE_NULL) {
+		while(m_iNext != BaseScene::SCENE_QUIT) {
+			if (m_iNext != BaseScene::SCENE_NULL) {
 				UnloadScene();
 				LoadScene();
 			}
 
 			m_pScene->RunFrame();
-			m_iNext = m_pScene->Return();
+			m_iNext = m_pScene->GetNextScene();
 		}
 	}
 	catch(exception& e) {
@@ -75,7 +83,7 @@ void BaseSceneMgr::Quit() {
 
 BaseSceneMgr::BaseSceneMgr() {
 	m_pScene = NULL;
-	m_iNext = SCENE_FIRST;
+	m_iNext = BaseScene::SCENE_FIRST;
 }
 
 BaseSceneMgr::~BaseSceneMgr() {

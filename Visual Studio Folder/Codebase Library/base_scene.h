@@ -1,6 +1,6 @@
 /* File Name: base_scene.h
  * Author: Kayne Ruse
- * Date: 11/2/2012
+ * Date: 16/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -19,19 +19,22 @@
  * along with Codebase Library.  If not, see <http://www.gnu.org/licenses/>.
  * 
  * Description: 
- *     The abstract base class for implementing scenes in a game.
+ *     The abstract base class for implementing scenes in the scene framework.
 */
 #ifndef KR_BASESCENE_H_
-#define KR_BASESCENE_H_ 2012021101
+#define KR_BASESCENE_H_ 2012051601
 
 #include "SDL.h"
 
-#define SCENE_EXIT -1 //close the program
-#define SCENE_NULL	0 //do nothing
-#define SCENE_FIRST 1 //default
-
 class BaseScene {
 public:
+	/* Scene list */
+	enum {
+		SCENE_QUIT = -1, //close the program
+		SCENE_NULL = 0, //do nothing
+		SCENE_FIRST = 1 //first scene to open
+	};
+
 	/* Static members */
 	static SDL_Surface* SetScreen(int w, int h, int bpp, int iFlags);
 	static SDL_Surface* GetScreen();
@@ -42,33 +45,31 @@ public:
 
 	/* Program control members */
 	virtual void RunFrame();
-	virtual int Return();
+	virtual int GetNextScene();
 
 protected:
 	/* Frame loop members */
-	virtual void BeginLoop	() {}
-	virtual void EndLoop	() {}
-	virtual void Input		();
-	virtual void Update		() {}
-	virtual void Draw		(SDL_Surface* const) =0;
+	virtual void Head	() {}
+	virtual void Tail	() {}
+	virtual void Input	();
+	virtual void Update	() {}
+	virtual void Render	(SDL_Surface* const) =0;
 
 	/* Input loop members */
-	virtual void Event				(SDL_Event const&) {}
+	virtual void QuitEvent			() { SetNextScene(SCENE_QUIT); }
 	virtual void MouseMotion		(SDL_MouseMotionEvent const&) {}
 	virtual void MouseButtonDown	(SDL_MouseButtonEvent const&) {}
 	virtual void MouseButtonUp		(SDL_MouseButtonEvent const&) {}
 	virtual void KeyDown			(SDL_KeyboardEvent const&) {}
 	virtual void KeyUp				(SDL_KeyboardEvent const&) {}
-	virtual void UserEvent			(SDL_UserEvent const&) {}
-	virtual void UnknownEvent		(SDL_Event const&) {}
+//	virtual void UnknownEvent		(SDL_Event const&) {}
 
 	/* Program control members */
-	virtual int Return(int);
-	virtual void Quit();
+	virtual int SetNextScene(int);
 
 private:
 	static SDL_Surface* ms_pScreen;
-	int m_iReturn;
+	int m_iNextScene;
 };
 
 #endif
