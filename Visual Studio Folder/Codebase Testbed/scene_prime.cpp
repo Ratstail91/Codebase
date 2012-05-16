@@ -4,28 +4,25 @@
  * Date: 
  * Description: 
 */
-#include <iostream>
 #include "scene_prime.h"
-using namespace std;
+
+//-------------------------
+//Preprocessor directives
+//-------------------------
+
+#define CASE break; case
+#define SPEED 0.14f
 
 //-------------------------
 //Public access members
 //-------------------------
 
 ScenePrime::ScenePrime() {
-	//camera is usually first
-	m_camUtil.SetMode( CameraUtility::NORMAL );
-	m_camUtil.SetScreenSize( GetScreen()->w, GetScreen()->h );
-
-	//load this, usually should have it in a try/catch block
-	m_cfgUtil.Load( "config.cfg" );
-
-	//another try/catch block for this
-	m_udpNet.Init(m_cfgUtil.Integer( "port" )); //port 2000
+	 m_image.LoadImage("player_red.bmp");
 }
 
 ScenePrime::~ScenePrime() {
-	m_udpNet.Quit();
+	m_image.UnloadImage();
 }
 
 //-------------------------
@@ -33,7 +30,7 @@ ScenePrime::~ScenePrime() {
 //-------------------------
 
 void ScenePrime::BeginLoop() {
-	FPSUtility::CalcFrameRate();
+	//
 }
 
 void ScenePrime::EndLoop() {
@@ -41,15 +38,12 @@ void ScenePrime::EndLoop() {
 }
 
 void ScenePrime::Update() {
-	FPSUtility::CalcDeltaTime();
-
-	while (m_udpNet.Receive()) {
-		cout << (char*)(m_udpNet.GetDataIn()) << endl;
-	}
+	m_origin.Update(0);
 }
 
 void ScenePrime::Draw(SDL_Surface* const pScreen) {
-	//
+	m_image.SetImagePosition( m_origin.GetOriginX(), m_origin.GetOriginY() );
+	m_image.DrawTo(pScreen);
 }
 
 //-------------------------
@@ -70,17 +64,24 @@ void ScenePrime::MouseButtonUp(SDL_MouseButtonEvent const& rButton) {
 
 void ScenePrime::KeyDown(SDL_KeyboardEvent const& rKey) {
 	switch(rKey.keysym.sym) {
-		case SDLK_ESCAPE:
-			Quit();
-			break;
+		CASE SDLK_ESCAPE: Quit();
 
-		case SDLK_SPACE:
-			m_udpNet.Send( m_cfgUtil["127.0.0.1"].c_str(), m_cfgUtil.Integer( "port" ), (void*)("Hello world!"), strlen("Hello world!") );
+		//controls
+		CASE SDLK_UP:		m_origin.ShiftMotionY(-SPEED);
+		CASE SDLK_DOWN:		m_origin.ShiftMotionY( SPEED);
+		CASE SDLK_LEFT:		m_origin.ShiftMotionX(-SPEED);
+		CASE SDLK_RIGHT:	m_origin.ShiftMotionX( SPEED);
 	};
 }
 
 void ScenePrime::KeyUp(SDL_KeyboardEvent const& rKey) {
-	//
+	switch(rKey.keysym.sym) {
+		//controls
+		CASE SDLK_UP:		m_origin.ShiftMotionY( SPEED);
+		CASE SDLK_DOWN:		m_origin.ShiftMotionY(-SPEED);
+		CASE SDLK_LEFT:		m_origin.ShiftMotionX( SPEED);
+		CASE SDLK_RIGHT:	m_origin.ShiftMotionX(-SPEED);
+	};
 }
 
 //-------------------------

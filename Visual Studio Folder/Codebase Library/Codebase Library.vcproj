@@ -258,20 +258,20 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="CameraUtility"
+				Name="Camera2DUtility"
 				>
 				<File
-					RelativePath=".\camera_utility.cpp"
+					RelativePath=".\camera_2d_utility.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\camera_utility.h"
+					RelativePath=".\camera_2d_utility.h"
 					>
 				</File>
 			</Filter>
 		</Filter>
 		<Filter
-			Name="Instance System"
+			Name="Instance Systems"
 			>
 			<Filter
 				Name="Image"
@@ -286,26 +286,26 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="BBox"
+				Name="BBox2D"
 				>
 				<File
-					RelativePath=".\bbox.cpp"
+					RelativePath=".\bbox_2d.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\bbox.h"
+					RelativePath=".\bbox_2d.h"
 					>
 				</File>
 			</Filter>
 			<Filter
-				Name="Origin"
+				Name="Origin2D"
 				>
 				<File
-					RelativePath=".\origin.cpp"
+					RelativePath=".\origin_2d.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\origin.h"
+					RelativePath=".\origin_2d.h"
 					>
 				</File>
 			</Filter>

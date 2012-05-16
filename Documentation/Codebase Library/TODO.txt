@@ -25,21 +25,23 @@ Code base:
 	^	Complex Callbacks
 end
 
-*	Instance System
-	*	Image
-	*	Origin
-	*	BBox
++	Instance Systems
+	+	Image
+	+	Origin2D
+	-	Origin3D
+	+	BBox2D
+	-	BBox3D
 end
 
-*	Utilities
-	*	CameraUtility
-	*	ConfigUtility
++	Utilities
+	+	CameraUtility
+	+	ConfigUtility
 	+	FPSUtility
 end
 
-*	Network Systems
++	Network Systems
 	+	UDPNetwork
-	*	TCPNetwork
+	-	TCPNetwork
 end
 
 ^	Global
@@ -78,26 +80,23 @@ Document known bugs.
 Consider possible additions
 -------------------------
 
-*	Image::SetPosition(x, y)
-*	Check all of Image's function names
 *	Entity::GetX() //just (int)GetRealX()
-*	"Disable" option in CameraUtility
 *	"Target" option in CameraUtility, targeting an origin?
 *	New modules such as TCP networking, animation, rotation(done), or sound management
 *	Sound manager(SDL_mixer)
-*	change ConfigUtility::Real() to a float return
 *	rename begin/end to head/tail
 *	GitHub wiki needs to be fleshed out
+*	Version macros in QuickStart
 
 -	Upgrading and compatabilities with SDL 1.3
 -	Rename SceneMgr to GameMgr?
 -	Move the Scene macros to quick start from BaseScene
 -	add entry and exit functions to the frameworks, not-unlike constructors/destructors?
 -	the callback systems don't cleanup after themselfs well.
--	Rename Origin to Origin2D
 -	Generic "single base class" (Does Simple Callbacks count as this? No, I need an actual class)
 -	Particle system? (boost the popularity!)
 -	Make SceneMgr static?
+-	change ConfigUtility::Real() to a float return (impossible due to atof() return type)
 
 -------------------------
 

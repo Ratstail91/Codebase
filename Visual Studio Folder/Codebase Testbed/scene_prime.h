@@ -10,11 +10,8 @@
 #include "SDL.h"
 #include "base_scene.h"
 
-#include "camera_utility.h"
-#include "config_utility.h"
-#include "fps_utility.h"
-
-#include "udp_network.h"
+#include "image.h"
+#include "origin_2d.h"
 
 class ScenePrime : public BaseScene {
 public:
@@ -37,10 +34,8 @@ protected:
 	virtual void KeyUp				(SDL_KeyboardEvent const&);
 
 	/* Members */
-	CameraUtility m_camUtil;
-	ConfigUtility m_cfgUtil;
-
-	UDPNetwork m_udpNet;
+	Image m_image;
+	Origin2D m_origin;
 };
 
 #endif
