@@ -1,4 +1,4 @@
-/* File Name: boilerplate.h
+/* File Name: global_macros.h
  * Author: Kayne Ruse
  * Date: 14/5/2012
  * Copyright: (c) Kayne Ruse 2012
@@ -21,8 +21,8 @@
  * Description: 
  *     A set of macros to automate repetitive code.
 */
-#ifndef KR_BOILERPLATE_H_
-#define KR_BOILERPLATE_H_
+#ifndef KR_GLOBALMACROS_H_
+#define KR_GLOBALMACROS_H_
 
 //usage: BP_MEMBER(GetFunction, SetFunction, dataType, variableName)
 #define BP_MEMBER(GET, SET, TYPE, NAME)	\

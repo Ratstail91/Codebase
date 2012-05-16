@@ -327,10 +327,10 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="Code Generators"
+			Name="Global"
 			>
 			<File
-				RelativePath=".\boilerplate.h"
+				RelativePath=".\global_macros.h"
 				>
 			</File>
 		</Filter>
