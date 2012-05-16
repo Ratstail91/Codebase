@@ -1,7 +1,7 @@
 /* File Name: scene_mgr.h
- * Copyright: (c) Kayne Ruse, all rights reserved.
- * Author: Kayne Ruse
+ * Author: 
  * Date: 
+ * Copyright: 
  * Description: 
 */
 #ifndef KR_SCENEMGR_H_
@@ -14,11 +14,11 @@
 class SceneMgr : public BaseSceneMgr {
 public:
 	/* Public access members */
-	SceneMgr();
-	virtual ~SceneMgr();
+//	SceneMgr();
+//	virtual ~SceneMgr();
 
 //	virtual void Init();
-//	virtual void Loop();
+//	virtual void Proc();
 //	virtual void Quit();
 
 protected:

@@ -1,7 +1,7 @@
 /* File Name: scene_prime.h
- * Copyright: (c) Kayne Ruse, all rights reserved.
- * Author: Kayne Ruse
+ * Author: 
  * Date: 
+ * Copyright: 
  * Description: 
 */
 #ifndef KR_SCENEPRIME_H_
@@ -18,10 +18,10 @@ public:
 
 protected:
 	/* Frame loop members */
-	virtual void BeginLoop	();
-	virtual void EndLoop	();
-	virtual void Update		();
-	virtual void Draw		(SDL_Surface* const);
+	virtual void Head	();
+	virtual void Tail	();
+	virtual void Update	();
+	virtual void Render	(SDL_Surface* const);
 
 	/* Input loop members */
 	virtual void MouseMotion		(SDL_MouseMotionEvent const&);

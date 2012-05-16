@@ -1,24 +1,23 @@
 /* File Name: entity.h
- * Copyright: (c) Kayne Ruse, all rights reserved.
- * Author: Kayne Ruse
+ * Author: 
  * Date: 
+ * Copyright: 
  * Description: 
 */
 #ifndef KR_ENTITY_H_
 #define KR_ENTITY_H_
 
 #include "image.h"
-#include "origin.h"
-#include "bbox.h"
+#include "origin_2d.h"
+#include "bbox_2d.h"
 
-class Entity : public Image, public Origin, public BBox {
+class Entity : public Image, public Origin2D, public BBox2D {
 public:
 	/* Public access members */
 	Entity();
-	Entity(const char* szFileName);
 	virtual ~Entity();
 
-	virtual void Load(const char* szFileName);
+	virtual void LoadImage(const char* szFileName);
 
 	virtual void Update(int iDelta);
 
@@ -27,10 +26,10 @@ public:
 
 protected:
 	/* Protected access members */
-	Image::SetX;
-	Image::SetY;
-	Image::GetX;
-	Image::GetY;
+	Image::SetImageX;
+	Image::SetImageY;
+	Image::GetImageX;
+	Image::GetImageY;
 };
 
 #endif
