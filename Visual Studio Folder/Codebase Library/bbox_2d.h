@@ -1,6 +1,6 @@
-/* File Name: bbox.h
+/* File Name: bbox_2d.h
  * Author: Kayne Ruse
- * Date: 20/3/2012
+ * Date: 16/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -19,12 +19,12 @@
  * along with Codebase Library.  If not, see <http://www.gnu.org/licenses/>.
  * 
  * Description: 
- *     Detect and handle box collisions.
+ *     Detect and handle box collisions on a 2D plane.
 */
-#ifndef KR_BBOX_H_
-#define KR_BBOX_H_ 2012032001
+#ifndef KR_BBOX2D_H_
+#define KR_BBOX2D_H_ 2012051601
 
-class BBox {
+class BBox2D {
 public:
 	/* Box struct */
 	typedef struct Rect {
@@ -37,13 +37,13 @@ public:
 	enum {FALSE=0, EDGE=1, INSIDE=2, OUTSIDE=3};
 
 	/* Public access members */
-	BBox(float x=0, float y=0, float w=0, float h=0);
-	BBox(Rect box);
+	BBox2D(float x=0, float y=0, float w=0, float h=0);
+	BBox2D(Rect box);
 
 	virtual Rect GetWorldBBox	();
 	virtual int CheckWorldBBox	(Rect box);
-	virtual Rect GetWorldBBox	(float fRealX, float fRealY);
-	virtual int CheckWorldBBox	(float fRealX, float fRealY, Rect box);
+	virtual Rect GetWorldBBox	(float x, float y);
+	virtual int CheckWorldBBox	(float x, float y, Rect box);
 
 	/* Accessors and mutators */
 	Rect SetBBox(float x, float y, float w, float h);
