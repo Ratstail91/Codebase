@@ -1,6 +1,6 @@
 /* File Name: udp_network.h
  * Author: Kayne Ruse
- * Date: 4/4/2012
+ * Date: 16/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -22,7 +22,7 @@
  *     Manage UDP-based networking.
 */
 #ifndef KR_UDPNETWORK_H_
-#define KR_UDPNETWORK_H_ 2012040401
+#define KR_UDPNETWORK_H_ 2012051601
 
 #include "SDL_net.h"
 
@@ -42,6 +42,8 @@ public:
 
 	const UDPpacket* GetPacketOut();
 	const UDPpacket* GetPacketIn();
+
+	const UDPsocket* GetSocket();
 
 private:
 	/* Private access members */

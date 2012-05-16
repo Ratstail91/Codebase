@@ -1,6 +1,6 @@
 /* File Name: udp_network.cpp
  * Author: Kayne Ruse
- * Date: 4/4/2012
+ * Date: 16/5/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -101,4 +101,8 @@ const UDPpacket* UDPNetwork::GetPacketOut() {
 
 const UDPpacket* UDPNetwork::GetPacketIn() {
 	return m_pPacketIn;
+}
+
+const UDPsocket* UDPNetwork::GetSocket() {
+	return &m_socket;
 }
