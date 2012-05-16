@@ -1,49 +1,89 @@
 /* File Name: scene_prime.cpp
- * Copyright: (c) Kayne Ruse, all rights reserved.
- * Author: Kayne Ruse
+ * Author: 
  * Date: 
+ * Copyright: 
  * Description: 
 */
+#include <iostream>
 #include "scene_prime.h"
+using namespace std;
 
 //-------------------------
 //Preprocessor directives
 //-------------------------
 
-#define CASE break; case
-#define SPEED 0.14f
+#if KR_BASESCENE_H_ != 2012051601 // 16/5/2012, revision 1
+#error BaseScene version is incompatible with this scene
+#endif
 
 //-------------------------
 //Public access members
 //-------------------------
 
 ScenePrime::ScenePrime() {
-	 m_image.LoadImage("player_red.bmp");
+	//setup the camera
+
+	m_camUtil.SetScreenSize( GetScreen()->w, GetScreen()->h );
+	m_camUtil.SetMode( Camera2DUtility::CENTER );
+
+	//load the assets
+	try {
+		m_red.LoadImage("player_red.bmp");
+		m_blu.LoadImage("player_blue.bmp");
+	}
+	catch(exception& e) {
+		cerr << "Asset error: " << e.what() << endl;
+		QuitEvent();
+	}
 }
 
 ScenePrime::~ScenePrime() {
-	m_image.UnloadImage();
+	//free the assets
+	m_red.UnloadImage();
+	m_blu.UnloadImage();
 }
 
 //-------------------------
 //Frame loop members
 //-------------------------
 
-void ScenePrime::BeginLoop() {
-	//
+void ScenePrime::Head() {
+	//calcualte the framerate
+	FPSUtility::CalcFrameRate();
 }
 
-void ScenePrime::EndLoop() {
+void ScenePrime::Tail() {
 	//
 }
 
 void ScenePrime::Update() {
-	m_origin.Update(0);
+	//smooth movement
+	FPSUtility::CalcDeltaTime();
+
+	m_red.Update( FPSUtility::GetDeltaTime() );
+	m_blu.Update( FPSUtility::GetDeltaTime() );
 }
 
-void ScenePrime::Draw(SDL_Surface* const pScreen) {
-	m_image.SetImagePosition( m_origin.GetOriginX(), m_origin.GetOriginY() );
-	m_image.DrawTo(pScreen);
+void ScenePrime::Render(SDL_Surface* const pScreen) {
+	//camera adjustment
+	m_camUtil.SetOriginPosition( m_red.GetOriginX(), m_red.GetOriginY() );
+
+	//grey background
+	SDL_FillRect(pScreen, NULL, SDL_MapRGB(pScreen->format, 192, 192, 192) );
+
+	//white square
+	SDL_Rect square;
+
+	square.x = -60 + m_camUtil.GetCamX();
+	square.y = -60 + m_camUtil.GetCamY();
+	square.w = 120;
+	square.h = 120;
+
+	SDL_FillRect(pScreen, &square, SDL_MapRGB(pScreen->format, 255, 255, 255) );
+
+	//draw the entities, using  the camera coords
+	m_red.DrawTo(pScreen, m_camUtil.GetCamX(), m_camUtil.GetCamY());
+	m_blu.DrawTo(pScreen, m_camUtil.GetCamX(), m_camUtil.GetCamY());
 }
 
 //-------------------------
@@ -64,23 +104,30 @@ void ScenePrime::MouseButtonUp(SDL_MouseButtonEvent const& rButton) {
 
 void ScenePrime::KeyDown(SDL_KeyboardEvent const& rKey) {
 	switch(rKey.keysym.sym) {
-		CASE SDLK_ESCAPE: Quit();
+		case SDLK_ESCAPE:
+			QuitEvent();
+			break;
 
-		//controls
-		CASE SDLK_UP:		m_origin.ShiftMotionY(-SPEED);
-		CASE SDLK_DOWN:		m_origin.ShiftMotionY( SPEED);
-		CASE SDLK_LEFT:		m_origin.ShiftMotionX(-SPEED);
-		CASE SDLK_RIGHT:	m_origin.ShiftMotionX( SPEED);
+		//red player controls
+		case SDLK_UP:		m_red.ShiftMotionY(-0.14f); break;
+		case SDLK_DOWN:		m_red.ShiftMotionY( 0.14f); break;
+		case SDLK_LEFT:		m_red.ShiftMotionX(-0.14f); break;
+		case SDLK_RIGHT:	m_red.ShiftMotionX( 0.14f); break;
+
+		//output the framerate
+		case SDLK_f:
+			cout << FPSUtility::GetFrameRate() << endl;
+			break;
 	};
 }
 
 void ScenePrime::KeyUp(SDL_KeyboardEvent const& rKey) {
 	switch(rKey.keysym.sym) {
-		//controls
-		CASE SDLK_UP:		m_origin.ShiftMotionY( SPEED);
-		CASE SDLK_DOWN:		m_origin.ShiftMotionY(-SPEED);
-		CASE SDLK_LEFT:		m_origin.ShiftMotionX( SPEED);
-		CASE SDLK_RIGHT:	m_origin.ShiftMotionX(-SPEED);
+		//red player controls
+		case SDLK_UP:		m_red.ShiftMotionY( 0.14f); break;
+		case SDLK_DOWN:		m_red.ShiftMotionY(-0.14f); break;
+		case SDLK_LEFT:		m_red.ShiftMotionX( 0.14f); break;
+		case SDLK_RIGHT:	m_red.ShiftMotionX(-0.14f); break;
 	};
 }
 

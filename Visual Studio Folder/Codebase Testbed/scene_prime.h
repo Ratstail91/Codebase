@@ -1,17 +1,19 @@
 /* File Name: scene_prime.h
- * Copyright: (c) Kayne Ruse, all rights reserved.
- * Author: Kayne Ruse
+ * Author: 
  * Date: 
+ * Copyright: 
  * Description: 
 */
 #ifndef KR_SCENEPRIME_H_
 #define KR_SCENEPRIME_H_
 
 #include "SDL.h"
-#include "base_scene.h"
 
-#include "image.h"
-#include "origin_2d.h"
+#include "base_scene.h"
+#include "fps_utility.h"
+#include "camera_2d_utility.h"
+
+#include "entity.h"
 
 class ScenePrime : public BaseScene {
 public:
@@ -21,10 +23,10 @@ public:
 
 protected:
 	/* Frame loop members */
-	virtual void BeginLoop	();
-	virtual void EndLoop	();
-	virtual void Update		();
-	virtual void Draw		(SDL_Surface* const);
+	virtual void Head	();
+	virtual void Tail	();
+	virtual void Update	();
+	virtual void Render	(SDL_Surface* const);
 
 	/* Input loop members */
 	virtual void MouseMotion		(SDL_MouseMotionEvent const&);
@@ -34,8 +36,10 @@ protected:
 	virtual void KeyUp				(SDL_KeyboardEvent const&);
 
 	/* Members */
-	Image m_image;
-	Origin2D m_origin;
+	Entity m_red;
+	Entity m_blu;
+
+	Camera2DUtility m_camUtil;
 };
 
 #endif

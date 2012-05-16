@@ -1,7 +1,7 @@
 /* File Name: entity.cpp
- * Copyright: (c) Kayne Ruse, all rights reserved.
- * Author: Kayne Ruse
+ * Author: 
  * Date: 
+ * Copyright: 
  * Description: 
 */
 #include "entity.h"
@@ -14,31 +14,27 @@ Entity::Entity() {
 	//
 }
 
-Entity::Entity(const char* szFileName) {
-	Load(szFileName);
-}
-
 Entity::~Entity() {
 	//
 }
 
-void Entity::Load(const char* szFileName) {
-	Image::Load(szFileName);
+void Entity::LoadImage(const char* szFileName) {
+	Image::LoadImage(szFileName);
 
-	BBox::SetBBox( 0, 0, (float)GetW()-1, (float)GetH()-1 );
+	BBox2D::SetBBox( 0, 0, (float)GetImageW()-1, (float)GetImageH()-1 );
 }
 
 void Entity::Update(int iDelta) {
-	Origin::Update(iDelta);
+	Origin2D::Update(iDelta);
 
-	SetX( (int)GetRealX() );
-	SetY( (int)GetRealY() );
+	SetImageX( (int)GetOriginX() );
+	SetImageY( (int)GetOriginY() );
 }
 
-BBox::Rect Entity::GetWorldBBox() {
-	return BBox::GetWorldBBox(GetRealX(), GetRealY());
+BBox2D::Rect Entity::GetWorldBBox() {
+	return BBox2D::GetWorldBBox(GetOriginX(), GetOriginY());
 }
 
-int Entity::CheckWorldBBox(Rect box) {
-	return BBox::CheckWorldBBox(GetRealX(), GetRealY(), box);
+int Entity::CheckWorldBBox(BBox2D::Rect box) {
+	return BBox2D::CheckWorldBBox(GetOriginX(), GetOriginY(), box);
 }

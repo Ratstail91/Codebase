@@ -1,10 +1,18 @@
 /* File Name: scene_mgr.cpp
- * Copyright: (c) Kayne Ruse, all rights reserved.
- * Author: Kayne Ruse
+ * Author: 
  * Date: 
+ * Copyright: 
  * Description: 
 */
 #include "scene_mgr.h"
+
+//-------------------------
+//Preprocessor directives
+//-------------------------
+
+#if KR_BASESCENEMGR_H_ != 2012051601 // 16/5/2012, revision 1
+#error BaseSceneMgr version is incompatible with SceneMgr
+#endif
 
 //-------------------------
 //Scene headers
@@ -16,19 +24,19 @@
 //Public access members
 //-------------------------
 
-SceneMgr::SceneMgr() {
-	//
-}
+//SceneMgr::SceneMgr() {
+//	//
+//}
 
-SceneMgr::~SceneMgr() {
-	//
-}
+//SceneMgr::~SceneMgr() {
+//	//
+//}
 
 //void SceneMgr::Init() {
 //	//
 //}
 
-//void SceneMgr::Loop() {
+//void SceneMgr::Proc() {
 //	//
 //}
 
@@ -44,7 +52,8 @@ void SceneMgr::LoadScene() {
 	delete GetScene();
 
 	switch(GetNext()) {
-		case SCENE_FIRST:
+		case BaseScene::SCENE_FIRST: //this is always the first scene in the game
+
 		case SCENE_PRIME:
 			SetScene( new ScenePrime() );
 	}
@@ -61,7 +70,7 @@ int SDL_main(int, char**) {
 	SceneMgr app;
 
 	app.Init();
-	app.Loop();
+	app.Proc();
 	app.Quit();
 
 	return 0;
