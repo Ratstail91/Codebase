@@ -25,7 +25,7 @@
 #include "camera_2d_utility.h"
 
 //-------------------------
-//Preprocessor
+//Preprocessor directives
 //-------------------------
 
 #if KR_ORIGIN2D_H_ != KR_CAMERA2DUTILITY_H_
