@@ -1,6 +1,6 @@
 --[[
 
-A good convention, he one that I use, is:
+A good convention, the one that I use, is:
 
 class nmae: "ClassName"
 file name: "class_name" (note: no file extention!!)
