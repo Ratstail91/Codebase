@@ -43,6 +43,7 @@ hFile:write(
 \
 #include \"SDL.h\"\
 #include \"base_scene.h\"\
+#include \"scene_list.h\"\
 \
 class " .. className .. " : public BaseScene {\
 public:\
