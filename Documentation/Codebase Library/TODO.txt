@@ -81,6 +81,7 @@ Consider possible additions
 -------------------------
 
 *	Remove "Callback" phrase from simple and complex callback functions; leave them as short phrases.
+*	Remove ConfigUtility's inheritance from a std container.
 *	"Target" option in CameraUtility, targeting an origin?
 *	New modules such as TCP networking, animation, rotation(done), or sound management
 *	Sound manager(SDL_mixer)
