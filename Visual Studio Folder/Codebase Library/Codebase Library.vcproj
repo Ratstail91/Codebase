@@ -326,14 +326,6 @@
 				</File>
 			</Filter>
 		</Filter>
-		<Filter
-			Name="Global"
-			>
-			<File
-				RelativePath=".\global_macros.h"
-				>
-			</File>
-		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
