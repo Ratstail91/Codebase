@@ -1,8 +1,7 @@
--------------------------
 Consider possible additions
+
 -------------------------
 
-*	Remove "Callback" phrase from simple and complex callback functions; leave them as short phrases.
 *	Remove ConfigUtility's inheritance from a std container.
 *	"Target" option in CameraUtility, targeting an origin?
 *	New modules such as TCP networking, animation, rotation(done), or sound management
@@ -10,14 +9,10 @@ Consider possible additions
 *	GitHub wiki needs to be fleshed out
 
 -	Upgrading and compatabilities with SDL 1.3
--	Rename SceneMgr to GameMgr?
--	Move the Scene macros to quick start from BaseScene
--	add entry and exit functions to the frameworks, not-unlike constructors/destructors?
--	the callback systems don't cleanup after themselfs well.
--	Generic "single base class" (Does Simple Callbacks count as this? No, I need an actual class)
+-	add entry and exit functions to complex callbacks, not-unlike constructors/destructors?
+--	the callback systems don't cleanup after themselves well.
 -	Particle system? (boost the popularity!)
--	Make SceneMgr static?
--	change ConfigUtility::Real() to a float return (impossible due to atof() return type)
+-	Make SceneMgr static/singleton?
 
 -------------------------
 
