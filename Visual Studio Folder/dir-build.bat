@@ -14,3 +14,4 @@ RMDIR /S /Q "%~p0Release\Codebase Library\Quick Start\"
 XCOPY "%~p0Codebase Library\*.h" "%~p0Release\Codebase Library\include\" /D /S /Y /I
 XCOPY "%~p0Quick Start\*.h" "%~p0Release\Codebase Library\Quick Start\" /D /S /Y /I
 XCOPY "%~p0Quick Start\*.cpp" "%~p0Release\Codebase Library\Quick Start\" /D /S /Y /I
+XCOPY "%~p0Quick Start\*.lua" "%~p0Release\Codebase Library\Quick Start\" /D /S /Y /I
