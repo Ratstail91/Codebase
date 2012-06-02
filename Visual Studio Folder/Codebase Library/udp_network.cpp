@@ -1,6 +1,6 @@
 /* File Name: udp_network.cpp
  * Author: Kayne Ruse
- * Date: 16/5/2012
+ * Date: 2/6/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -55,7 +55,7 @@ void UDPNetwork::Quit() {
 	SDLNet_Quit();
 }
 
-void UDPNetwork::Send(IPaddress add, void* data, int size) {
+void UDPNetwork::Send(IPaddress add, const void* data, int size) {
 	m_pPacketOut->address = add;
 
 	memcpy(m_pPacketOut->data, data, size);
@@ -64,7 +64,7 @@ void UDPNetwork::Send(IPaddress add, void* data, int size) {
 	SDLNet_UDP_Send(m_socket, -1, m_pPacketOut);
 }
 
-void UDPNetwork::Send(const char* ip, int port, void* data, int size) {
+void UDPNetwork::Send(const char* ip, int port, const void* data, int size) {
 	//determine the address
 	IPaddress add;
 

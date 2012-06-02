@@ -1,6 +1,6 @@
 /* File Name: udp_network.h
  * Author: Kayne Ruse
- * Date: 16/5/2012
+ * Date: 2/6/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -22,7 +22,7 @@
  *     Manage UDP-based networking.
 */
 #ifndef KR_UDPNETWORK_H_
-#define KR_UDPNETWORK_H_ 2012051601
+#define KR_UDPNETWORK_H_ 2012060201
 
 #include "SDL_net.h"
 
@@ -32,8 +32,8 @@ public:
 	void Init(int port, int size = 512);
 	void Quit();
 
-	void Send(IPaddress add, void* data, int size);
-	void Send(const char* ip, int port, void* data, int size);
+	void Send(IPaddress add, const void* data, int size);
+	void Send(const char* ip, int port, const void* data, int size);
 	int Receive();
 
 	/* Accessors and mutators */
