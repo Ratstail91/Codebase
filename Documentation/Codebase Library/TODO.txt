@@ -44,10 +44,6 @@ end
 	-	TCPNetwork
 end
 
-^	Global
-	^	Global Macros
-end
-
 -	Map Systems
 	//"tools" build the maps, while "utilities" read the map data
 	-	MapTool
@@ -80,6 +76,7 @@ Document known bugs.
 Consider possible additions
 -------------------------
 
+*	Change UDPNetwork::Send() void* parameter to const void*
 *	Remove "Callback" phrase from simple and complex callback functions; leave them as short phrases.
 *	Remove ConfigUtility's inheritance from a std container.
 *	"Target" option in CameraUtility, targeting an origin?
