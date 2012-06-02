@@ -191,13 +191,6 @@
 			<File
 				RelativePath=".\entity.cpp"
 				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\entity.h"
@@ -233,6 +226,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\auto scene.lua"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
