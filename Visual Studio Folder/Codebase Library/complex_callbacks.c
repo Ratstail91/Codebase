@@ -1,6 +1,6 @@
 /* File Name: complex_callbacks.c
  * Author: Kayne Ruse
- * Date: 4/5/2012
+ * Date: 2/6/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -24,8 +24,8 @@
  *     This version handles multiple scenes; see "simple callbacks" for a single scene.
  * 
  * Notes:
- *     The "cc_" prefix for the globals is to differentiate these variables from identical
- *     variables in "simple callbacks".
+ *     The "cc" prefix is to differentiate these variables from identical names in
+ *     "simple callbacks".
 */
 #include "complex_callbacks.h"
 
@@ -41,22 +41,22 @@ Uint8 cc_g_uiSceneThis = 0;
 Uint8 cc_g_uiSceneNext = 0;
 int cc_g_iReturn = 0;
 
-ccBasicCallback cc_g_fpInit = NULL;
-ccBasicCallback cc_g_fpQuit = NULL;
+ccBasic cc_g_fpInit = NULL;
+ccBasic cc_g_fpQuit = NULL;
 
 typedef struct ccScene {
-	ccBasicCallback m_fpHead;
-	ccBasicCallback m_fpTail;
-	ccBasicCallback m_fpUpdate;
-	ccBasicCallback m_fpRender;
+	ccBasic m_fpHead;
+	ccBasic m_fpTail;
+	ccBasic m_fpUpdate;
+	ccBasic m_fpRender;
 
-	ccEventCallback m_fpEvents[SDL_NUMEVENTS];
+	ccEvent m_fpEvents[SDL_NUMEVENTS];
 }ccScene;
 
 ccScene* cc_g_pSceneArray = NULL;
 
 /* Complex callbacks accessors and mutators */
-int ccSetInitCallback(ccBasicCallback cb) {
+int ccSetInit(ccBasic cb) {
 	if (cc_g_fpInit != NULL) return 1;
 
 	cc_g_fpInit = cb;
@@ -64,7 +64,7 @@ int ccSetInitCallback(ccBasicCallback cb) {
 	return 0;
 }
 
-int ccSetQuitCallback(ccBasicCallback cb) {
+int ccSetQuit(ccBasic cb) {
 	if (cc_g_fpQuit != NULL) return 1;
 
 	cc_g_fpQuit = cb;
@@ -72,7 +72,7 @@ int ccSetQuitCallback(ccBasicCallback cb) {
 	return 0;
 }
 
-int ccSetHeadCallback(Uint8 s, ccBasicCallback cb) {
+int ccSetHead(Uint8 s, ccBasic cb) {
 	if (cc_g_pSceneArray == NULL || s >= cc_g_uiSceneCount) return 2;
 	if (cc_g_pSceneArray[s].m_fpHead != NULL) return 1;
 
@@ -81,7 +81,7 @@ int ccSetHeadCallback(Uint8 s, ccBasicCallback cb) {
 	return 0;
 }
 
-int ccSetTailCallback(Uint8 s, ccBasicCallback cb) {
+int ccSetTail(Uint8 s, ccBasic cb) {
 	if (cc_g_pSceneArray == NULL || s >= cc_g_uiSceneCount) return 2;
 	if (cc_g_pSceneArray[s].m_fpTail != NULL) return 1;
 
@@ -90,7 +90,7 @@ int ccSetTailCallback(Uint8 s, ccBasicCallback cb) {
 	return 0;
 }
 
-int ccSetUpdateCallback(Uint8 s, ccBasicCallback cb) {
+int ccSetUpdate(Uint8 s, ccBasic cb) {
 	if (cc_g_pSceneArray == NULL || s >= cc_g_uiSceneCount) return 2;
 	if (cc_g_pSceneArray[s].m_fpUpdate != NULL) return 1;
 
@@ -99,7 +99,7 @@ int ccSetUpdateCallback(Uint8 s, ccBasicCallback cb) {
 	return 0;
 }
 
-int ccSetRenderCallback(Uint8 s, ccBasicCallback cb) {
+int ccSetRender(Uint8 s, ccBasic cb) {
 	if (cc_g_pSceneArray == NULL || s >= cc_g_uiSceneCount) return 2;
 	if (cc_g_pSceneArray[s].m_fpRender != NULL) return 1;
 
@@ -108,7 +108,7 @@ int ccSetRenderCallback(Uint8 s, ccBasicCallback cb) {
 	return 0;
 }
 
-int ccSetEventCallback(Uint8 s, ccEventCallback cb, Uint8 e) {
+int ccSetEvent(Uint8 s, ccEvent cb, Uint8 e) {
 	if (e >= SDL_NUMEVENTS) return 3;
 	if (cc_g_pSceneArray == NULL || s >= cc_g_uiSceneCount) return 2;
 	if (cc_g_pSceneArray[s].m_fpEvents[e] != NULL) return 1;

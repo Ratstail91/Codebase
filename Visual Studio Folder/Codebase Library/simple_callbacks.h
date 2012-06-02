@@ -1,6 +1,6 @@
 /* File Name: simple_callbacks.h
  * Author: Kayne Ruse
- * Date: 4/5/2012
+ * Date: 2/6/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -24,11 +24,11 @@
  *     This version handles only one scene; see "complex callbacks" for multiple scenes.
  * 
  * Notes:
- *     The "sc_" prefix for the globals is to differentiate these variables from identical
- *     variables in "complex callbacks".
+ *     The "sc" prefix is to differentiate these variables from identical names in
+ *     "complex callbacks".
 */
 #ifndef KR_SIMPLECALLBACKS_H_
-#define KR_SIMPLECALLBACKS_H_ 2012050401
+#define KR_SIMPLECALLBACKS_H_ 2012060201
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,19 +38,19 @@ extern "C" {
 #include "SDL.h"
 
 /* Callback types */
-typedef void (*scBasicCallback)(void);
-typedef void (*scEventCallback)(SDL_Event const* const);
+typedef void (*scBasic)(void);
+typedef void (*scEvent)(SDL_Event const* const);
 
 /* Simple callback functions */
-int scSetInitCallback	(scBasicCallback);
-int scSetQuitCallback	(scBasicCallback);
+int scSetInit	(scBasic);
+int scSetQuit	(scBasic);
 
-int scSetHeadCallback	(scBasicCallback);
-int scSetTailCallback	(scBasicCallback);
-int scSetUpdateCallback	(scBasicCallback);
-int scSetRenderCallback	(scBasicCallback);
+int scSetHead	(scBasic);
+int scSetTail	(scBasic);
+int scSetUpdate	(scBasic);
+int scSetRender	(scBasic);
 
-int scSetEventCallback	(scEventCallback, Uint8);
+int scSetEvent	(scEvent, Uint8);
 
 void scProc();
 void scQuit();

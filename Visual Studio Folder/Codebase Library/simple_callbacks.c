@@ -1,6 +1,6 @@
 /* File Name: simple_callbacks.c
  * Author: Kayne Ruse
- * Date: 4/5/2012
+ * Date: 2/6/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -24,8 +24,8 @@
  *     This version handles only one scene; see "complex callbacks" for multiple scenes.
  * 
  * Notes:
- *     The "sc_" prefix for the globals is to differentiate these variables from identical
- *     variables in "complex callbacks".
+ *     The "sc" prefix is to differentiate these variables from identical names in
+ *     "complex callbacks".
 */
 #include "simple_callbacks.h"
 
@@ -42,54 +42,54 @@
 /* Simple callback internals */
 int sc_g_bRunning = TRUE;
 
-scBasicCallback sc_g_fpInit = NULL;
-scBasicCallback sc_g_fpQuit = NULL;
+scBasic sc_g_fpInit = NULL;
+scBasic sc_g_fpQuit = NULL;
 
-scBasicCallback sc_g_fpHead = NULL;
-scBasicCallback sc_g_fpTail = NULL;
-scBasicCallback sc_g_fpUpdate = NULL;
-scBasicCallback sc_g_fpRender = NULL;
+scBasic sc_g_fpHead = NULL;
+scBasic sc_g_fpTail = NULL;
+scBasic sc_g_fpUpdate = NULL;
+scBasic sc_g_fpRender = NULL;
 
-scEventCallback sc_g_fpEvents[SDL_NUMEVENTS] = {LIST_32(NULL)};
+scEvent sc_g_fpEvents[SDL_NUMEVENTS] = {LIST_32(NULL)};
 
 /* Simple callback functions */
-int  scSetInitCallback(scBasicCallback cb) {
+int  scSetInit(scBasic cb) {
 	if (sc_g_fpInit != NULL) return 1;
 	sc_g_fpInit = cb;
 	return 0;
 }
 
-int scSetQuitCallback(scBasicCallback cb) {
+int scSetQuit(scBasic cb) {
 	if (sc_g_fpQuit != NULL) return 1;
 	sc_g_fpQuit = cb;
 	return 0;
 }
 
-int scSetHeadCallback(scBasicCallback cb) {
+int scSetHead(scBasic cb) {
 	if (sc_g_fpHead != NULL) return 1;
 	sc_g_fpHead = cb;
 	return 0;
 }
 
-int scSetTailCallback(scBasicCallback cb) {
+int scSetTail(scBasic cb) {
 	if (sc_g_fpTail != NULL) return 1;
 	sc_g_fpTail = cb;
 	return 0;
 }
 
-int scSetUpdateCallback(scBasicCallback cb) {
+int scSetUpdate(scBasic cb) {
 	if (sc_g_fpUpdate != NULL) return 1;
 	sc_g_fpUpdate = cb;
 	return 0;
 }
 
-int scSetRenderCallback(scBasicCallback cb) {
+int scSetRender(scBasic cb) {
 	if (sc_g_fpRender != NULL) return 1;
 	sc_g_fpRender = cb;
 	return 0;
 }
 
-int scSetEventCallback(scEventCallback cb, Uint8 e) {
+int scSetEvent(scEvent cb, Uint8 e) {
 	if (e >= SDL_NUMEVENTS) return 2;
 	if (sc_g_fpEvents[e] != NULL) return 1;
 	sc_g_fpEvents[e] = cb;

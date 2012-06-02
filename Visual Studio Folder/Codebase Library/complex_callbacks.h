@@ -1,6 +1,6 @@
 /* File Name: complex_callbacks.h
  * Author: Kayne Ruse
- * Date: 4/5/2012
+ * Date: 2/6/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -24,11 +24,11 @@
  *     This version handles multiple scenes; see "simple callbacks" for a single scene.
  * 
  * Notes:
- *     The "cc_" prefix for the globals is to differentiate these variables from identical
- *     variables in "simple callbacks".
+ *     The "cc" prefix is to differentiate these variables from identical names in
+ *     "simple callbacks".
 */
 #ifndef KR_COMPLEXCALLBACKS_H_
-#define KR_COMPLEXCALLBACKS_H_ 2012050401
+#define KR_COMPLEXCALLBACKS_H_ 2012060201
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,19 +38,19 @@ extern "C" {
 #include "SDL.h"
 
 /* Callback types */
-typedef void (*ccBasicCallback)(void);
-typedef void (*ccEventCallback)(SDL_Event const* const);
+typedef void (*ccBasic)(void);
+typedef void (*ccEvent)(SDL_Event const* const);
 
 /* Complex callbacks accessors and mutators */
-int ccSetInitCallback	(ccBasicCallback);
-int ccSetQuitCallback	(ccBasicCallback);
+int ccSetInit	(ccBasic);
+int ccSetQuit	(ccBasic);
 
-int ccSetHeadCallback	(Uint8, ccBasicCallback);
-int ccSetTailCallback	(Uint8, ccBasicCallback);
-int ccSetUpdateCallback	(Uint8, ccBasicCallback);
-int ccSetRenderCallback	(Uint8, ccBasicCallback);
+int ccSetHead	(Uint8, ccBasic);
+int ccSetTail	(Uint8, ccBasic);
+int ccSetUpdate	(Uint8, ccBasic);
+int ccSetRender	(Uint8, ccBasic);
 
-int ccSetEventCallback	(Uint8, ccEventCallback, Uint8);
+int ccSetEvent	(Uint8, ccEvent, Uint8);
 
 /* Body of the complex callbacks */
 int ccAlloc		(Uint8);
