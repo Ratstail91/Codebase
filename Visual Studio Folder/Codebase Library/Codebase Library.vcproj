@@ -157,6 +157,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\Documentation\Codebase Library\Class List.txt"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Documentation\Codebase Library\Pseudocode.txt"
 				>
 			</File>

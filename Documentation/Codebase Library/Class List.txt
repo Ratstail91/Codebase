@@ -1,0 +1,65 @@
+Key:
+	+	Complete
+	*	Todo
+	-	Backburner
+	%	Deprecated
+	^	Auxiliary (not part of the primary modules)
+end
+
+-------------------------
+
+Check each module's code consistency.
+Deprecate the necessary components.
+
+-------------------------
+
+Code base:
+
++	Frameworks
+	+	Scene System
+		+	BaseSceneMgr
+		+	BaseScene
+	end
+	
+	^	Simple Callbacks
+	^	Complex Callbacks
+end
+
++	Instance Systems
+	+	Image
+	+	Origin2D
+	-	Origin3D
+	+	BBox2D
+	-	BBox3D
+end
+
++	Utilities
+	+	CameraUtility
+	+	ConfigUtility
+	+	FPSUtility
+end
+
++	Network Systems
+	+	UDPNetwork
+	-	TCPNetwork
+end
+
+-	Map Systems
+	//"tools" build the map data, while "utilities" read the map data
+	-	MapTool
+	-	MapUtility
+	-	WaypointTool
+	-	WaypointUtility
+	-	PositionTool
+	-	PositionUtility
+end
+
++	Quick Setup:
+	+	SceneList
+	+	SceneMgr
+	+	ScenePrime
+	+	Entity
+	-	ImageRot
+	-	EntityRot
+end
+
