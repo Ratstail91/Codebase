@@ -7,12 +7,15 @@ Consider possible additions
 *	New modules such as TCP networking, animation, rotation(done), or sound management
 *	Sound manager(SDL_mixer)
 *	GitHub wiki needs to be fleshed out
+*	Fix the inconsistency between sc and cc quit functions
+*	fix any inconsistencies between sc and cc
 
 -	Upgrading and compatabilities with SDL 1.3
 -	add entry and exit functions to complex callbacks, not-unlike constructors/destructors?
 --	the callback systems don't cleanup after themselves well.
 -	Particle system? (boost the popularity!)
 -	Make SceneMgr static/singleton?
+-	Wrap SDL stuff in Codebase-specific data types, abstracting away SDL?
 
 -------------------------
 
