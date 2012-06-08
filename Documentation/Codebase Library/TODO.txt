@@ -9,6 +9,9 @@ Consider possible additions
 *	GitHub wiki needs to be fleshed out
 *	Fix the inconsistency between sc and cc quit functions
 *	fix any inconsistencies between sc and cc
+*	Image::LoadImage(SDL_Surface*); //derp wat?
+*	CameraUtility could be abstract
+*	Remove the "Utility" state of the classes
 
 -	Upgrading and compatabilities with SDL 1.3
 -	add entry and exit functions to complex callbacks, not-unlike constructors/destructors?
