@@ -12,6 +12,7 @@ Consider possible additions
 *	Image::LoadImage(SDL_Surface*); //derp wat?
 *	CameraUtility could be abstract
 *	Remove the "Utility" state of the classes
+*	I need logical names for all classes AND functions
 
 -	Upgrading and compatabilities with SDL 1.3
 -	add entry and exit functions to complex callbacks, not-unlike constructors/destructors?

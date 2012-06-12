@@ -1,6 +1,6 @@
 /* File Name: image.h
  * Author: Kayne Ruse
- * Date: 16/5/2012
+ * Date: 12/6/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -22,7 +22,7 @@
  *     A wrapper for SDL_Surface, and it's rendering functionality.
 */
 #ifndef KR_IMAGE_H_
-#define KR_IMAGE_H_ 2012051602
+#define KR_IMAGE_H_ 2012061201
 
 #include "SDL.h"
 
@@ -64,7 +64,8 @@ public:
 	int GetSheetW();
 	int GetSheetH();
 
-	bool Local();
+	bool IsLoadedImage();
+	bool IsLocalImage();
 
 protected:
 	/* Protected access members */

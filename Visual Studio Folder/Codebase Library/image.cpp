@@ -1,6 +1,6 @@
 /* File Name: image.cpp
  * Author: Kayne Ruse
- * Date: 16/5/2012
+ * Date: 12/6/2012
  * Copyright: (c) Kayne Ruse 2012
  * 
  * This file is part of Codebase Library.
@@ -188,7 +188,11 @@ int Image::GetSheetH() {
 	return m_pSurface->h;
 }
 
-bool Image::Local() {
+bool Image::IsLoadedImage() {
+	return m_pSurface != NULL;
+}
+
+bool Image::IsLocalImage() {
 	return m_bLocal;
 }
 

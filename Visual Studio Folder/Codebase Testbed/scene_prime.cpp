@@ -29,6 +29,11 @@ ScenePrime::ScenePrime() {
 	//load the assets
 	try {
 		m_red.LoadImage("player_red.bmp");
+
+		//testing Image::IsLoadedImage()
+		cout << m_red.IsLoadedImage() << endl;
+		cout << m_blu.IsLoadedImage() << endl;
+
 		m_blu.LoadImage("player_blue.bmp");
 	}
 	catch(exception& e) {
