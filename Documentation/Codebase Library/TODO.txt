@@ -13,6 +13,8 @@ Consider possible additions
 *	CameraUtility could be abstract
 *	Remove the "Utility" state of the classes
 *	I need logical names for all classes AND functions
+*	Switch to the zlib license
+*	Move this TODO list into the GitHub issue tracker?
 
 -	Upgrading and compatabilities with SDL 1.3
 -	add entry and exit functions to complex callbacks, not-unlike constructors/destructors?
