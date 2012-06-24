@@ -1,19 +1,24 @@
 Consider possible additions
 
+Ordered list:
+
+1	Remove the "2D" naming convention
+2	Switch to the zlib license
+3	fix any inconsistencies between sc and cc
+4	BBox::GetWorldBBox and BBox::CheckWorldBBox can be static
+5	Remove the "Utility" state of the classes
+
 -------------------------
+
+Unordered list:
 
 *	Remove ConfigUtility's inheritance from a std container.
 *	"Target" option in CameraUtility, targeting an origin?
 *	New modules such as TCP networking, animation, rotation(done), or sound management
 *	Sound manager(SDL_mixer)
 *	GitHub wiki needs to be fleshed out
-*	Fix the inconsistency between sc and cc quit functions
-*	fix any inconsistencies between sc and cc
 *	Image::LoadImage(SDL_Surface*); //derp wat?
-*	CameraUtility could be abstract
-*	Remove the "Utility" state of the classes
 *	I need logical names for all classes AND functions
-*	Switch to the zlib license
 *	Move this TODO list into the GitHub issue tracker?
 
 -	Upgrading and compatabilities with SDL 1.3

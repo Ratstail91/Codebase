@@ -24,7 +24,7 @@ GetMap()
 
 "Target" option in CameraUtility, targeting an origin?
 
-Camera2DUtility
+CameraUtility
 
 GetCamX
 GetCamY
@@ -34,12 +34,12 @@ GetMode
 
 ScreenSize
 
-SetTarget(Origin2D*)
-GetTarget(Origin2D*)
+SetTarget(Origin*)
+GetTarget(Origin*)
 
 -mode
 
 -screenw
 -screenh
 
--Origin2D* target
+-Origin* target

@@ -27,10 +27,8 @@ end
 
 +	Instance Systems
 	+	Image
-	+	Origin2D
-	-	Origin3D
-	+	BBox2D
-	-	BBox3D
+	+	Origin
+	+	BBox
 end
 
 +	Utilities
