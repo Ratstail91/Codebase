@@ -59,7 +59,7 @@ int ccSetEvent	(Uint8, ccEvent, Uint8);
 /* Body of the complex callbacks */
 int ccAlloc		(Uint8);
 int ccSwitch	(Uint8);
-int ccQuit		(int);
+void ccQuit		();
 int ccProc		();
 
 #ifdef __cplusplus

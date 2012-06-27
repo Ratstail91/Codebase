@@ -56,8 +56,8 @@ int scSetRender	(scBasic);
 
 int scSetEvent	(scEvent, Uint8);
 
-void scProc();
 void scQuit();
+void scProc();
 
 #ifdef __cplusplus
 } //extern "C"

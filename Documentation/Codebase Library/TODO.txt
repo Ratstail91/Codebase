@@ -2,7 +2,6 @@ Consider possible additions
 
 Ordered list:
 
-1	fix any inconsistencies between sc and cc
 2	Reduce the overreliance on inheritance: "is-a" vs "has-a"
 
 -------------------------

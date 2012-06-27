@@ -100,6 +100,10 @@ int scSetEvent(scEvent cb, Uint8 e) {
 	return 0;
 }
 
+void scQuit() {
+	sc_g_bRunning = FALSE;
+}
+
 void scProc() {
 	SDL_Event event;
 
@@ -120,8 +124,4 @@ void scProc() {
 	}
 
 	if (sc_g_fpQuit != NULL) sc_g_fpQuit();
-}
-
-void scQuit() {
-	sc_g_bRunning = FALSE;
 }

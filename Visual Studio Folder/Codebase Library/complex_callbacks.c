@@ -43,7 +43,6 @@ int cc_g_bRunning = TRUE;
 Uint8 cc_g_uiSceneCount = 0;
 Uint8 cc_g_uiSceneThis = 0;
 Uint8 cc_g_uiSceneNext = 0;
-int cc_g_iReturn = 0;
 
 ccBasic cc_g_fpInit = NULL;
 ccBasic cc_g_fpQuit = NULL;
@@ -160,12 +159,8 @@ int ccSwitch(Uint8 i) {
 	return 0;
 }
 
-int ccQuit(int i) {
-	if (cc_g_iReturn != 0 || cc_g_bRunning == FALSE) return -1;
-
+void ccQuit() {
 	cc_g_bRunning = FALSE;
-
-	return 0;
 }
 
 int ccProc() {
@@ -195,5 +190,5 @@ int ccProc() {
 
 	free(cc_g_pSceneArray);
 
-	return cc_g_iReturn;
+	return 0;
 }
