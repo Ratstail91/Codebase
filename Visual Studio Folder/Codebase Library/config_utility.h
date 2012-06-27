@@ -26,7 +26,7 @@
  *     Load and process configuration values from a file.
 */
 #ifndef KR_CONFIGUTILITY_H_
-#define KR_CONFIGUTILITY_H_ 2012062702
+#define KR_CONFIGUTILITY_H_ 2012062703
 
 #include <map>
 #include <string>
@@ -43,6 +43,7 @@ public:
 	bool Boolean			(const char* szKey);
 
 	std::string operator[]	(const char* szKey);
+	std::string operator[]	(std::string sKey);
 
 	std::map<std::string, std::string>* GetMap();
 

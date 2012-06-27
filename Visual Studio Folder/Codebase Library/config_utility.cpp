@@ -123,6 +123,10 @@ string ConfigUtility::operator[](const char* szKey) {
 	return String(szKey);
 }
 
+string ConfigUtility::operator[](string sKey) {
+	return String(sKey.c_str());
+}
+
 map<string, string>* ConfigUtility::GetMap() {
 	return &m_vValues;
 }
