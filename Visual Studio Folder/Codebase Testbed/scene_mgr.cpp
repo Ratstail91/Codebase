@@ -10,7 +10,7 @@
 //Preprocessor directives
 //-------------------------
 
-#if KR_BASESCENEMGR_H_ != 2012051601 // 16/5/2012, revision 1
+#if KR_BASESCENEMGR_H_ != 2012062701 //27/6/2012, revision 1
 #error BaseSceneMgr version is incompatible with SceneMgr
 #endif
 

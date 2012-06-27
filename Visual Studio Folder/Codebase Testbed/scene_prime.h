@@ -8,12 +8,8 @@
 #define KR_SCENEPRIME_H_
 
 #include "SDL.h"
-
 #include "base_scene.h"
-#include "fps_utility.h"
-#include "camera_2d_utility.h"
-
-#include "entity.h"
+#include "scene_list.h"
 
 class ScenePrime : public BaseScene {
 public:
@@ -36,10 +32,7 @@ protected:
 	virtual void KeyUp				(SDL_KeyboardEvent const&);
 
 	/* Members */
-	Entity m_red;
-	Entity m_blu;
-
-	Camera2DUtility m_camUtil;
+	//...
 };
 
 #endif

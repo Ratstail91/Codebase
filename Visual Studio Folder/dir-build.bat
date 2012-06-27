@@ -8,8 +8,8 @@ REM Simply call this script; the Visual Studio solution calls this after the lib
 REM parameter list:
 REM %0 $(SolutionDir)dir-build
 
-REM RMDIR /S /Q "%~p0Release\Codebase Library\include\"
-REM RMDIR /S /Q "%~p0Release\Codebase Library\Quick Start\"
+RMDIR /S /Q "%~p0Release\Codebase Library\include\"
+RMDIR /S /Q "%~p0Release\Codebase Library\Quick Start\"
 
 XCOPY "%~p0Codebase Library\*.h" "%~p0Release\Codebase Library\include\" /D /S /Y /I
 XCOPY "%~p0Quick Start\*.h" "%~p0Release\Codebase Library\Quick Start\" /D /S /Y /I

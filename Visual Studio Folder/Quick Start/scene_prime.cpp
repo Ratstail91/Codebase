@@ -12,7 +12,7 @@ using namespace std;
 //Preprocessor directives
 //-------------------------
 
-#if KR_BASESCENE_H_ != 2012051601 // 16/5/2012, revision 1
+#if KR_BASESCENE_H_ != 2012062701 //27/6/2012, revision 1
 #error BaseScene version is incompatible with this scene
 #endif
 

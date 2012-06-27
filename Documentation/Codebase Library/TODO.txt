@@ -2,16 +2,14 @@ Consider possible additions
 
 Ordered list:
 
-1	Remove the "2D" naming convention
-2	Switch to the zlib license
-3	fix any inconsistencies between sc and cc
-4	BBox::GetWorldBBox and BBox::CheckWorldBBox can be static
-5	Remove the "Utility" state of the classes
+1	fix any inconsistencies between sc and cc
+2	Reduce the overreliance on inheritance: "is-a" vs "has-a"
 
 -------------------------
 
 Unordered list:
 
+*	BBox::GetWorldBBox and BBox::CheckWorldBBox can be static
 *	Remove ConfigUtility's inheritance from a std container.
 *	"Target" option in CameraUtility, targeting an origin?
 *	New modules such as TCP networking, animation, rotation(done), or sound management

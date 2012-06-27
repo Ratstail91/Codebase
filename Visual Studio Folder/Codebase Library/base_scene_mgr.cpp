@@ -1,24 +1,28 @@
 /* File Name: base_scene_mgr.cpp
  * Author: Kayne Ruse
- * Date: 16/5/2012
+ * Date: 27/6/2012
  * Copyright: (c) Kayne Ruse 2012
- * 
- * This file is part of Codebase Library.
- * 
- * Codebase Library is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * Codebase Library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public License
- * along with Codebase Library.  If not, see <http://www.gnu.org/licenses/>.
- * 
- * Description: 
+ *
+ * This software is provided 'as-is', without any express or implied
+ * warranty. In no event will the authors be held liable for any damages
+ * arising from the use of this software.
+ *
+ * Permission is granted to anyone to use this software for any purpose,
+ * including commercial applications, and to alter it and redistribute it
+ * freely, subject to the following restrictions:
+ *
+ * 1. The origin of this software must not be misrepresented; you must not
+ * claim that you wrote the original software. If you use this software
+ * in a product, an acknowledgment in the product documentation would be
+ * appreciated but is not required.
+ *
+ * 2. Altered source versions must be plainly marked as such, and must not be
+ * misrepresented as being the original software.
+ *
+ * 3. This notice may not be removed or altered from any source
+ * distribution.
+ *
+ * Description:
  *     The base class for managing a series of classes derived from BaseScene.
 */
 #include <exception>
@@ -30,7 +34,7 @@ using namespace std;
 //Preprocessor directives
 //-------------------------
 
-#if KR_BASESCENE_H_ != KR_BASESCENEMGR_H_
+#if KR_BASESCENE_H_ != 2012062701
 #error BaseScene version is incompatible with BaseSceneMgr
 #endif
 
