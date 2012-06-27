@@ -27,6 +27,8 @@ The file "dir-build.bat" is a batch script that is designed to create a usable l
 ## Contact information
 
 ratstail91@yahoo.com.au
+
 http://kr-studios.tumblr.com/
+
 http://www.facebook.com/krgamestudios
 
