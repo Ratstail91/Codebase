@@ -2,28 +2,31 @@ Consider possible additions
 
 Ordered list:
 
-2	Reduce the overreliance on inheritance: "is-a" vs "has-a"
+...
 
 -------------------------
 
 Unordered list:
 
-*	BBox::GetWorldBBox and BBox::CheckWorldBBox can be static
-*	Remove ConfigUtility's inheritance from a std container.
 *	"Target" option in CameraUtility, targeting an origin?
-*	New modules such as TCP networking, animation, rotation(done), or sound management
+*	Animation
+*	TCPNetwork
+*	ImageRot
+*	EntityRot
 *	Sound manager(SDL_mixer)
-*	GitHub wiki needs to be fleshed out
-*	Image::LoadImage(SDL_Surface*); //derp wat?
-*	I need logical names for all classes AND functions
-*	Move this TODO list into the GitHub issue tracker?
+*	GitHub wiki needs to be fleshed out/kept up to date
 
+-	Image::LoadImage(SDL_Surface*); //derp wat?
+-	I need logical names for all classes AND functions
+-	Move this TODO list into the GitHub issue tracker?
 -	Upgrading and compatabilities with SDL 1.3
 -	add entry and exit functions to complex callbacks, not-unlike constructors/destructors?
 --	the callback systems don't cleanup after themselves well.
 -	Particle system? (boost the popularity!)
 -	Make SceneMgr static/singleton?
 -	Wrap SDL stuff in Codebase-specific data types, abstracting away SDL?
+-	Reduce/remove Entity's inheritance?
+-	Reduce the overreliance on inheritance: "is-a" vs "has-a"
 
 -------------------------
 
