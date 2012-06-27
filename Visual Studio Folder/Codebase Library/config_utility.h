@@ -26,22 +26,29 @@
  *     Load and process configuration values from a file.
 */
 #ifndef KR_CONFIGUTILITY_H_
-#define KR_CONFIGUTILITY_H_ 2012062701
+#define KR_CONFIGUTILITY_H_ 2012062702
 
 #include <map>
 #include <string>
 
-class ConfigUtility : public std::map<std::string, std::string> {
+class ConfigUtility {
 public:
 	/* Public access members */
 	void Load		(const char* szFileName);
-	int Integer		(const char* szKey);
-	double Real		(const char* szKey);
-	bool Boolean	(const char* szKey);
 
-	/* Path system */
-	const char* ConcatPath			(const char* szKey, const char* szFileName);
-	const char* ConcatPathAndFile	(const char* szKey1, const char* szKey2);
+	std::string String		(const char* szKey);
+	const char* Cstring		(const char* szKey);
+	int Integer				(const char* szKey);
+	double Real				(const char* szKey);
+	bool Boolean			(const char* szKey);
+
+	std::string operator[]	(const char* szKey);
+
+	std::map<std::string, std::string>* GetMap();
+
+private:
+	/* Private access members */
+	std::map<std::string, std::string> m_vValues;
 };
 
 #endif

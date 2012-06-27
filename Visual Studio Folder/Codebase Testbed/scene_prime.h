@@ -11,6 +11,9 @@
 #include "base_scene.h"
 #include "scene_list.h"
 
+#include "image.h"
+#include "config_utility.h"
+
 class ScenePrime : public BaseScene {
 public:
 	/* Public access members */
@@ -32,7 +35,8 @@ protected:
 	virtual void KeyUp				(SDL_KeyboardEvent const&);
 
 	/* Members */
-	//...
+	ConfigUtility m_config;
+	Image m_image;
 };
 
 #endif

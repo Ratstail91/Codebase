@@ -5,20 +5,37 @@ ConfigUtility
 Load	(fName)
 	-load a config file, formatted as a set of keys and elements
 
+operator[](key)
+	-returns a string, could return another type?
+
+String	(key)
 Integer	(key)
 Real	(key)
 Boolean	(key)
 	-return the respective types, or throw an exception
 
 ConcatKeys(count, ...)
-	-concat a series of elements, and return them as a singel string
+	-concat a series of elements, and return them as a single string
 	is this really needed?: config["path"] + config["file"]
-
-operator[](key)
-	-get an element
 
 GetMap()
 	-return the map member, basic OO breaking accessor
+
+-------------------------
+
+ConfigUtility:
+	Load(fname)
+	
+	String
+	Cstring
+	Integer
+	Real
+	Boolean
+	
+	operator[]
+	
+	GetMap
+end
 
 -------------------------
 

@@ -28,16 +28,8 @@
 //#define _CRT_SECURE_NO_WARNINGS
 #include <exception>
 #include <fstream>
-#include <string>
 #include "config_utility.h"
 using namespace std;
-
-//-------------------------
-//Preprocessor
-//-------------------------
-
-//BUGLIST: 1
-#define RESERVED "__reserved"
 
 //-------------------------
 //Public access members
@@ -91,73 +83,46 @@ void ConfigUtility::Load(const char* szFileName) {
 			sBufferTwo.erase(sBufferTwo.end()-1);
 
 		//save the pair
-		(*this)[sBufferOne] = sBufferTwo;
+		m_vValues[sBufferOne] = sBufferTwo;
 	}
 
 	is.close();
 }
 
+string ConfigUtility::String(const char* szKey) {
+	return m_vValues[szKey];
+}
+
+const char* ConfigUtility::Cstring(const char* szKey) {
+	return m_vValues[szKey].c_str();
+}
+
 int ConfigUtility::Integer(const char* szKey) {
-	return atoi((*this)[szKey].c_str());
+	return atoi(m_vValues[szKey].c_str());
 }
 
 double ConfigUtility::Real(const char* szKey) {
-	return atof((*this)[szKey].c_str());
+	return atof(m_vValues[szKey].c_str());
 }
 
 bool ConfigUtility::Boolean(const char* szKey) {
-	if (! _stricmp( (*this)[szKey].c_str() , "true") )
+	if (! _stricmp( m_vValues[szKey].c_str() , "true") )
 		return true;
 
-	if (! _stricmp( (*this)[szKey].c_str() , "false") )
+	if (! _stricmp( m_vValues[szKey].c_str() , "false") )
 		return false;
 
-	string sWhat = "Incorrect boolean config argument: key: ";
+	string sWhat = "Unknown boolean argument. Key: ";
 	sWhat += szKey;
 	sWhat += ", value: ";
-	sWhat += (*this)[szKey];
+	sWhat += m_vValues[szKey];
 	throw(exception(sWhat.c_str()));
 }
 
-//-------------------------
-//Path system
-//-------------------------
-
-const char* ConfigUtility::ConcatPath(const char* szKey, const char* szFileName) {
-	map<string, string>::iterator it = find(szKey);
-
-	if (it == end()) {
-		string sWhat = "Failed to find path key: ";
-		sWhat += szKey;
-		throw(exception(sWhat.c_str()));
-	}
-
-	//BUGLIST: 1
-	(*this)[RESERVED] = it->second;
-	(*this)[RESERVED] += szFileName;
-
-	return (*this)[RESERVED].c_str();
+string ConfigUtility::operator[](const char* szKey) {
+	return String(szKey);
 }
 
-const char* ConfigUtility::ConcatPathAndFile(const char* szKey1, const char* szKey2) {
-	map<string, string>::iterator it1 = find(szKey1);
-	map<string, string>::iterator it2 = find(szKey2);
-
-	if (it1 == end()) {
-		string sWhat = "Failed to find key: ";
-		sWhat += szKey1;
-		throw(exception(sWhat.c_str()));
-	}
-
-	if (it2 == end()) {
-		string sWhat = "Failed to find key: ";
-		sWhat += szKey2;
-		throw(exception(sWhat.c_str()));
-	}
-
-	//BUGLIST: 1
-	(*this)[RESERVED] = it1->second;
-	(*this)[RESERVED] += it2->second;
-
-	return (*this)[RESERVED].c_str();
+map<string, string>* ConfigUtility::GetMap() {
+	return &m_vValues;
 }
