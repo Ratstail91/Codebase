@@ -32,7 +32,7 @@
  *     "complex callbacks".
 */
 #ifndef KR_SIMPLECALLBACKS_H_
-#define KR_SIMPLECALLBACKS_H_ 2012062701
+#define KR_SIMPLECALLBACKS_H_ 2012062702
 
 #ifdef __cplusplus
 extern "C" {
