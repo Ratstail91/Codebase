@@ -8,13 +8,14 @@ Ordered list:
 
 Unordered list:
 
+*	Flesh out the wiki, and keep it up to date.
+*	Specify the exit codes in Complex Callbacks, and update the wiki accordingly.
 *	"Target" option in CameraUtility, targeting an origin?
 *	Animation
 *	TCPNetwork
 *	ImageRot
 *	EntityRot
 *	Sound manager(SDL_mixer)
-*	GitHub wiki needs to be fleshed out/kept up to date
 
 -	Image::LoadImage(SDL_Surface*); //derp wat?
 -	I need logical names for all classes AND functions
