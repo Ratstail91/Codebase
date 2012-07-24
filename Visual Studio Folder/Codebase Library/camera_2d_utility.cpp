@@ -32,7 +32,7 @@
 //Preprocessor directives
 //-------------------------
 
-#if KR_ORIGIN2D_H_ != 2012062701
+#if KR_ORIGIN2D_H_ != 2012072501
 #error Origin2D version is incompatible with Camera2DUtility
 #endif
 
