@@ -1,6 +1,6 @@
 /* File Name: origin_2d.h
  * Author: Kayne Ruse
- * Date: 27/6/2012
+ * Date: 25/7/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -23,10 +23,10 @@
  * distribution.
  *
  * Description:
- *     Handle position and motion on a 2D plane.
+ *     Handle position and motion on a 2D plane, independant of outside influence.
 */
 #ifndef KR_ORIGIN2D_H_
-#define KR_ORIGIN2D_H_ 2012062701
+#define KR_ORIGIN2D_H_ 2012072501
 
 class Origin2D {
 public:
@@ -36,30 +36,30 @@ public:
 	virtual void Update(int iDelta);
 
 	/* Positon in 2D */
-	void SetOriginPosition		(float x, float y);
-	float SetOriginX			(float x);
-	float SetOriginY			(float y);
+	virtual void SetOriginPosition		(float x, float y);
+	virtual float SetOriginX			(float x);
+	virtual float SetOriginY			(float y);
 
-	void ShiftOriginPosition	(float x, float y);
-	float ShiftOriginX			(float x);
-	float ShiftOriginY			(float y);
+	virtual void ShiftOriginPosition	(float x, float y);
+	virtual float ShiftOriginX			(float x);
+	virtual float ShiftOriginY			(float y);
 
-	float GetOriginX			();
-	float GetOriginY			();
+	virtual float GetOriginX			();
+	virtual float GetOriginY			();
 
 	/* Motion in 2D */
-	void SetMotion		(float x, float y);
-	float SetMotionX	(float x);
-	float SetMotionY	(float y);
+	virtual void SetMotion		(float x, float y);
+	virtual float SetMotionX	(float x);
+	virtual float SetMotionY	(float y);
 
-	void ShiftMotion	(float x, float y);
-	float ShiftMotionX	(float x);
-	float ShiftMotionY	(float y);
+	virtual void ShiftMotion	(float x, float y);
+	virtual float ShiftMotionX	(float x);
+	virtual float ShiftMotionY	(float y);
 
-	float GetMotionX	();
-	float GetMotionY	();
+	virtual float GetMotionX	();
+	virtual float GetMotionY	();
 
-	void StopMotion		();
+	virtual void StopMotion		();
 
 private:
 	/* Private access members */

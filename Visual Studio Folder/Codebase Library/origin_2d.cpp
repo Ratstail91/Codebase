@@ -1,6 +1,6 @@
 /* File Name: origin_2d.cpp
  * Author: Kayne Ruse
- * Date: 27/6/2012
+ * Date: 25/7/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -23,7 +23,7 @@
  * distribution.
  *
  * Description:
- *     Handle position and motion on a 2D plane.
+ *     Handle position and motion on a 2D plane, independant of outside influence.
 */
 #include "origin_2d.h"
 

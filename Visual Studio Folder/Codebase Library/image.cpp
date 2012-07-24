@@ -1,6 +1,6 @@
 /* File Name: image.cpp
  * Author: Kayne Ruse
- * Date: 27/6/2012
+ * Date: 25/7/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -44,12 +44,12 @@ Image::Image() {
 	Init();
 }
 
-Image::Image(const char* szFileName, int x, int y, int w, int h) {
+Image::Image(const char* szFileName, Sint16 x, Sint16 y, Uint16 w, Uint16 h) {
 	Init();
 	LoadImage(szFileName, x, y, w, h);
 }
 
-Image::Image(SDL_Surface* pSurface,  int x, int y, int w, int h) {
+Image::Image(SDL_Surface* pSurface,  Sint16 x, Sint16 y, Uint16 w, Uint16 h) {
 	Init();
 	LoadImage(pSurface, x, y, w, h);
 }
@@ -58,7 +58,7 @@ Image::~Image() {
 	UnloadImage();
 }
 
-void Image::LoadImage(const char* szFileName, int x, int y, int w, int h) {
+void Image::LoadImage(const char* szFileName, Sint16 x, Sint16 y, Uint16 w, Uint16 h) {
 	UnloadImage();
 	m_pSurface = SDL_LoadBMP(szFileName);
 
@@ -66,7 +66,7 @@ void Image::LoadImage(const char* szFileName, int x, int y, int w, int h) {
 
 	m_bLocal = true;
 
-	SetColorKey();
+	SetImageColorKey();
 
 	m_sclip.x = 0;
 	m_sclip.y = 0;
@@ -76,7 +76,7 @@ void Image::LoadImage(const char* szFileName, int x, int y, int w, int h) {
 	m_dclip.y = y;
 }
 
-void Image::LoadImage(SDL_Surface* pSurface, int x, int y, int w, int h) {
+void Image::LoadImage(SDL_Surface* pSurface, Sint16 x, Sint16 y, Uint16 w, Uint16 h) {
 	UnloadImage();
 
 	if (pSurface == NULL) return; //dh protection
@@ -103,7 +103,7 @@ void Image::UnloadImage() {
 	m_bLocal = false;
 }
 
-void Image::SetColorKey(int iRed, int iGreen, int iBlue) {
+void Image::SetImageColorKey(Uint8 iRed, Uint8 iGreen, Uint8 iBlue) {
 	CHECK_LOADED;
 	SDL_SetColorKey(m_pSurface, SDL_SRCCOLORKEY, SDL_MapRGB(m_pSurface->format, iRed, iGreen, iBlue));
 }
@@ -113,7 +113,7 @@ void Image::ClearColorKey() {
 	SDL_SetColorKey(m_pSurface, 0, 0);
 }
 
-void Image::DrawTo(SDL_Surface* const pDest, int iCamX, int iCamY) {
+void Image::DrawTo(SDL_Surface* const pDest, Sint16 iCamX, Sint16 iCamY) {
 	CHECK_LOADED;
 
 	//local dclip to compensate the camera hooks
@@ -129,56 +129,56 @@ void Image::DrawTo(SDL_Surface* const pDest, int iCamX, int iCamY) {
 //Accessors and mutators
 //-------------------------
 
-void Image::SetImagePosition(int x, int y) {
+void Image::SetImagePosition(Sint16 x, Sint16 y) {
 	m_dclip.x = x;
 	m_dclip.y = y;
 }
 
-int Image::SetImageX(int x) {
+Sint16 Image::SetImageX(Sint16 x) {
 	return m_dclip.x = x;
 }
 
-int Image::SetImageY(int y) {
+Sint16 Image::SetImageY(Sint16 y) {
 	return m_dclip.y = y;
 }
 
-int Image::SetImageW(int w) {
+Uint16 Image::SetImageW(Uint16 w) {
 	return m_sclip.w = w;
 }
 
-int Image::SetImageH(int h) {
+Uint16 Image::SetImageH(Uint16 h) {
 	return m_sclip.h = h;
 }
 
-int Image::GetImageX() {
+Sint16 Image::GetImageX() {
 	return m_dclip.x;
 }
 
-int Image::GetImageY() {
+Sint16 Image::GetImageY() {
 	return m_dclip.y;
 }
 
-int Image::GetImageW() {
+Uint16 Image::GetImageW() {
 	return m_sclip.w;
 }
 
-int Image::GetImageH() {
+Uint16 Image::GetImageH() {
 	return m_sclip.h;
 }
 
-int Image::SetSheetX(int x) {
+Sint16 Image::SetSheetX(Sint16 x) {
 	return m_sclip.x = x;
 }
 
-int Image::SetSheetY(int y) {
+Sint16 Image::SetSheetY(Sint16 y) {
 	return m_sclip.y = y;
 }
 
-int Image::GetSheetX() {
+Sint16 Image::GetSheetX() {
 	return m_sclip.x;
 }
 
-int Image::GetSheetY() {
+Sint16 Image::GetSheetY() {
 	return m_sclip.y;
 }
 

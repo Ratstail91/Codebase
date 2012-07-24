@@ -1,6 +1,6 @@
 /* File Name: image.h
  * Author: Kayne Ruse
- * Date: 27/6/2012
+ * Date: 25/7/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -26,7 +26,7 @@
  *     A wrapper for SDL_Surface, and it's rendering functionality.
 */
 #ifndef KR_IMAGE_H_
-#define KR_IMAGE_H_ 2012062701
+#define KR_IMAGE_H_ 2012072501
 
 #include "SDL.h"
 
@@ -34,47 +34,47 @@ class Image {
 public:
 	/* Public access members */
 	Image();
-	Image(const char* szFileName, int x=0, int y=0, int w=0, int h=0);
-	Image(SDL_Surface* pSurface,  int x=0, int y=0, int w=0, int h=0);
+	Image(const char* szFileName, Sint16 x=0, Sint16 y=0, Uint16 w=0, Uint16 h=0);
+	Image(SDL_Surface* pSurface,  Sint16 x=0, Sint16 y=0, Uint16 w=0, Uint16 h=0);
 	virtual ~Image();
 
-	void LoadImage(const char* szFileName, int x=0, int y=0, int w=0, int h=0);
-	void LoadImage(SDL_Surface* pSurface,  int x=0, int y=0, int w=0, int h=0);
-	void UnloadImage();
+	virtual void LoadImage(const char* szFileName, Sint16 x=0, Sint16 y=0, Uint16 w=0, Uint16 h=0);
+	virtual void LoadImage(SDL_Surface* pSurface,  Sint16 x=0, Sint16 y=0, Uint16 w=0, Uint16 h=0);
+	virtual void UnloadImage();
 
-	void SetColorKey(int iRed=255, int iGreen=0, int iBlue=255);
-	void ClearColorKey();
+	virtual void SetImageColorKey(Uint8 iRed=255, Uint8 iGreen=0, Uint8 iBlue=255);
+	virtual void ClearColorKey();
 
-	virtual void DrawTo(SDL_Surface* const, int iCamX=0, int iCamY=0);
+	virtual void DrawTo(SDL_Surface* const, Sint16 iCamX=0, Sint16 iCamY=0);
 
 	/* Accessors and mutators */
-	void SetImagePosition(int x, int y);
+	virtual void SetImagePosition(Sint16 x, Sint16 y);
 
-	int SetImageX(int);
-	int SetImageY(int);
-	int SetImageW(int);
-	int SetImageH(int);
+	virtual Sint16 SetImageX(Sint16 x);
+	virtual Sint16 SetImageY(Sint16 y);
+	virtual Uint16 SetImageW(Uint16 w);
+	virtual Uint16 SetImageH(Uint16 h);
 
-	int GetImageX();
-	int GetImageY();
-	int GetImageW();
-	int GetImageH();
+	virtual Sint16 GetImageX();
+	virtual Sint16 GetImageY();
+	virtual Uint16 GetImageW();
+	virtual Uint16 GetImageH();
 
-	int SetSheetX(int);
-	int SetSheetY(int);
+	virtual Sint16 SetSheetX(Sint16 x);
+	virtual Sint16 SetSheetY(Sint16 y);
 
-	int GetSheetX();
-	int GetSheetY();
-	int GetSheetW();
-	int GetSheetH();
+	virtual Sint16 GetSheetX();
+	virtual Sint16 GetSheetY();
+	virtual int GetSheetW();
+	virtual int GetSheetH();
 
-	bool IsLoadedImage();
-	bool IsLocalImage();
+	virtual bool IsLoadedImage();
+	virtual bool IsLocalImage();
 
 protected:
 	/* Protected access members */
-	SDL_Surface* SetSurface(SDL_Surface*);
-	SDL_Surface* GetSurface();
+	virtual SDL_Surface* SetSurface(SDL_Surface*);
+	virtual SDL_Surface* GetSurface();
 
 private:
 	/* Private access members */
