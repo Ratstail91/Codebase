@@ -21,13 +21,13 @@ Entity::~Entity() {
 void Entity::LoadImage(const char* szFileName, Sint16 x, Sint16 y, Uint16 w, Uint16 h) {
 	Image::LoadImage(szFileName, x, y, w, h);
 
-	BBox2D::SetBBox( 0, 0, GetImageW(), GetImageH() );
+	BBox2D::SetBBox( GetImageX(), GetImageY(), GetImageW(), GetImageH() );
 }
 
 void Entity::LoadImage(SDL_Surface* pSurface,  Sint16 x, Sint16 y, Uint16 w, Uint16 h) {
 	Image::LoadImage(pSurface, x, y, w, h);
 
-	BBox2D::SetBBox( 0, 0, GetImageW(), GetImageH() );
+	BBox2D::SetBBox( GetImageX(), GetImageY(), GetImageW(), GetImageH() );
 }
 
 void Entity::Update(int iDelta) {

@@ -11,8 +11,8 @@
 #include "base_scene.h"
 #include "scene_list.h"
 
-#include "image.h"
-#include "config_utility.h"
+#include "fps_utility.h"
+#include "entity.h"
 
 class ScenePrime : public BaseScene {
 public:
@@ -35,8 +35,8 @@ protected:
 	virtual void KeyUp				(SDL_KeyboardEvent const&);
 
 	/* Members */
-	ConfigUtility m_config;
-	Image m_image;
+	Entity m_one;
+	Entity m_two;
 };
 
 #endif

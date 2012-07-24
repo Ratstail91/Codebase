@@ -4,7 +4,6 @@
  * Copyright: 
  * Description: 
 */
-#include <exception>
 #include <iostream>
 #include "scene_prime.h"
 using namespace std;
@@ -22,16 +21,8 @@ using namespace std;
 //-------------------------
 
 ScenePrime::ScenePrime() {
-	try {
-		//load the assets
-		m_config.Load("config.cfg");
-
-		//well, this kinda sucks
-		m_image.LoadImage( (m_config["path"]+m_config["picture"]).c_str() );
-	}
-	catch(exception& e) {
-		cerr << e.what() << endl;
-	}
+	m_one.LoadImage("jumpman.bmp");
+	m_two.LoadImage("two.bmp", 0, 300);
 }
 
 ScenePrime::~ScenePrime() {
@@ -51,11 +42,29 @@ void ScenePrime::Tail() {
 }
 
 void ScenePrime::Update() {
-	//
+	FPSUtility::CalcDeltaTime();
+
+	//collision
+	SDL_Rect tmp = m_one.GetWorldBBox(); //this workournd should stop the dancing
+	tmp.h += 1;
+
+	if (m_two.CheckWorldBBox( tmp )) {
+		cout << "collision" << endl;
+		m_one.StopMotion();
+		m_one.SetOriginY( float(m_two.GetWorldBBox().y - m_one.GetBBoxH()) );
+	}
+	else {
+		cout << "falling" << endl;
+		m_one.SetMotionY(.1);
+	}
+
+	m_one.Update( FPSUtility::GetDeltaTime() );
 }
 
 void ScenePrime::Render(SDL_Surface* const pScreen) {
-	m_image.DrawTo(pScreen);
+	SDL_FillRect(pScreen, NULL, SDL_MapRGB(pScreen->format, 0, 0, 0));
+	m_one.DrawTo(pScreen);
+	m_two.DrawTo(pScreen);
 }
 
 //-------------------------
