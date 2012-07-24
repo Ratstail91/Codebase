@@ -1,6 +1,6 @@
 /* File Name: bbox_2d.h
  * Author: Kayne Ruse
- * Date: 27/6/2012
+ * Date: 25/7/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -23,51 +23,42 @@
  * distribution.
  *
  * Description:
- *     Detect and handle box collisions on a 2D plane.
+ *     Detect and handle box collisions on a 2D plane. This can only interface
+ *      with another BBox2D, so the internals should not be messed with.
 */
 #ifndef KR_BBOX2D_H_
-#define KR_BBOX2D_H_ 2012062701
+#define KR_BBOX2D_H_ 2012072501
+
+#include "SDL.h"
 
 class BBox2D {
 public:
-	/* Box struct */
-	typedef struct Rect {
-		float x;
-		float y;
-		float w;
-		float h;
-	}Rect;
-
-	enum {FALSE=0, EDGE=1, INSIDE=2, OUTSIDE=3};
-
 	/* Public access members */
-	BBox2D(float x=0, float y=0, float w=0, float h=0);
-	BBox2D(Rect box);
+	BBox2D(Sint16 x=0, Sint16 y=0, Uint16 w=0, Uint16 h=0);
+	BBox2D(SDL_Rect box);
 
-	virtual Rect GetWorldBBox	();
-	virtual int CheckWorldBBox	(Rect box);
-	virtual Rect GetWorldBBox	(float x, float y);
-	virtual int CheckWorldBBox	(float x, float y, Rect box);
+	virtual SDL_Rect GetWorldBBox	(Sint16 x=0, Sint16 y=0);
+	virtual bool CheckWorldBBox		(SDL_Rect otherBox, Sint16 x=0, Sint16 y=0);
 
 	/* Accessors and mutators */
-	Rect SetBBox(float x, float y, float w, float h);
-	Rect SetBBox(Rect box);
+	virtual void SetBBox(Sint16 x, Sint16 y, Uint16 w, Uint16 h);
+	virtual void SetBBox(SDL_Rect box);
 
-	Rect GetBBox();
+	virtual SDL_Rect GetBBox();
 
-	float SetBBoxX(float);
-	float SetBBoxY(float);
-	float SetBBoxW(float);
-	float SetBBoxH(float);
+	virtual Sint16 SetBBoxX(Sint16 x);
+	virtual Sint16 SetBBoxY(Sint16 y);
+	virtual Uint16 SetBBoxW(Uint16 w);
+	virtual Uint16 SetBBoxH(Uint16 h);
 
-	float GetBBoxX();
-	float GetBBoxY();
-	float GetBBoxW();
-	float GetBBoxH();
+	virtual Sint16 GetBBoxX();
+	virtual Sint16 GetBBoxY();
+	virtual Uint16 GetBBoxW();
+	virtual Uint16 GetBBoxH();
 
 private:
 	/* Private access members */
-	Rect m_rect;
+	SDL_Rect m_rect;
 };
 
 #endif

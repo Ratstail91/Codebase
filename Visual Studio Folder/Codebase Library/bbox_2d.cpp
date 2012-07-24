@@ -1,6 +1,6 @@
 /* File Name: bbox_2d.cpp
  * Author: Kayne Ruse
- * Date: 27/6/2012
+ * Date: 25/7/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -23,7 +23,8 @@
  * distribution.
  *
  * Description:
- *     Detect and handle box collisions on a 2D plane.
+ *     Detect and handle box collisions on a 2D plane. This can only interface
+ *      with another BBox2D, so the internals should not be messed with.
 */
 #include "bbox_2d.h"
 
@@ -31,122 +32,107 @@
 //Public access members
 //-------------------------
 
-BBox2D::BBox2D(float x, float y, float w, float h) {
+BBox2D::BBox2D(Sint16 x, Sint16 y, Uint16 w, Uint16 h) {
 	m_rect.x = x;
 	m_rect.y = y;
 	m_rect.w = w;
 	m_rect.h = h;
 }
 
-BBox2D::BBox2D(Rect box) {
-	m_rect = box;
+BBox2D::BBox2D(SDL_Rect box) : m_rect(box) {
+	//
 }
 
-BBox2D::Rect BBox2D::GetWorldBBox() {
-	return GetWorldBBox(0, 0);
-}
-
-int BBox2D::CheckWorldBBox(Rect box) {
-	return CheckWorldBBox(0, 0, box);
-}
-
-BBox2D::Rect BBox2D::GetWorldBBox(float x, float y) {
-	Rect box = m_rect;
+SDL_Rect BBox2D::GetWorldBBox(Sint16 x, Sint16 y) {
+	SDL_Rect box = m_rect;
 
 	box.x += x;
 	box.y += y;
-	box.w += x;
-	box.h += y;
 
 	return box;
 }
 
-int BBox2D::CheckWorldBBox(float x, float y, Rect box) {
-	Rect myBox = GetWorldBBox(x, y);
+bool BBox2D::CheckWorldBBox(SDL_Rect otherBox, Sint16 x, Sint16 y) {
+	SDL_Rect myBox = GetWorldBBox(x, y);
 
-	/* Returns:
-	 * 0: false
-	 * 1: edge
-	 * 2: this is inside
-	 * 3: this is outside
+	/* lets say there are two boxes with a width of 3
+	 * these boxes are given origins of 0 and 3
+	 * if the boxes are zero indexed, then they look like this:
+	 * 
+	 *     0, 1, 2
+	 *     3, 4, 5
+	 * 
+	 * no collision. However, if they have the origins 4 and 6:
+	 * 
+	 *     4, 5, 6
+	 *     6, 7, 8
+	 * 
+	 * there should be a graphical overlap, which is considered a collision.
+	 * because of this, the correct operator in the following (inverted)
+	 * if statement is "greater than or equal to", instead of "greater than"
+	 * 
+	 * Pay close attention when you are building more advanced collision code
+	 * on top of this.
 	*/
 
 	if (
-			myBox.x < box.x &&
-			myBox.y < box.y &&
-			myBox.w > box.w &&
-			myBox.h > box.h
+			otherBox.x >= myBox.x + myBox.w ||
+			otherBox.y >= myBox.y + myBox.h ||
+			myBox.x >= otherBox.x + otherBox.w ||
+			myBox.y >= otherBox.y + otherBox.h
 		)
-		return OUTSIDE;
+		return false;
 
-	if (
-			myBox.x > box.x &&
-			myBox.y > box.y &&
-			myBox.w < box.w &&
-			myBox.h < box.h
-		)
-		return INSIDE;
-
-	if (
-			myBox.x < box.w &&
-			myBox.y < box.h &&
-			myBox.w > box.x &&
-			myBox.h > box.y
-		)
-		return EDGE;
-
-	return FALSE;
+	return true;
 }
 
 //-------------------------
 //Accessors and mutators
 //-------------------------
 
-BBox2D::Rect BBox2D::SetBBox(float x, float y, float w, float h) {
+void BBox2D::SetBBox(Sint16 x, Sint16 y, Uint16 w, Uint16 h) {
 	m_rect.x = x;
 	m_rect.y = y;
 	m_rect.w = w;
 	m_rect.h = h;
+}
 
+void BBox2D::SetBBox(SDL_Rect box) {
+	m_rect = box;
+}
+
+SDL_Rect BBox2D::GetBBox() {
 	return m_rect;
 }
 
-BBox2D::Rect BBox2D::SetBBox(Rect box) {
-	return m_rect = box;
-}
-
-BBox2D::Rect BBox2D::GetBBox() {
-	return m_rect;
-}
-
-float BBox2D::SetBBoxX(float x) {
+Sint16 BBox2D::SetBBoxX(Sint16 x) {
 	return m_rect.x = x;
 }
 
-float BBox2D::SetBBoxY(float y) {
+Sint16 BBox2D::SetBBoxY(Sint16 y) {
 	return m_rect.y = y;
 }
 
-float BBox2D::SetBBoxW(float w) {
+Uint16 BBox2D::SetBBoxW(Uint16 w) {
 	return m_rect.w = w;
 }
 
-float BBox2D::SetBBoxH(float h) {
+Uint16 BBox2D::SetBBoxH(Uint16 h) {
 	return m_rect.h = h;
 }
 
-float BBox2D::GetBBoxX() {
+Sint16 BBox2D::GetBBoxX() {
 	return m_rect.x;
 }
 
-float BBox2D::GetBBoxY() {
+Sint16 BBox2D::GetBBoxY() {
 	return m_rect.y;
 }
 
-float BBox2D::GetBBoxW() {
+Uint16 BBox2D::GetBBoxW() {
 	return m_rect.w;
 }
 
-float BBox2D::GetBBoxH() {
+Uint16 BBox2D::GetBBoxH() {
 	return m_rect.h;
 }

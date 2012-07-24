@@ -18,23 +18,29 @@ Entity::~Entity() {
 	//
 }
 
-void Entity::LoadImage(const char* szFileName) {
-	Image::LoadImage(szFileName);
+void Entity::LoadImage(const char* szFileName, Sint16 x, Sint16 y, Uint16 w, Uint16 h) {
+	Image::LoadImage(szFileName, x, y, w, h);
 
-	BBox2D::SetBBox( 0, 0, (float)GetImageW()-1, (float)GetImageH()-1 );
+	BBox2D::SetBBox( 0, 0, GetImageW(), GetImageH() );
+}
+
+void Entity::LoadImage(SDL_Surface* pSurface,  Sint16 x, Sint16 y, Uint16 w, Uint16 h) {
+	Image::LoadImage(pSurface, x, y, w, h);
+
+	BBox2D::SetBBox( 0, 0, GetImageW(), GetImageH() );
 }
 
 void Entity::Update(int iDelta) {
 	Origin2D::Update(iDelta);
 
-	SetImageX( (int)GetOriginX() );
-	SetImageY( (int)GetOriginY() );
+	Image::SetImageX( (Sint16)Origin2D::GetOriginX() );
+	Image::SetImageY( (Sint16)Origin2D::GetOriginY() );
 }
 
-BBox2D::Rect Entity::GetWorldBBox() {
-	return BBox2D::GetWorldBBox(GetOriginX(), GetOriginY());
+SDL_Rect Entity::GetWorldBBox() {
+	return BBox2D::GetWorldBBox( (Sint16)Origin2D::GetOriginX(), (Sint16)Origin2D::GetOriginY());
 }
 
-int Entity::CheckWorldBBox(BBox2D::Rect box) {
-	return BBox2D::CheckWorldBBox(GetOriginX(), GetOriginY(), box);
+int Entity::CheckWorldBBox(SDL_Rect otherBox) {
+	return BBox2D::CheckWorldBBox(otherBox, (Sint16)Origin2D::GetOriginX(), (Sint16)Origin2D::GetOriginY());
 }
