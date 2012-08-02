@@ -55,7 +55,7 @@ void ScenePrime::Update() {
 	}
 	else {
 		cout << "falling" << endl;
-		m_one.SetMotionY(.1);
+		m_one.SetMotionY(.1f);
 	}
 
 	m_one.Update( FPSUtility::GetDeltaTime() );
