@@ -23,7 +23,7 @@ public:
 	virtual void Update(int iDelta);
 
 	virtual SDL_Rect GetWorldBBox	();
-	virtual int CheckWorldBBox		(SDL_Rect otherBox);
+	virtual bool CheckWorldBBox		(SDL_Rect otherBox);
 
 protected:
 	/* Protected access members */
