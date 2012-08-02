@@ -1,6 +1,6 @@
 /* File Name: bbox_2d.cpp
  * Author: Kayne Ruse
- * Date: 25/7/2012
+ * Date: 2/8/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -41,6 +41,14 @@ BBox2D::BBox2D(Sint16 x, Sint16 y, Uint16 w, Uint16 h) {
 
 BBox2D::BBox2D(SDL_Rect box) : m_rect(box) {
 	//
+}
+
+SDL_Rect BBox2D::GetWorldBBox() {
+	return GetWorldBBox(0, 0);
+}
+
+bool BBox2D::CheckWorldBBox(SDL_Rect otherBox) {
+	return CheckWorldBBox(otherBox, 0, 0);
 }
 
 SDL_Rect BBox2D::GetWorldBBox(Sint16 x, Sint16 y) {

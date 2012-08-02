@@ -1,6 +1,6 @@
 /* File Name: bbox_2d.h
  * Author: Kayne Ruse
- * Date: 25/7/2012
+ * Date: 2/8/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -27,7 +27,7 @@
  *      with another BBox2D, so the internals should not be messed with.
 */
 #ifndef KR_BBOX2D_H_
-#define KR_BBOX2D_H_ 2012072501
+#define KR_BBOX2D_H_ 2012080201
 
 #include "SDL.h"
 
@@ -37,6 +37,8 @@ public:
 	BBox2D(Sint16 x=0, Sint16 y=0, Uint16 w=0, Uint16 h=0);
 	BBox2D(SDL_Rect box);
 
+	virtual SDL_Rect GetWorldBBox	();
+	virtual bool CheckWorldBBox		(SDL_Rect otherBox);
 	virtual SDL_Rect GetWorldBBox	(Sint16 x=0, Sint16 y=0);
 	virtual bool CheckWorldBBox		(SDL_Rect otherBox, Sint16 x=0, Sint16 y=0);
 
