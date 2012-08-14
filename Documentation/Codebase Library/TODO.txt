@@ -9,7 +9,6 @@ Ordered list:
 Unordered list:
 
 *	Flesh out the wiki, and keep it up to date.
-*	Specify the exit codes in Complex Callbacks, and update the wiki accordingly.
 *	"Target" option in CameraUtility, targeting an origin?
 *	Animation
 *	TCPNetwork
@@ -28,6 +27,7 @@ Unordered list:
 -	Wrap SDL stuff in Codebase-specific data types, abstracting away SDL?
 -	Reduce/remove Entity's inheritance?
 -	Reduce the overreliance on inheritance: "is-a" vs "has-a"
+-	I need to sort out the naming convention for the classes
 
 -------------------------
 

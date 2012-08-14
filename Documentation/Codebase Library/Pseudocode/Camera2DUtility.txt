@@ -1,0 +1,21 @@
+"Target" option in CameraUtility, targeting an origin?
+
+CameraUtility
+
+GetCamX
+GetCamY
+
+SetMode
+GetMode
+
+ScreenSize
+
+SetTarget(Origin*)
+GetTarget(Origin*)
+
+-mode
+
+-screenw
+-screenh
+
+-Origin* target
