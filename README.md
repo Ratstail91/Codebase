@@ -4,7 +4,7 @@ This repository holds a collection of my generic reusable code modules. This is 
 
 ## Instructions
 
---
+After building the project in Release configuration, use dir-build.bat to create a usable directory tree.
 
 ## Copyright
 
