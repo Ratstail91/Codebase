@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C++ Express 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Scene Framework", "Scene Framework\Scene Framework.vcproj", "{852B7991-E87D-474A-8008-7B4004106431}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Library", "Library\Library.vcproj", "{6BCAB3F1-AEEF-4D28-AA05-28FC799AE5CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{852B7991-E87D-474A-8008-7B4004106431}.Debug|Win32.Build.0 = Debug|Win32
 		{852B7991-E87D-474A-8008-7B4004106431}.Release|Win32.ActiveCfg = Release|Win32
 		{852B7991-E87D-474A-8008-7B4004106431}.Release|Win32.Build.0 = Release|Win32
+		{6BCAB3F1-AEEF-4D28-AA05-28FC799AE5CB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6BCAB3F1-AEEF-4D28-AA05-28FC799AE5CB}.Debug|Win32.Build.0 = Debug|Win32
+		{6BCAB3F1-AEEF-4D28-AA05-28FC799AE5CB}.Release|Win32.ActiveCfg = Release|Win32
+		{6BCAB3F1-AEEF-4D28-AA05-28FC799AE5CB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

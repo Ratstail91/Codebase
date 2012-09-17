@@ -1,0 +1,41 @@
+ImageManager ImageMgr --index the images by their filename?
+
+Image& image = ImageMgr.Load("fname.bmp")
+
+load:
+	LNode node(fname, new Image)
+	
+	LList.push(node)
+	
+	return node.element
+end
+
+-------------------------
+
+--A static image class: loading, drawing & clipping
+
+Image:
+	Image()
+	~Image()
+	
+	LoadSurface(fname) --load & SetSurface
+	UnloadSurface()
+	
+	SetSurface(surface) --free & set
+	GetSurface()
+	
+	SetColorKey
+	ClearColorKey
+	
+	SetClip(x,y,w,h)
+	GetClip()
+	
+	DrawTo(pScreen, x, y) --x & y
+	
+	bool IsLoaded()
+	bool IsLocal()
+	
+	-clip {x,y,w,h}
+	-SDL_Surface* surface
+	-bool local
+end
