@@ -27,6 +27,7 @@
 */
 #include "vector2.h"
 
+#include <stdexcept>
 #include <math.h>
 
 //-------------------------
@@ -77,9 +78,15 @@ Vector2 Vector2::operator*(double d) {
 }
 
 Vector2 Vector2::operator/(Vector2 v) {
+	if (!v.x || !v.y)
+		throw(invalid_argument);
+
 	return Vector2(x / v.x, y / v.y);
 }
 
 Vector2 Vector2::operator/(double d) {
+	if (!d)
+		throw(invalid_argument);
+
 	return Vector2(x / d, y / d);
 }
