@@ -57,6 +57,13 @@ double Vector2::SquaredLength() {
 	return x*x+y*y;
 }
 
+double Vector2::operator[](int i) {
+	if (i < 0 || i >= 2)
+		throw(std::out_of_range("Out of range"));
+
+	return *(&x+i);
+}
+
 //-------------------------
 //Arithmetic operators
 //-------------------------

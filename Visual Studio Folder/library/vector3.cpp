@@ -57,6 +57,13 @@ double Vector3::SquaredLength() {
 	return x*x+y*y+z*z;
 }
 
+double Vector3::operator[](int i) {
+	if (i < 0 || i >= 3)
+		throw(std::out_of_range("Out of range"));
+
+	return *(&x+i);
+}
+
 //-------------------------
 //Arithmetic operators
 //-------------------------
@@ -79,7 +86,7 @@ Vector3 Vector3::operator*(double d) {
 
 Vector3 Vector3::operator/(Vector3 v) {
 	if (!v.x || !v.y || !v.z)
-		throw(std::invalid_argument ("Divide by zero"));
+		throw(std::invalid_argument("Divide by zero"));
 
 	return Vector3(x / v.x, y / v.y, z / v.z);
 }

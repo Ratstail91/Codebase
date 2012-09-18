@@ -40,6 +40,8 @@ public:
 	double Length();
 	double SquaredLength();
 
+	double operator[](int);
+
 	/* Arithmetic operators */
 	Vector3 operator+(Vector3);
 	Vector3 operator-(Vector3);
