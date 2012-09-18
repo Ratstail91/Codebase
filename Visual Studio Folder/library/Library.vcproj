@@ -141,7 +141,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine=""
+				CommandLine="CALL &quot;$(SolutionDir)dir-build&quot;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -185,14 +185,30 @@
 				Name="Pseudocode"
 				>
 				<File
-					RelativePath="..\..\Documentation\Library\Pseudocode\image.txt"
+					RelativePath="..\..\Documentation\Library\Pseudocode\Image.txt"
 					>
 				</File>
 				<File
 					RelativePath="..\..\Documentation\Library\Pseudocode\LList.txt"
 					>
 				</File>
+				<File
+					RelativePath="..\..\Documentation\Library\Pseudocode\Vector.txt"
+					>
+				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="Vector"
+			>
+			<File
+				RelativePath=".\vector2.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\vector2.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

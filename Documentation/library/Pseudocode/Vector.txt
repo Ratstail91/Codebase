@@ -1,0 +1,90 @@
+Reference:
+http://www.ogre3d.org/docs/api/html/OgreVector2_8h_source.html
+
+-------------------------
+
+Vector2 can represent either a point or motion in 2D space
+I'd like to make a vector class template, which could then be
+ instanciated as Vector2, Vector3 and Vector4, just to probe I can.
+
+-------------------------
+
+Operator list:
+
+vector = vector
+vector = scalar
+
+vector + vector
+vector + scalar
+
+vector - vector
+vector - scalar
+
+vector * vector
+vector * scalar
+
+vector / vector
+vector / scalar
+
+vector += T: vector = vector + T
+vector -= T: vector = vector - T
+vector *= T: vector = vector * T
+vector /= T: vector = vector / T
+
+//special points?
+
+-------------------------
+
+template<typename T>
+operator+(T t) {
+	return Vector2(x+t, y+t)
+end
+
+-------------------------
+
+Vector2:
+	double x, y
+	
+	Vector2()
+	
+	Vector2(paramx, paramy)
+	
+	operator=
+	
+	operator[](size_t i):
+		return *(&x+i) //admittedly awesome
+	
+	-------------------------
+	operator+(Vector2 lhs, Vector2 rhs):
+		return Vector2(lhs.x + rhs.x, lhs.y + rhs.y)
+	end
+	
+	...
+	
+	
+-------------------------
+
+//Final outline
+//Each operator acts n both a scalar and a Vector2
+//vectors of different dimentions should never be used together
+
+Vector2:
+	//public access members
+	Vector2()
+	Vector2(T)
+	Vector2(x, y)
+	
+	Length()
+	SquaredLength()
+	
+	//arithmetic
+	operator +
+	operator -
+	operator *
+	operator /
+	
+	operator +=
+	operator -=
+	operator *=
+	operator /=
+end
