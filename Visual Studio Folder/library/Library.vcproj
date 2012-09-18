@@ -209,6 +209,14 @@
 				RelativePath=".\vector2.h"
 				>
 			</File>
+			<File
+				RelativePath=".\vector3.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\vector3.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
