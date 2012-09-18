@@ -1,0 +1,45 @@
+BoundingBox, BBox or Box
+
+uses stdint.h, mimics SDL_Rect; hopefully can pass as SDL_Rect
+
+-------------------------
+
+BBox:
+	sint16 x, y
+	uint16 w, h
+	
+	enum result
+	
+	BBox()
+	BBox(x, y, w, h)
+	
+	Compare			(Box b)
+	CompareSide		(Box b)
+	CompareAbove	(Box b)
+	CompareBelow	(Box b)
+	CompareLeft		(Box b)
+	CompareRight	(Box b)
+	
+	GetTweakedBox(x, y, w, h) //these parameters are used to tweak the current box
+end
+
+-------------------------
+
+BBox:
+	sint16 x, y
+	uint16 w, h
+	
+	/* Member functions */
+	BBox()
+	BBox(x, y, w, h)
+	
+	Tweak(x, y, w, h) //same as GetWorldBBox, just less verbose
+end
+
+/* Check for a collision */
+CheckCollision		(BBox a, BBox b)
+CheckCollisionSide	(BBox a, BBox b)
+CheckCollisionAbove	(BBox a, BBox b)
+CheckCollisionBelow	(BBox a, BBox b)
+CheckCollisionLeft	(BBox a, BBox b)
+CheckCollisionRight	(BBox a, BBox b)

@@ -185,6 +185,10 @@
 				Name="Pseudocode"
 				>
 				<File
+					RelativePath="..\..\Documentation\library\Pseudocode\BBox.txt"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Documentation\Library\Pseudocode\Image.txt"
 					>
 				</File>
@@ -215,6 +219,18 @@
 			</File>
 			<File
 				RelativePath=".\vector3.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="BBox"
+			>
+			<File
+				RelativePath=".\bbox.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\bbox.h"
 				>
 			</File>
 		</Filter>
