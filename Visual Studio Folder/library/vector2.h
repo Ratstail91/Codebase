@@ -41,12 +41,12 @@ public:
 	double SquaredLength();
 
 	/* Arithmetic operators */
-	inline Vector2 operator+(Vector2);
-	inline Vector2 operator-(Vector2);
-	inline Vector2 operator*(Vector2);
-	inline Vector2 operator*(double);
-	inline Vector2 operator/(Vector2);
-	inline Vector2 operator/(double);
+	Vector2 operator+(Vector2);
+	Vector2 operator-(Vector2);
+	Vector2 operator*(Vector2);
+	Vector2 operator*(double);
+	Vector2 operator/(Vector2);
+	Vector2 operator/(double);
 
 	template<typename T> Vector2& operator+=(T t) { return *this = *this + t; }
 	template<typename T> Vector2& operator-=(T t) { return *this = *this - t; }
