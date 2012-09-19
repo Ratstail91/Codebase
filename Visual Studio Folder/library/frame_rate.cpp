@@ -1,6 +1,6 @@
-/* File Name: fps_utility.cpp
+/* File Name: frame_rate.cpp
  * Author: Kayne Ruse
- * Date: 27/6/2012
+ * Date (dd/mm/yyyy): 19/9/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -23,45 +23,34 @@
  * distribution.
  *
  * Description:
- *     To calculate framerate and regulate game speed.
+ *     ...
 */
+#include "frame_rate.h"
+
 #include <time.h>
-#include "fps_utility.h"
 
 //-------------------------
 //Static members
 //-------------------------
 
-int FPSUtility::ms_iFrameRate = 0;
-int FPSUtility::ms_iLastFrameRate = 0;
-int FPSUtility::ms_iFrameTick = 0;
-int FPSUtility::ms_iDeltaTime = 0;
-int FPSUtility::ms_iDeltaTick = 0;
+int FrameRate::ms_iFrameCount = 0;
+int FrameRate::ms_iFrameRate = 0;
+int FrameRate::ms_iTick = 0;
 
 //-------------------------
 //Public access members
 //-------------------------
 
-int FPSUtility::CalcFrameRate() {
-	if (clock() - ms_iFrameTick >= CLOCKS_PER_SEC) {
-		ms_iLastFrameRate = ms_iFrameRate;
-		ms_iFrameRate = 0;
-		ms_iFrameTick = clock();
+int FrameRate::CalcFrameRate() {
+	if (clock() - ms_iTick >= CLOCKS_PER_SEC) {
+		ms_iFrameRate = ms_iFrameCount;
+		ms_iFrameCount = 0;
+		ms_iTick = clock();
 	}
-	ms_iFrameRate++;
-	return ms_iLastFrameRate;
+	ms_iFrameCount++;
+	return ms_iFrameRate;
 }
 
-int FPSUtility::CalcDeltaTime() {
-	ms_iDeltaTime = clock() - ms_iDeltaTick;
-	ms_iDeltaTick = clock();
-	return ms_iDeltaTime;
-}
-
-int FPSUtility::GetFrameRate() {
-	return ms_iLastFrameRate;
-}
-
-int FPSUtility::GetDeltaTime() {
-	return ms_iDeltaTime;
+int FrameRate::GetFrameRate() {
+	return ms_iFrameRate;
 }

@@ -235,14 +235,14 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="FPS Utility"
+			Name="Frame Rate"
 			>
 			<File
-				RelativePath=".\fps_utility.cpp"
+				RelativePath=".\frame_rate.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\fps_utility.h"
+				RelativePath=".\frame_rate.h"
 				>
 			</File>
 		</Filter>
@@ -255,6 +255,18 @@
 			</File>
 			<File
 				RelativePath=".\config_utility.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Delta"
+			>
+			<File
+				RelativePath=".\delta.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\delta.h"
 				>
 			</File>
 		</Filter>

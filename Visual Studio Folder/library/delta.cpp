@@ -1,6 +1,6 @@
-/* File Name: fps_utility.h
+/* File Name: delta.cpp
  * Author: Kayne Ruse
- * Date: 27/6/2012
+ * Date (dd/mm/yyyy): 19/9/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -23,27 +23,29 @@
  * distribution.
  *
  * Description:
- *     To calculate framerate and regulate game speed.
+ *     ...
 */
-#ifndef KR_FPSUTILITY_H_
-#define KR_FPSUTILITY_H_
+#include "delta.h"
 
-class FPSUtility {
-public:
-	/* Public access members */
-	static int CalcFrameRate	();
-	static int CalcDeltaTime	();
-	static int GetFrameRate		();
-	static int GetDeltaTime		();
+#include <time.h>
 
-private:
-	/* Private access members */
-	static int ms_iFrameRate;
-	static int ms_iLastFrameRate;
-	static int ms_iFrameTick;
+//-------------------------
+//Static members
+//-------------------------
 
-	static int ms_iDeltaTime;
-	static int ms_iDeltaTick;
-};
+int Delta::ms_iTime = 0;
+int Delta::ms_iTick = 0;
 
-#endif
+//-------------------------
+//Public access members
+//-------------------------
+
+int Delta::CalcDelta() {
+	ms_iTime = clock() - ms_iTick;
+	ms_iTick = clock();
+	return ms_iTime;
+}
+
+int Delta::GetDelta() {
+	return ms_iTime;
+}
