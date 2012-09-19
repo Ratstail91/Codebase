@@ -246,6 +246,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Config Utility"
+			>
+			<File
+				RelativePath=".\config_utility.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\config_utility.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
