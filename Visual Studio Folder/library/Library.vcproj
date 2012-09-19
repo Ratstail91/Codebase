@@ -234,6 +234,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="FPS Utility"
+			>
+			<File
+				RelativePath=".\fps_utility.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\fps_utility.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
