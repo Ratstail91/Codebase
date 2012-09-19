@@ -1,0 +1,9 @@
+Origin:
+	Vector2 position
+	Vector2 motion
+	
+end
+
+-------------------------
+
+entity

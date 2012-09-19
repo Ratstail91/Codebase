@@ -1,0 +1,81 @@
+Camera:
+	Mode:
+		INACTIVE
+		NORMAL
+		CENTER
+		TARGET //follow a specific instance
+	end
+	
+	Vector* target (handle?) = player, or other, etc.
+	
+	//These are added to the rendering functions...
+	GetRenderX()
+	GetRenderY()
+	
+//	Image.DrawTo(screen, position.x + Camera.GetCamX(), position.y + Camera.GetCamY())
+	
+	SetMode(Mode)
+	GetMode()
+	
+	SetScreenWidth
+end
+
+-------------------------
+
+Camera:
+	-Vector2 //member
+	
+	Mode:
+		DISABLE
+		NORMAL
+		CENTER
+		TARGET
+	end
+	
+	//state
+	GetCamX()
+	GetCamY()
+	
+	SetScreen(w, h)
+end
+
+-------------------------
+
+//candidate
+
+Camera:
+	Vector2 pos //camera x & y
+	Vector2 mod //camera skew
+	Vector2* ptr //pointer to a target?
+	
+	Mode:
+		DISABLE	//return 0
+		NORMAL	//return pos
+		CENTER	//pos is center of the screen
+		TARGET	//center on an instance
+	end
+	
+	//state
+	GetCamX()
+	GetCamY()
+	
+	SetPos(Vector2)
+	SetMod(Vector2)
+	
+	SetScreen(w, h) //calc the mod from this
+end
+
+-------------------------
+
+Camera:
+	-Vector2* handle //pointer to a "handle", a vector that controls the camera's position
+	-Vector2 mod //skew the output according to this; for screen sizes, etc.
+	
+	Mode:
+		DISABLE	//return 0
+		NORMAL	//return handle
+		CENTER	//return handle + mod; pos is center of the screen
+		TARGET	//center on an instance, duplicated?
+	end
+	
+	

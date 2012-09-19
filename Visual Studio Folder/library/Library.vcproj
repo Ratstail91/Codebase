@@ -189,6 +189,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\Documentation\library\Pseudocode\Camera.txt"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Documentation\Library\Pseudocode\Image.txt"
 					>
 				</File>
