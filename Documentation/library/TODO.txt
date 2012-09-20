@@ -13,5 +13,6 @@ Image Manager (multition, etc.)
 
 Move the #include "this_file's_header.h" to the top of the include lists.
 
-BBox bit masking
-BBox: DISTANCE_ABOVE(a,b)
+BBox functions are compatable with SDL_Rect if implemented as a template; ommitted for now.
+The user can cast SDL_Rect as a BBox without any problems.
+

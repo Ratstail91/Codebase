@@ -1,6 +1,6 @@
 /* File Name: bbox.cpp
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 19/9/2012
+ * Date (dd/mm/yyyy): 21/9/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -34,10 +34,10 @@
 //Preprocessor directives
 //-------------------------
 
-#define DISTANCE_ABOVE	(b.y + b.h - a.y)
-#define DISTANCE_BELOW	(a.y + a.h - b.y)
-#define DISTANCE_LEFT	(b.x + b.w - a.x)
-#define DISTANCE_RIGHT	(a.x + a.w - b.x)
+#define DISTANCE_ABOVE(a,b)	((b).y + (b).h - (a).y)
+#define DISTANCE_BELOW(a,b)	((a).y + (a).h - (b).y)
+#define DISTANCE_LEFT(a,b)	((b).x + (b).w - (a).x)
+#define DISTANCE_RIGHT(a,b)	((a).x + (a).w - (b).x)
 
 //-------------------------
 //Member functions
@@ -120,7 +120,7 @@ BBox::Result CheckCollisionAbove(BBox a, BBox b) {
 	if (!CheckCollision(a, b))
 		return BBox::NONE;
 
-	if (DISTANCE_ABOVE <= DISTANCE_BELOW && DISTANCE_ABOVE <= std::min(DISTANCE_LEFT, DISTANCE_RIGHT))
+	if (DISTANCE_ABOVE(a, b) <= DISTANCE_BELOW(a, b) && DISTANCE_ABOVE(a, b) <= std::min(DISTANCE_LEFT(a, b), DISTANCE_RIGHT(a, b)))
 		return BBox::ABOVE;
 
 	return BBox::NONE;
@@ -130,7 +130,7 @@ BBox::Result CheckCollisionBelow(BBox a, BBox b) {
 	if (!CheckCollision(a, b))
 		return BBox::NONE;
 
-	if (DISTANCE_BELOW <= DISTANCE_ABOVE && DISTANCE_BELOW <= std::min(DISTANCE_LEFT, DISTANCE_RIGHT))
+	if (DISTANCE_BELOW(a, b) <= DISTANCE_ABOVE(a, b) && DISTANCE_BELOW(a, b) <= std::min(DISTANCE_LEFT(a, b), DISTANCE_RIGHT(a, b)))
 		return BBox::BELOW;
 
 	return BBox::NONE;
@@ -140,7 +140,7 @@ BBox::Result CheckCollisionLeft(BBox a, BBox b) {
 	if (!CheckCollision(a, b))
 		return BBox::NONE;
 
-	if (DISTANCE_LEFT <= DISTANCE_RIGHT && DISTANCE_LEFT <= std::min(DISTANCE_ABOVE, DISTANCE_BELOW))
+	if (DISTANCE_LEFT(a, b) <= DISTANCE_RIGHT(a, b) && DISTANCE_LEFT(a, b) <= std::min(DISTANCE_ABOVE(a, b), DISTANCE_BELOW(a, b)))
 		return BBox::LEFT;
 
 	return BBox::NONE;
@@ -150,7 +150,7 @@ BBox::Result CheckCollisionRight(BBox a, BBox b) {
 	if (!CheckCollision(a, b))
 		return BBox::NONE;
 
-	if (DISTANCE_RIGHT <= DISTANCE_LEFT && DISTANCE_RIGHT <= std::min(DISTANCE_ABOVE, DISTANCE_BELOW))
+	if (DISTANCE_RIGHT(a, b) <= DISTANCE_LEFT(a, b) && DISTANCE_RIGHT(a, b) <= std::min(DISTANCE_ABOVE(a, b), DISTANCE_BELOW(a, b)))
 		return BBox::RIGHT;
 
 	return BBox::NONE;
