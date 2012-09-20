@@ -1,0 +1,33 @@
+doesn't need to update all of the time, so only call update when there's an animation
+This looks like it can be just a number cruncher.
+
+assuming a horizontal sprite strip:
+	sclip.x = frame * sclip.w
+
+Animator:
+	Constructor
+	Destructor
+	
+	Update()
+	
+-	DrawTo(dest, x, y) //wraps around image, but only if image is used
+	
+	SetFrame()
+	SetFrameCount()
+	GetFrame()
+	GetFrameCount()
+	
+	SetInterval() //also resets tick
+	GetInterval()
+	GetTick()
+	
+private:
+-	Image image //loading, rendering (could remove this, to unhook it from cb)
+	
+	int frame //current frame index
+	int framecount //number of frames
+	
+	time_t tick //tick of the last frame
+	time_t interval //time between frame changes
+end
+

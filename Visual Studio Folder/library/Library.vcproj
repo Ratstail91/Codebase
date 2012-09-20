@@ -185,6 +185,10 @@
 				Name="Pseudocode"
 				>
 				<File
+					RelativePath="..\..\Documentation\library\Pseudocode\Animator.txt"
+					>
+				</File>
+				<File
 					RelativePath="..\..\Documentation\library\Pseudocode\BBox.txt"
 					>
 				</File>
@@ -271,6 +275,18 @@
 			</File>
 			<File
 				RelativePath=".\delta.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Animator"
+			>
+			<File
+				RelativePath=".\animator.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\animator.h"
 				>
 			</File>
 		</Filter>

@@ -1,15 +1,8 @@
 Migrate old modules
 
-Animated Images
 Linked List-?
 
-Camera
-Actor
-NetworkUDP
-NetworkTCP
 callback frameworks -?
-
-Image Manager (multition, etc.)
 
 Notes:
 Move the #include "this_file's_header.h" to the top of the include lists.
@@ -17,3 +10,35 @@ Move the #include "this_file's_header.h" to the top of the include lists.
 BBox functions are compatable with SDL_Rect if implemented as a template; ommitted for now.
 The user can cast SDL_Rect as a BBox without any problems.
 
+-------------------------
+
+Main Modules (the most generic available):
+>	Vector2
+>	Vector3
+>	Image	//the only one that depends on SDL!!
+>	Animator
+>	BBox
+>	FrameRate
+>	Delta
+>	ConfigUtility
+end
+
+Aux Modules (not generic):	
+	//can be modded as needed, requires SDL_net or other library, could be a main module
+*	NetworkUDP
+*	NetworkTCP
+	
+	//only for C, but kind of pointless with scene system + C++ in all of the other code
+*	Simple Callbacks
+*	Complex Callbacks
+end
+
+Game Modules (should be implemented in the game rather than cb):
+>	Scene
+>	SceneManager
+*	Camera
+*	Actor
+	
+*	xxxManager //from a multition? MultitionManager? Abstract factory possibly
+*	ImageManager
+end
