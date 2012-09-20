@@ -1,6 +1,6 @@
 /* File Name: scene.cpp
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 17/9/2012
+ * Date (dd/mm/yyyy): 21/9/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -25,8 +25,9 @@
  * Description:
  *     ...
 */
-#include <exception>
 #include "scene.h"
+
+#include <exception>
 
 //-------------------------
 //Static declarations

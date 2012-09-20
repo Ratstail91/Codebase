@@ -1,6 +1,6 @@
 /* File Name: config_utility.cpp
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 19/9/2012
+ * Date (dd/mm/yyyy): 21/9/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -25,9 +25,10 @@
  * Description:
  *     Load and process configuration values from a file.
 */
+#include "config_utility.h"
+
 #include <exception>
 #include <fstream>
-#include "config_utility.h"
 using namespace std;
 
 //-------------------------
