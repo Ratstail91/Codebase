@@ -1,6 +1,6 @@
 /* File Name: scene.h
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 17/9/2012
+ * Date (dd/mm/yyyy): 23/9/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -41,8 +41,8 @@ public:
 	static SDL_Surface* SetScreen(int w, int h, int bpp = 0, Uint32 flags = SDL_SWSURFACE);
 	static SDL_Surface* GetScreen();
 
-	static SceneList SetNextScene(SceneList iSceneIndex);
-	static SceneList GetNextScene();
+	SceneList SetNextScene(SceneList iSceneIndex);
+	SceneList GetNextScene();
 
 	/* Frame loop */
 	virtual void RunFrame();
@@ -73,7 +73,7 @@ protected:
 
 private:
 	static SDL_Surface* ms_pScreen;
-	static SceneList ms_iNextScene;
+	SceneList m_iNextScene;
 };
 
 #endif

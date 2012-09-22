@@ -1,6 +1,6 @@
 /* File Name: scene.cpp
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 21/9/2012
+ * Date (dd/mm/yyyy): 23/9/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -34,14 +34,13 @@
 //-------------------------
 
 SDL_Surface* Scene::ms_pScreen = NULL;
-SceneList Scene::ms_iNextScene = SCENE_NULL;
 
 //-------------------------
 //Public access members
 //-------------------------
 
 Scene::Scene() {
-	//
+	m_iNextScene = SCENE_NULL;
 }
 
 Scene::~Scene() {
@@ -69,11 +68,11 @@ SDL_Surface* Scene::GetScreen() {
 }
 
 SceneList Scene::SetNextScene(SceneList iSceneIndex) {
-	return ms_iNextScene = iSceneIndex;
+	return m_iNextScene = iSceneIndex;
 }
 
 SceneList Scene::GetNextScene() {
-	return ms_iNextScene;
+	return m_iNextScene;
 }
 
 //-------------------------
