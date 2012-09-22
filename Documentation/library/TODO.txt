@@ -25,20 +25,20 @@ end
 
 Aux Modules (not generic):	
 	//can be modded as needed, requires SDL_net or other library, could be a main module
-*	NetworkUDP
-*	NetworkTCP
+-?	NetworkUDP
+-?	NetworkTCP
 	
 	//only for C, but kind of pointless with scene system + C++ in all of the other code
-*	Simple Callbacks
-*	Complex Callbacks
+-	Simple Callbacks
+-	Complex Callbacks
 end
 
 Game Modules (should be implemented in the game rather than cb):
 >	Scene
 >	SceneManager
-*	Camera
-*	Actor
+-	Camera
+*	Actor (Outline)
 	
-*	xxxManager //from a multition? MultitionManager? Abstract factory possibly
-*	ImageManager
+-	xxxManager //from a multition? MultitionManager? Abstract factory possibly
+-	ImageManager
 end

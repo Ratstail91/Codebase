@@ -1,0 +1,56 @@
+Aspects of the old UDPNetwork class:
+
+open & close SDLNet
+open & close a UDP socket
+create & free two packets (in & out, this is also where the data is stored)
+send to a specified address
+receive data and save it to a packet
+
+-------------------------
+
+open & close SDLNet //UDP & TCP
+
+
+//TCP system
+TCPServerSocket: //socket factory
+	-socket
+	
+	Constructor
+	Destructor
+	
+	Open( port ) //called by the constuctor?
+	
+	ClientSocket Accept( ) //returns a socket or null
+	
+	Close() //close this socket
+end
+
+TCPClientSocket: //created by ServerSocket?
+	Constructor
+	Destructor
+	
+	Open( ip, port )
+	Open( address )
+	
+	Send(buffer, size)
+	Receive(buffer, size)
+	Ping() //pings the other end, closing the connection if there is a problem?
+	
+	Close() //destructor
+end
+
+//UDP system, should I include an "array of packets" system?
+Socket:
+	Open( port )
+	Close()
+	
+	Send( packet, address )
+	Send( packet, channel )
+	Receive( packet )
+	
+	//binding is part of SDLNet, not networking in general
+	
+end
+
+-------------------------
+
