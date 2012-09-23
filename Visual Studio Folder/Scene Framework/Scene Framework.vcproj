@@ -216,18 +216,18 @@
 				RelativePath=".\scene_list.h"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="Scene Example"
-			>
-			<File
-				RelativePath=".\scene_example.cpp"
+			<Filter
+				Name="Scene Example"
 				>
-			</File>
-			<File
-				RelativePath=".\scene_example.h"
-				>
-			</File>
+				<File
+					RelativePath=".\scene_example.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\scene_example.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="-Scripts"
