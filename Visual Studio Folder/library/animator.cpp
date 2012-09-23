@@ -1,6 +1,6 @@
 /* File Name: animator.cpp
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 21/9/2012
+ * Date (dd/mm/yyyy): 23/9/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -39,7 +39,7 @@ Animator::Animator() {
 }
 
 void Animator::Update() {
-	if (clock() - m_tick >= m_interval) {
+	if (m_interval && clock() - m_tick >= m_interval) {
 		m_frame++;
 		if (m_frame >= m_framecount) { //GEQ for 0 indexing
 			m_frame = 0;
