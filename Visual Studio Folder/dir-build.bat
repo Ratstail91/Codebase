@@ -23,7 +23,7 @@ REM -------------------------
 REM Copy the library
 
 XCOPY "%~p0Library\*.h" "%~p0Release\Codebase Library\include\" /D /S /Y /I
-MOVE /Y "%~p0Release\cb.lib" "%~p0Release\Codebase Library\lib\"
+XCOPY "%~p0Release\*.lib" "%~p0Release\Codebase Library\lib\" /D /Y /I
 
 
 REM -------------------------
