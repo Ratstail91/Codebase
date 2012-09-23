@@ -4,7 +4,9 @@ This repository holds a collection of my generic reusable code modules. This is 
 
 ## Instructions
 
-After building the project in Release configuration, use dir-build.bat to create a usable directory tree.
+After building the project in Release configuration, dir-build.bat is called by VC++ to create a usable directory tree. if you use a different compiler, just run the script. If you use a platform that can't run batch... sorry.
+
+If you want to play around with the Hello World example, you'll need the resources found [here](https://github.com/downloads/Ratstail91/Codebase/data.rar).
 
 ## Copyright
 
