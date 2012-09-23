@@ -1,14 +1,24 @@
-Migrate old modules
+>	For now, I won't include networking in the codebase until I can define what I need, if not
+	in general at least for Tortuga.
 
-Linked List-?
+>	I do need to create an "Actor" class, if only as an example of what can be done.
+>	I could make a whole hello world project.
 
-callback frameworks -?
+>	I also need to remember to change the GitHub wiki to reflect the current version.
 
-Notes:
-Move the #include "this_file's_header.h" to the top of the include lists.
+>	The Preprocessor macros need the date stamps
 
-BBox functions are compatable with SDL_Rect if implemented as a template; ommitted for now.
-The user can cast SDL_Rect as a BBox without any problems.
+>	I need to remove the copyright info from the scene generator
+
+-------------------------
+
+>	Migrate old modules
+
+-	Linked List/other structures
+-	callback frameworks
+
+>	BBox functions are compatable with SDL_Rect if implemented as a template; ommitted for now.
+>	The user can cast SDL_Rect as a BBox without any problems.
 
 -------------------------
 
@@ -25,8 +35,8 @@ end
 
 Aux Modules (not generic):	
 	//can be modded as needed, requires SDL_net or other library, could be a main module
--?	NetworkUDP
--?	NetworkTCP
+-	NetworkUDP
+-	NetworkTCP
 	
 	//only for C, but kind of pointless with scene system + C++ in all of the other code
 -	Simple Callbacks
@@ -37,7 +47,7 @@ Game Modules (should be implemented in the game rather than cb):
 >	Scene
 >	SceneManager
 -	Camera
-*	Actor (Outline)
+>	Actor (Outline)
 	
 -	xxxManager //from a multition? MultitionManager? Abstract factory possibly
 -	ImageManager
