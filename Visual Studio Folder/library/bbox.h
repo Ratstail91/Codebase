@@ -26,7 +26,7 @@
  *     ...
 */
 #ifndef KR_BBOX_H_
-#define KR_BBOX_H_
+#define KR_BBOX_H_ 2012091901
 
 #include "stdint.h"
 

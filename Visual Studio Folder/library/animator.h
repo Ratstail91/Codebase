@@ -26,7 +26,7 @@
  *     ...
 */
 #ifndef KR_ANIMATOR_H_
-#define KR_ANIMATOR_H_
+#define KR_ANIMATOR_H_ 2012092101
 
 #include <time.h>
 

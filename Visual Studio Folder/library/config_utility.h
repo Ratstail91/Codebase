@@ -26,7 +26,7 @@
  *     Load and process configuration values from a file.
 */
 #ifndef KR_CONFIGUTILITY_H_
-#define KR_CONFIGUTILITY_H_
+#define KR_CONFIGUTILITY_H_ 2012091901
 
 #include <map>
 #include <string>

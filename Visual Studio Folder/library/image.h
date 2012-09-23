@@ -26,7 +26,7 @@
  *     ...
 */
 #ifndef KR_IMAGE_H_
-#define KR_IMAGE_H_
+#define KR_IMAGE_H_ 2012091701
 
 #include "SDL.h"
 

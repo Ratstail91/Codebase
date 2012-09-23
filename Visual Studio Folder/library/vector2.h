@@ -26,7 +26,7 @@
  *     ...
 */
 #ifndef KR_VECTOR2_H_
-#define KR_VECTOR2_H_
+#define KR_VECTOR2_H_ 2012091901
 
 class Vector2 {
 public:

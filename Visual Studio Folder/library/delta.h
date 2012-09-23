@@ -26,7 +26,7 @@
  *     ...
 */
 #ifndef KR_DELTA_H_
-#define KR_DELTA_H_
+#define KR_DELTA_H_ 2012091901
 
 class Delta {
 public:
