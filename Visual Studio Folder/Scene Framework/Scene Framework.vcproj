@@ -201,10 +201,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\README.md"
-				>
-			</File>
-			<File
 				RelativePath="..\..\Documentation\Scene Framework\TODO.txt"
 				>
 			</File>

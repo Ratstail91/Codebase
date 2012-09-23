@@ -178,6 +178,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\README.md"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Documentation\Library\TODO.txt"
 				>
 			</File>
