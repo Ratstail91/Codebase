@@ -1,3 +1,8 @@
+Image class is WAY to verbose, I need to fix that, or break it up into smaller pieces.
+Hungarian notation is verbosr too, remove it.
+
+-------------------------
+
 >	For now, I won't include networking in the codebase until I can define what I need, if not
 	in general at least for Tortuga.
 
