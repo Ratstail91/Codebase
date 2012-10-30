@@ -1,6 +1,6 @@
 /* File Name: scene.cpp
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 23/9/2012
+ * Date (dd/mm/yyyy): 31/10/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -33,14 +33,14 @@
 //Static declarations
 //-------------------------
 
-SDL_Surface* Scene::ms_pScreen = NULL;
+SDL_Surface* Scene::screen = NULL;
 
 //-------------------------
 //Public access members
 //-------------------------
 
 Scene::Scene() {
-	m_iNextScene = SCENE_NULL;
+	nextScene = SCENE_NULL;
 }
 
 Scene::~Scene() {
@@ -55,24 +55,24 @@ SDL_Surface* Scene::SetScreen(int w, int h, int bpp, Uint32 flags) {
 	if (!bpp)
 		bpp = SDL_GetVideoInfo()->vfmt->BitsPerPixel;
 
-	ms_pScreen = SDL_SetVideoMode(w, h, bpp, flags);
+	screen = SDL_SetVideoMode(w, h, bpp, flags);
 
-	if (ms_pScreen == NULL)
+	if (screen == NULL)
 		throw(std::exception("Failed to create the screen surface"));
 
-	return ms_pScreen;
+	return screen;
 }
 
 SDL_Surface* Scene::GetScreen() {
-	return ms_pScreen;
+	return screen;
 }
 
-SceneList Scene::SetNextScene(SceneList iSceneIndex) {
-	return m_iNextScene = iSceneIndex;
+SceneList Scene::SetNextScene(SceneList sceneIndex) {
+	return nextScene = sceneIndex;
 }
 
 SceneList Scene::GetNextScene() {
-	return m_iNextScene;
+	return nextScene;
 }
 
 //-------------------------
@@ -84,9 +84,9 @@ void Scene::RunFrame() {
 
 	EventLoop();
 	Update();
-	Render(ms_pScreen);
+	Render(screen);
 
-	SDL_Flip(ms_pScreen);
+	SDL_Flip(screen);
 
 	FrameEnd();
 }
@@ -105,7 +105,7 @@ void Scene::EventLoop() {
 				break;
 
 			case SDL_VIDEORESIZE:
-				SetScreen(event.resize.w, event.resize.h, 0, ms_pScreen->flags);
+				SetScreen(event.resize.w, event.resize.h, 0, screen->flags);
 				break;
 
 			case SDL_MOUSEMOTION:
@@ -128,11 +128,11 @@ void Scene::EventLoop() {
 				KeyUp(event.key);
 				break;
 
-#ifdef EVENT_USE_JOYSTICK
+#ifdef USE_EVENT_JOYSTICK
 			//TODO: joystick/gamepad support
 #endif
 
-#ifdef EVENT_USE_UNKNOWN
+#ifdef USE_EVENT_UNKNOWN
 			default:
 				UnknownEvent(event);
 				break;

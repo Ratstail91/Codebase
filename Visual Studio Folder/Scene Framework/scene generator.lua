@@ -1,7 +1,7 @@
 --[[
  * File Name: scene generator.lua
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 17/9/2012
+ * Date (dd/mm/yyyy): 31/10/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -134,7 +134,7 @@ void " .. sname .. "::Update() {\
 	//\
 }\
 \
-void " .. sname .. "::Render(SDL_Surface* const) {\
+void " .. sname .. "::Render(SDL_Surface* const screen) {\
 	//\
 }\
 \
@@ -142,27 +142,27 @@ void " .. sname .. "::Render(SDL_Surface* const) {\
 //Event handlers\
 //-------------------------\
 \
-void " .. sname .. "::MouseMotion(SDL_MouseMotionEvent const& rMotion) {\
+void " .. sname .. "::MouseMotion(SDL_MouseMotionEvent const& motion) {\
 	//\
 }\
 \
-void " .. sname .. "::MouseButtonDown(SDL_MouseButtonEvent const& rButton) {\
+void " .. sname .. "::MouseButtonDown(SDL_MouseButtonEvent const& button) {\
 	//\
 }\
 \
-void " .. sname .. "::MouseButtonUp(SDL_MouseButtonEvent const& rButton) {\
+void " .. sname .. "::MouseButtonUp(SDL_MouseButtonEvent const& button) {\
 	//\
 }\
 \
-void " .. sname .. "::KeyDown(SDL_KeyboardEvent const& rKey) {\
-	switch(rKey.keysym.sym) {\
+void " .. sname .. "::KeyDown(SDL_KeyboardEvent const& key) {\
+	switch(key.keysym.sym) {\
 		case SDLK_ESCAPE:\
 			QuitEvent();\
 			break;\
 	}\
 }\
 \
-void " .. sname .. "::KeyUp(SDL_KeyboardEvent const& rKey) {\
+void " .. sname .. "::KeyUp(SDL_KeyboardEvent const& key) {\
 	//\
 }\
 "

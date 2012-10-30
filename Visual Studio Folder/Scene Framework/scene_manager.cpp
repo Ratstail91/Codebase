@@ -1,6 +1,6 @@
 /* File Name: scene_manager.cpp
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 17/9/2012
+ * Date (dd/mm/yyyy): 31/10/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -41,7 +41,7 @@
 //-------------------------
 
 SceneManager::SceneManager() {
-	m_pActiveScene = NULL;
+	activeScene = NULL;
 }
 
 SceneManager::~SceneManager() {
@@ -59,15 +59,15 @@ void SceneManager::Proc() {
 	LoadScene(SCENE_EXAMPLE);
 
 	//The main loop
-	while(m_pActiveScene->GetNextScene() != SCENE_QUIT) {
+	while(activeScene->GetNextScene() != SCENE_QUIT) {
 		//switch scenes when necessary
-		if (m_pActiveScene->GetNextScene() != SCENE_NULL) {
-			LoadScene(m_pActiveScene->GetNextScene());
+		if (activeScene->GetNextScene() != SCENE_NULL) {
+			LoadScene(activeScene->GetNextScene());
 			continue;
 		}
 
 		//call each user defined function
-		m_pActiveScene->RunFrame();
+		activeScene->RunFrame();
 	}
 
 	UnloadScene();
@@ -88,7 +88,7 @@ void SceneManager::LoadScene(SceneList iSceneIndex) {
 	switch(iSceneIndex) {
 		//add scene creation here
 		case SCENE_EXAMPLE:
-			m_pActiveScene = new SceneExample();
+			activeScene = new SceneExample();
 			break;
 
 		default:
@@ -97,8 +97,8 @@ void SceneManager::LoadScene(SceneList iSceneIndex) {
 }
 
 void SceneManager::UnloadScene() {
-	delete m_pActiveScene;
-	m_pActiveScene = NULL;
+	delete activeScene;
+	activeScene = NULL;
 }
 
 //-------------------------

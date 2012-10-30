@@ -1,6 +1,6 @@
 /* File Name: scene_manager.h
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 17/9/2012
+ * Date (dd/mm/yyyy): 31/10/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -47,7 +47,7 @@ private:
 	void LoadScene(SceneList iSceneIndex);
 	void UnloadScene();
 
-	Scene* m_pActiveScene;
+	Scene* activeScene;
 };
 
 #endif

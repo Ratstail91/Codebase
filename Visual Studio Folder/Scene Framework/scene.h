@@ -1,6 +1,6 @@
 /* File Name: scene.h
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 23/9/2012
+ * Date (dd/mm/yyyy): 31/10/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -41,7 +41,7 @@ public:
 	static SDL_Surface* SetScreen(int w, int h, int bpp = 0, Uint32 flags = SDL_SWSURFACE);
 	static SDL_Surface* GetScreen();
 
-	SceneList SetNextScene(SceneList iSceneIndex);
+	SceneList SetNextScene(SceneList sceneIndex);
 	SceneList GetNextScene();
 
 	/* Frame loop */
@@ -63,17 +63,17 @@ protected:
 	virtual void KeyDown			(SDL_KeyboardEvent const&) {}
 	virtual void KeyUp				(SDL_KeyboardEvent const&) {}
 
-#ifdef EVENT_USE_JOYSTICK
+#ifdef USE_EVENT_JOYSTICK
 	//TODO: joystick/gamepad support
 #endif
 
-#ifdef EVENT_USE_UNKNOWN
+#ifdef USE_EVENT_UNKNOWN
 	virtual void UnknownEvent		(SDL_Event const&) {}
 #endif
 
 private:
-	static SDL_Surface* ms_pScreen;
-	SceneList m_iNextScene;
+	static SDL_Surface* screen;
+	SceneList nextScene;
 };
 
 #endif
