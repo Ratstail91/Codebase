@@ -1,6 +1,6 @@
 /* File Name: vector2.h
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 19/9/2012
+ * Date (dd/mm/yyyy): 31/10/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -26,34 +26,75 @@
  *     ...
 */
 #ifndef KR_VECTOR2_H_
-#define KR_VECTOR2_H_ 2012091901
+#define KR_VECTOR2_H_ 2012103101
+
+#include <stdexcept>
+#include <math.h>
 
 class Vector2 {
 public:
 	/* Public access members */
 	double x, y;
 
-	Vector2();
-	Vector2(double);
-	Vector2(double, double);
+	inline Vector2():
+	x(0), y(0)
+	{
+	}
 
-	double Length();
-	double SquaredLength();
+	inline Vector2(double d):
+	x(d), y(d)
+	{
+	}
 
-	double operator[](int);
+	inline Vector2(double _x, double _y):
+	x(_x), y(_y)
+	{
+	}
+
+	inline double Length() {
+		return sqrt(x*x+y*y);
+	}
+
+	inline double SquaredLength()  {
+		return x*x+y*y;
+	}
+
+	inline double operator[](size_t i) {
+		if (i >= 2)
+			throw(std::out_of_range("Out of range"));
+
+		return *(&x+i);
+	}
 
 	/* Arithmetic operators */
-	Vector2 operator+(Vector2);
-	Vector2 operator-(Vector2);
-	Vector2 operator*(Vector2);
-	Vector2 operator*(double);
-	Vector2 operator/(Vector2);
-	Vector2 operator/(double);
+	inline Vector2 operator+(Vector2 v) { return Vector2(x + v.x, y + v.y); }
+	inline Vector2 operator-(Vector2 v) { return Vector2(x - v.x, y - v.y); }
+	inline Vector2 operator*(Vector2 v) { return Vector2(x * v.x, y * v.y); }
+	inline Vector2 operator*(double d) { return Vector2(x * d, y * d); }
 
-	template<typename T> Vector2& operator+=(T t) { return *this = *this + t; }
-	template<typename T> Vector2& operator-=(T t) { return *this = *this - t; }
-	template<typename T> Vector2& operator*=(T t) { return *this = *this * t; }
-	template<typename T> Vector2& operator/=(T t) { return *this = *this / t; }
+	inline Vector2 operator/(Vector2 v) {
+		if (!v.x || !v.y)
+			throw(std::invalid_argument("Divide by zero"));
+
+		return Vector2(x / v.x, y / v.y);
+	}
+
+	inline Vector2 operator/(double d) {
+		if (!d)
+			throw(std::invalid_argument("Divide by zero"));
+
+		return Vector2(x / d, y / d);
+	}
+
+	template<typename T> inline Vector2 operator+=(T t) { return *this = *this + t; }
+	template<typename T> inline Vector2 operator-=(T t) { return *this = *this - t; }
+	template<typename T> inline Vector2 operator*=(T t) { return *this = *this * t; }
+	template<typename T> inline Vector2 operator/=(T t) { return *this = *this / t; }
+
+	inline bool operator==(Vector2 v) { return (x == v.x && y == v.y); }
+	inline bool operator!=(Vector2 v) { return (x != v.x || y != v.y); }
+	template<typename T> inline bool operator==(T t) { return (x == t && y == t); }
+	template<typename T> inline bool operator!=(T t) { return (x != t || y != t); }
 };
 
 #endif

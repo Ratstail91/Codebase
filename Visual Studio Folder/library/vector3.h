@@ -1,6 +1,6 @@
 /* File Name: vector3.h
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 19/9/2012
+ * Date (dd/mm/yyyy): 31/10/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -26,34 +26,75 @@
  *     ...
 */
 #ifndef KR_VECTOR3_H_
-#define KR_VECTOR3_H_ 2012091901
+#define KR_VECTOR3_H_ 2012103101
+
+#include <stdexcept>
+#include <math.h>
 
 class Vector3 {
 public:
 	/* Public access members */
 	double x, y, z;
 
-	Vector3();
-	Vector3(double);
-	Vector3(double, double, double);
+	inline Vector2():
+	x(0), y(0), z(0)
+	{
+	}
 
-	double Length();
-	double SquaredLength();
+	inline Vector2(double d):
+	x(d), y(d), z(0)
+	{
+	}
 
-	double operator[](int);
+	inline Vector2(double _x, double _y, double _z):
+	x(_x), y(_y), z(_z)
+	{
+	}
+
+	inline double Length() {
+		return sqrt(x*x+y*y+z*z);
+	}
+
+	inline double SquaredLength()  {
+		return x*x+y*y+z*z;
+	}
+
+	inline double operator[](size_t i) {
+		if (i >= 3)
+			throw(std::out_of_range("Out of range"));
+
+		return *(&x+i);
+	}
 
 	/* Arithmetic operators */
-	Vector3 operator+(Vector3);
-	Vector3 operator-(Vector3);
-	Vector3 operator*(Vector3);
-	Vector3 operator*(double);
-	Vector3 operator/(Vector3);
-	Vector3 operator/(double);
+	inline Vector3 operator+(Vector3 v) { return Vector3(x + v.x, y + v.y, z + v.z); }
+	inline Vector3 operator-(Vector3 v) { return Vector3(x - v.x, y - v.y, z - v.z); }
+	inline Vector3 operator*(Vector3 v) { return Vector3(x * v.x, y * v.y, z * v.z); }
+	inline Vector3 operator*(double d) { return Vector3(x * d, y * d, z * d); }
 
-	template<typename T> Vector3& operator+=(T t) { return *this = *this + t; }
-	template<typename T> Vector3& operator-=(T t) { return *this = *this - t; }
-	template<typename T> Vector3& operator*=(T t) { return *this = *this * t; }
-	template<typename T> Vector3& operator/=(T t) { return *this = *this / t; }
+	inline Vector3 operator/(Vector3 v) {
+		if (!v.x || !v.y || !v.z)
+			throw(std::invalid_argument("Divide by zero"));
+
+		return Vector3(x / v.x, y / v.y, z / v.z);
+	}
+
+	inline Vector3 operator/(double d) {
+		if (!d)
+			throw(std::invalid_argument("Divide by zero"));
+
+		return Vector3(x / d, y / d, z / d);
+	}
+
+	template<typename T> inline Vector3 operator+=(T t) { return *this = *this + t; }
+	template<typename T> inline Vector3 operator-=(T t) { return *this = *this - t; }
+	template<typename T> inline Vector3 operator*=(T t) { return *this = *this * t; }
+	template<typename T> inline Vector3 operator/=(T t) { return *this = *this / t; }
+
+	inline bool operator==(Vector3 v) { return (x == v.x && y == v.y && z == v.z); }
+	inline bool operator!=(Vector3 v) { return (x != v.x || y != v.y || z != v.z); }
+	template<typename T> inline bool operator==(T t) { return (x == t && y == t && z == t); }
+	template<typename T> inline bool operator!=(T t) { return (x != t || y != t || z != t); }
 };
 
 #endif
