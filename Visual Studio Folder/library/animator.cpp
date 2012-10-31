@@ -1,6 +1,6 @@
 /* File Name: animator.cpp
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 23/9/2012
+ * Date (dd/mm/yyyy): 1/11/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -36,10 +36,11 @@ Animator::Animator() {
 	m_framecount = 0;
 	m_interval = 0;
 	m_tick = 0;
+	m_active = true;
 }
 
 void Animator::Update() {
-	if (m_interval && clock() - m_tick >= m_interval) {
+	if (m_active && clock() - m_tick >= m_interval) {
 		m_frame++;
 		if (m_frame >= m_framecount) { //GEQ for 0 indexing
 			m_frame = 0;
@@ -72,6 +73,10 @@ time_t Animator::GetInterval() {
 	return m_interval;
 }
 
-time_t Animator::GetTick() {
-	return m_tick;
+bool Animator::SetActive(bool a) {
+	return m_active = a;
+}
+
+bool Animator::GetActive() {
+	return m_active;
 }

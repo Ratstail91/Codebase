@@ -1,6 +1,6 @@
 /* File Name: animator.h
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 21/9/2012
+ * Date (dd/mm/yyyy): 1/11/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -26,7 +26,7 @@
  *     ...
 */
 #ifndef KR_ANIMATOR_H_
-#define KR_ANIMATOR_H_ 2012092101
+#define KR_ANIMATOR_H_ 2012110101
 
 #include <time.h>
 
@@ -44,7 +44,9 @@ public:
 
 	time_t SetInterval(time_t);
 	time_t GetInterval();
-	time_t GetTick();
+
+	bool SetActive(bool);
+	bool GetActive();
 
 private:
 	/* Private access members */
@@ -52,6 +54,7 @@ private:
 	unsigned int m_framecount;
 	time_t m_interval;
 	time_t m_tick;
+	bool m_active;
 };
 
 #endif
