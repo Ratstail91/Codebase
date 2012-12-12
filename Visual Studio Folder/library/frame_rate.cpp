@@ -1,6 +1,6 @@
 /* File Name: frame_rate.cpp
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 19/9/2012
+ * Date (dd/mm/yyyy): 13/12/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -42,12 +42,12 @@ int FrameRate::ms_iTick = 0;
 //-------------------------
 
 int FrameRate::CalcFrameRate() {
+	ms_iFrameCount++;
 	if (clock() - ms_iTick >= CLOCKS_PER_SEC) {
 		ms_iFrameRate = ms_iFrameCount;
 		ms_iFrameCount = 0;
 		ms_iTick = clock();
 	}
-	ms_iFrameCount++;
 	return ms_iFrameRate;
 }
 
