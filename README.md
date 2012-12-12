@@ -4,7 +4,7 @@ This repository holds a collection of my generic reusable code modules.
 
 ## Instructions
 
-This version of Codebase is intended to be used as a submodule within git.
+This version of Codebase is intended to be used as a submodule within other git repositories.
 
 ## Copyright
 
