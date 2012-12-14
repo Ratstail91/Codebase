@@ -1,6 +1,6 @@
 /* File Name: image.h
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 17/9/2012
+ * Date (dd/mm/yyyy): 14/12/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -26,7 +26,7 @@
  *     ...
 */
 #ifndef KR_IMAGE_H_
-#define KR_IMAGE_H_ 2012091701
+#define KR_IMAGE_H_ 2012121401
 
 #include "SDL.h"
 
@@ -34,7 +34,7 @@ class Image {
 public:
 	/* Public access members */
 	Image();
-	~Image();
+	virtual ~Image();
 
 	/* Surface handlers */
 	void LoadSurface(const char* fname);
@@ -47,7 +47,7 @@ public:
 	void ClearColorKey();
 
 	/* Rendering */
-	void DrawTo(SDL_Surface* const, int x, int y);
+	virtual void DrawTo(SDL_Surface* const, Sint16 x, Sint16 y);
 
 	/* Clip handlers */
 	SDL_Rect SetClip(SDL_Rect r) { return m_clip = r; }

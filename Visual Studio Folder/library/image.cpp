@@ -1,6 +1,6 @@
 /* File Name: image.cpp
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 21/9/2012
+ * Date (dd/mm/yyyy): 14/12/2012
  * Copyright: (c) Kayne Ruse 2012
  *
  * This software is provided 'as-is', without any express or implied
@@ -108,7 +108,7 @@ void Image::ClearColorKey() {
 //Rendering
 //-------------------------
 
-void Image::DrawTo(SDL_Surface* const pDest, int x, int y) {
+void Image::DrawTo(SDL_Surface* const pDest, Sint16 x, Sint16 y) {
 	SDL_Rect sclip = m_clip, dclip = {x,y};
 
 	SDL_BlitSurface(m_pSurface, &sclip, pDest, &dclip);
