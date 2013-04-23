@@ -52,7 +52,7 @@ protected:
 	virtual void FrameStart() {}
 	virtual void FrameEnd() {}
 	virtual void Update() {}
-	virtual void Render(SDL_Surface* const pScreen) {}
+	virtual void Render(SDL_Surface* const screen) {}
 
 	/* Event handlers */
 	virtual void HandleEvents();
