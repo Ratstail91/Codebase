@@ -1,7 +1,7 @@
 /* File Name: scene_manager.cpp
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 31/10/2012
- * Copyright: (c) Kayne Ruse 2012
+ * Date (dd/mm/yyyy): 24/04/2013
+ * Copyright: (c) Kayne Ruse 2013
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -23,25 +23,25 @@
  * distribution.
  *
  * Description:
- *     ...
+ *     Initialize the program, and manage the flow of the scene system.
 */
 #include "scene_manager.h"
 
-#include <exception>
+#include <stdexcept>
 
 //-------------------------
 //Scene headers
 //-------------------------
 
 //Add the custom scene headers here
-#include "scene_example.h"
+#include "example.h"
 
 //-------------------------
 //Public access members
 //-------------------------
 
 SceneManager::SceneManager() {
-	activeScene = NULL;
+	activeScene = nullptr;
 }
 
 SceneManager::~SceneManager() {
@@ -50,18 +50,18 @@ SceneManager::~SceneManager() {
 
 void SceneManager::Init() {
 	if (SDL_Init(SDL_INIT_VIDEO))
-		throw(std::exception("Failed to initialize SDL"));
+		throw(std::runtime_error("Failed to initialize SDL"));
 
-	Scene::SetScreen(800, 600);
+	BaseScene::SetScreen(800, 600);
 }
 
 void SceneManager::Proc() {
-	LoadScene(SCENE_EXAMPLE);
+	LoadScene(SceneList::FIRST);
 
 	//The main loop
-	while(activeScene->GetNextScene() != SCENE_QUIT) {
+	while(activeScene->GetNextScene() != SceneList::QUIT) {
 		//switch scenes when necessary
-		if (activeScene->GetNextScene() != SCENE_NULL) {
+		if (activeScene->GetNextScene() != SceneList::CONTINUE) {
 			LoadScene(activeScene->GetNextScene());
 			continue;
 		}
@@ -82,71 +82,22 @@ void SceneManager::Quit() {
 //Private access members
 //-------------------------
 
-void SceneManager::LoadScene(SceneList iSceneIndex) {
+void SceneManager::LoadScene(SceneList sceneIndex) {
 	UnloadScene();
 
-	switch(iSceneIndex) {
-		//add scene creation here
-		case SCENE_EXAMPLE:
-			activeScene = new SceneExample();
-			break;
+	switch(sceneIndex) {
+		//add scene creation calls here
+		case SceneList::FIRST:
+		case SceneList::EXAMPLE:
+			activeScene = new Example();
+		break;
 
 		default:
-			throw(std::exception("Failed to recognize scene index"));
+			throw(std::logic_error("Failed to recognize the scene index"));
 	}
 }
 
 void SceneManager::UnloadScene() {
 	delete activeScene;
-	activeScene = NULL;
-}
-
-//-------------------------
-//Entry point
-//-------------------------
-
-#include <iostream>
-
-int SDL_main(int, char**) {
-	SceneManager app;
-
-	//Try to initiate the program
-	try {
-		app.Init();
-	}
-	catch(std::exception& e) {
-		std::cerr << "Init Error: " << e.what() << std::endl;
-		return 1;
-	}
-
-	//try to run the program
-	try {
-		app.Proc();
-	}
-	catch(std::exception& e) {
-		std::cerr << "Proc Error: " << e.what() << std::endl;
-
-		//try to cleanup after the error
-		try {
-			app.Quit();
-		}
-		catch(std::exception& e2) {
-			std::cerr << "Quit Error: " << e2.what() << std::endl;
-			return 4;
-		}
-
-		return 2;
-	}
-
-	//try to quit the program
-	try {
-		app.Quit();
-	}
-	catch(std::exception& e) {
-		std::cerr << "Quit Error: " << e.what() << std::endl;
-		return 3;
-	}
-
-	//clean exit
-	return 0;
+	activeScene = nullptr;
 }

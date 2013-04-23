@@ -1,7 +1,7 @@
 /* File Name: scene_manager.h
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 31/10/2012
- * Copyright: (c) Kayne Ruse 2012
+ * Date (dd/mm/yyyy): 24/04/2013
+ * Copyright: (c) Kayne Ruse 2013
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -23,14 +23,15 @@
  * distribution.
  *
  * Description:
- *     ...
+ *     Initialize the program, and manage the flow of the scene system.
 */
-#ifndef KR_SCENEMANAGER_H_
-#define KR_SCENEMANAGER_H_
+#ifndef SCENEMANAGER_H_
+#define SCENEMANAGER_H_
 
-#include "SDL.h"
-#include "scene.h"
 #include "scene_list.h"
+#include "base_scene.h"
+
+#include "SDL/SDL.h"
 
 class SceneManager {
 public:
@@ -44,10 +45,10 @@ public:
 
 private:
 	/* Private access members */
-	void LoadScene(SceneList iSceneIndex);
+	void LoadScene(SceneList sceneIndex);
 	void UnloadScene();
 
-	Scene* activeScene;
+	BaseScene* activeScene;
 };
 
 #endif

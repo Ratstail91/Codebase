@@ -1,7 +1,7 @@
-/* File Name: scene.h
+/* File Name: base_scene.h
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 31/10/2012
- * Copyright: (c) Kayne Ruse 2012
+ * Date (dd/mm/yyyy): 24/04/2013
+ * Copyright: (c) Kayne Ruse 2013
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -23,26 +23,27 @@
  * distribution.
  *
  * Description:
- *     ...
+ *     The base class of all scenes used in the scene system.
 */
-#ifndef KR_SCENE_H_
-#define KR_SCENE_H_
+#ifndef BASESCENE_H_
+#define BASESCENE_H_
 
-#include "SDL.h"
 #include "scene_list.h"
 
-class Scene {
+#include "SDL/SDL.h"
+
+class BaseScene {
 public:
 	/* Public access members */
-	Scene();
-	virtual ~Scene();
+	BaseScene();
+	virtual ~BaseScene();
 
 	/* Program control */
-	static SDL_Surface* SetScreen(int w, int h, int bpp = 0, Uint32 flags = SDL_SWSURFACE);
+	static SDL_Surface* SetScreen(int w, int h, int bpp = 0, Uint32 flags = SDL_HWSURFACE|SDL_DOUBLEBUF);
 	static SDL_Surface* GetScreen();
 
 	SceneList SetNextScene(SceneList sceneIndex);
-	SceneList GetNextScene();
+	SceneList GetNextScene() const;
 
 	/* Frame loop */
 	virtual void RunFrame();
@@ -51,12 +52,12 @@ protected:
 	virtual void FrameStart() {}
 	virtual void FrameEnd() {}
 	virtual void Update() {}
-	virtual void Render(SDL_Surface* const pScreen) =0;
+	virtual void Render(SDL_Surface* const pScreen) {}
 
 	/* Event handlers */
-	virtual void EventLoop();
+	virtual void HandleEvents();
 
-	virtual void QuitEvent			() { SetNextScene(SCENE_QUIT); }
+	virtual void QuitEvent			() { SetNextScene(SceneList::QUIT); }
 	virtual void MouseMotion		(SDL_MouseMotionEvent const&) {}
 	virtual void MouseButtonDown	(SDL_MouseButtonEvent const&) {}
 	virtual void MouseButtonUp		(SDL_MouseButtonEvent const&) {}

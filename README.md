@@ -4,11 +4,11 @@ This repository holds a collection of my generic reusable code modules.
 
 ## Instructions
 
-This version of Codebase is intended to be used as a submodule within other git repositories.
+The Scene Framework requires C++11. The file "scene generator.lua" is provided to help automate the creation of scenes, otherwise it's useless.
 
 ## Copyright
 
-Copyright (c) Kayne Ruse 2012
+Copyright (c) Kayne Ruse 2013
 
 This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.
 
@@ -22,6 +22,4 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 ## Contact information
 
-ratstail91@yahoo.com.au  
 http://kr-studios.tumblr.com/  
-http://www.facebook.com/krgamestudios  

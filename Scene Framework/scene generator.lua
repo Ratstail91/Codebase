@@ -1,8 +1,8 @@
 --[[
  * File Name: scene generator.lua
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 31/10/2012
- * Copyright: (c) Kayne Ruse 2012
+ * Date (dd/mm/yyyy): 24/04/2013
+ * Copyright: (c) Kayne Ruse 2013
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -29,12 +29,12 @@
 
 --instructions
 io.write("Scene Generator - by Kayne Ruse\n\n")
-io.write("my convention is:\n")
+io.write("My convention is:\n")
 
-io.write("\tFile Name:\tscene_example (without the file extentions)\n")
+io.write("\tFile Name:\texample (without the file extentions)\n")
 io.write("\tAuthor:\t\tKayne Ruse\n")
-io.write("\tGuard:\t\tKR_SCENEEXAMPLE_H_\n")
-io.write("\tScene Name:\tSceneExample\n\n")
+io.write("\tGuard:\t\tEXAMPLE_H_\n")
+io.write("\tScene Name:\tExample\n\n")
 
 --input
 io.write("Enter file name (w/o extentions): ")
@@ -62,9 +62,9 @@ hFile:write(
 #ifndef " .. guard .. "\
 #define " .. guard .. "\
 \
-#include \"scene.h\"\
+#include \"base_scene.h\"\
 \
-class " .. sname .. " : public Scene {\
+class " .. sname .. " : public BaseScene {\
 public:\
 	/* Public access members */\
 	" .. sname .. "();\
@@ -158,7 +158,7 @@ void " .. sname .. "::KeyDown(SDL_KeyboardEvent const& key) {\
 	switch(key.keysym.sym) {\
 		case SDLK_ESCAPE:\
 			QuitEvent();\
-			break;\
+		break;\
 	}\
 }\
 \

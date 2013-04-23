@@ -1,19 +1,19 @@
-/* File Name: scene_example.h
+/* File Name: example.h
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 31/10/2012
+ * Date (dd/mm/yyyy): 24/04/2013
  * Copyright: ...
  * Description: ...
 */
-#ifndef KR_SCENEEXAMPLE_H_
-#define KR_SCENEEXAMPLE_H_
+#ifndef EXAMPLE_H_
+#define EXAMPLE_H_
 
-#include "scene.h"
+#include "base_scene.h"
 
-class SceneExample : public Scene {
+class Example : public BaseScene {
 public:
 	/* Public access members */
-	SceneExample();
-	virtual ~SceneExample();
+	Example();
+	virtual ~Example();
 
 protected:
 	/* Frame loop */

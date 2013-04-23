@@ -1,7 +1,7 @@
-/* File Name: scene.cpp
+/* File Name: base_scene.cpp
  * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 31/10/2012
- * Copyright: (c) Kayne Ruse 2012
+ * Date (dd/mm/yyyy): 24/04/2013
+ * Copyright: (c) Kayne Ruse 2013
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -23,27 +23,27 @@
  * distribution.
  *
  * Description:
- *     ...
+ *     The base class of all scenes used in the scene system.
 */
-#include "scene.h"
+#include "base_scene.h"
 
-#include <exception>
+#include <stdexcept>
 
 //-------------------------
 //Static declarations
 //-------------------------
 
-SDL_Surface* Scene::screen = NULL;
+SDL_Surface* BaseScene::screen = nullptr;
 
 //-------------------------
 //Public access members
 //-------------------------
 
-Scene::Scene() {
-	nextScene = SCENE_NULL;
+BaseScene::BaseScene() {
+	nextScene = SceneList::CONTINUE;
 }
 
-Scene::~Scene() {
+BaseScene::~BaseScene() {
 	//
 }
 
@@ -51,27 +51,29 @@ Scene::~Scene() {
 //Program control
 //-------------------------
 
-SDL_Surface* Scene::SetScreen(int w, int h, int bpp, Uint32 flags) {
-	if (!bpp)
+SDL_Surface* BaseScene::SetScreen(int w, int h, int bpp, Uint32 flags) {
+	if (!bpp) {
 		bpp = SDL_GetVideoInfo()->vfmt->BitsPerPixel;
+	}
 
 	screen = SDL_SetVideoMode(w, h, bpp, flags);
 
-	if (screen == NULL)
-		throw(std::exception("Failed to create the screen surface"));
+	if (screen == NULL) {
+		throw(std::runtime_error("Failed to create the screen surface"));
+	}
 
 	return screen;
 }
 
-SDL_Surface* Scene::GetScreen() {
+SDL_Surface* BaseScene::GetScreen() {
 	return screen;
 }
 
-SceneList Scene::SetNextScene(SceneList sceneIndex) {
+SceneList BaseScene::SetNextScene(SceneList sceneIndex) {
 	return nextScene = sceneIndex;
 }
 
-SceneList Scene::GetNextScene() {
+SceneList BaseScene::GetNextScene() const {
 	return nextScene;
 }
 
@@ -79,15 +81,12 @@ SceneList Scene::GetNextScene() {
 //Frame loop
 //-------------------------
 
-void Scene::RunFrame() {
+void BaseScene::RunFrame() {
 	FrameStart();
-
-	EventLoop();
+	HandleEvents();
 	Update();
 	Render(screen);
-
 	SDL_Flip(screen);
-
 	FrameEnd();
 }
 
@@ -95,38 +94,38 @@ void Scene::RunFrame() {
 //Event handlers
 //-------------------------
 
-void Scene::EventLoop() {
+void BaseScene::HandleEvents() {
 	SDL_Event event;
 
 	while(SDL_PollEvent(&event)) {
 		switch(event.type) {
 			case SDL_QUIT:
 				QuitEvent();
-				break;
+			break;
 
 			case SDL_VIDEORESIZE:
 				SetScreen(event.resize.w, event.resize.h, 0, screen->flags);
-				break;
+			break;
 
 			case SDL_MOUSEMOTION:
 				MouseMotion(event.motion);
-				break;
+			break;
 
 			case SDL_MOUSEBUTTONDOWN:
 				MouseButtonDown(event.button);
-				break;
+			break;
 
 			case SDL_MOUSEBUTTONUP:
 				MouseButtonUp(event.button);
-				break;
+			break;
 
 			case SDL_KEYDOWN:
 				KeyDown(event.key);
-				break;
+			break;
 
 			case SDL_KEYUP:
 				KeyUp(event.key);
-				break;
+			break;
 
 #ifdef USE_EVENT_JOYSTICK
 			//TODO: joystick/gamepad support
@@ -135,7 +134,7 @@ void Scene::EventLoop() {
 #ifdef USE_EVENT_UNKNOWN
 			default:
 				UnknownEvent(event);
-				break;
+			break;
 #endif
 		}//switch
 	}//while
