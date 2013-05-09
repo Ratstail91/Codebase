@@ -1,10 +1,4 @@
-/* File Name: example.cpp
- * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 24/04/2013
- * Copyright: ...
- * Description: ...
-*/
-#include "example.h"
+#include "example.hpp"
 
 //-------------------------
 //Public access members
