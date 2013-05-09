@@ -1,44 +1,50 @@
-/* File Name: delta.h
- * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 19/9/2012
- * Copyright: (c) Kayne Ruse 2012
- *
+/* Copyright: (c) Kayne Ruse 2013
+ * 
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
  * arising from the use of this software.
- *
+ * 
  * Permission is granted to anyone to use this software for any purpose,
  * including commercial applications, and to alter it and redistribute it
  * freely, subject to the following restrictions:
- *
+ * 
  * 1. The origin of this software must not be misrepresented; you must not
  * claim that you wrote the original software. If you use this software
  * in a product, an acknowledgment in the product documentation would be
  * appreciated but is not required.
- *
+ * 
  * 2. Altered source versions must be plainly marked as such, and must not be
  * misrepresented as being the original software.
- *
+ * 
  * 3. This notice may not be removed or altered from any source
  * distribution.
- *
- * Description:
- *     ...
 */
-#ifndef KR_DELTA_H_
-#define KR_DELTA_H_ 2012091901
+#ifndef FRAMERATE_HPP_
+#define FRAMERATE_HPP_
 
-class Delta {
+#include <ctime>
+
+class FrameRate {
 public:
-	public:
-	/* Public access members */
-	static int CalcDelta();
-	static int GetDelta();
-
+	FrameRate() {
+		frameCount = lastFrameRate = tick = 0;
+	}
+	int Calculate() {
+		frameCount++;
+		if (clock() - tick >= CLOCKS_PER_SEC) {
+			lastFrameRate = frameCount;
+			frameCount = 0;
+			tick = clock();
+		}
+		return lastFrameRate;
+	}
+	int GetFrameRate() const {
+		return lastFrameRate;
+	}
 private:
-	/* Private access members */
-	static int ms_iTime;
-	static int ms_iTick;
+	int frameCount;
+	int lastFrameRate;
+	int tick;
 };
 
 #endif
