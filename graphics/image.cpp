@@ -1,60 +1,52 @@
-/* File Name: animator.h
- * Author: Kayne Ruse
- * Date (dd/mm/yyyy): 1/11/2012
- * Copyright: (c) Kayne Ruse 2012
- *
+/* Copyright: (c) Kayne Ruse 2013
+ * 
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
  * arising from the use of this software.
- *
+ * 
  * Permission is granted to anyone to use this software for any purpose,
  * including commercial applications, and to alter it and redistribute it
  * freely, subject to the following restrictions:
- *
+ * 
  * 1. The origin of this software must not be misrepresented; you must not
  * claim that you wrote the original software. If you use this software
  * in a product, an acknowledgment in the product documentation would be
  * appreciated but is not required.
- *
+ * 
  * 2. Altered source versions must be plainly marked as such, and must not be
  * misrepresented as being the original software.
- *
+ * 
  * 3. This notice may not be removed or altered from any source
  * distribution.
- *
- * Description:
- *     ...
 */
-#ifndef KR_ANIMATOR_H_
-#define KR_ANIMATOR_H_ 2012110101
+#include "image.hpp"
 
-#include <time.h>
+Image::Image(SDL_Surface* p) {
+	SetSurface(p);
+}
 
-class Animator {
-public:
-	/* Public access members */
-	Animator();
+Image::Image(SDL_Surface* p, SDL_Rect r) {
+	SetSurface(p, r);
+}
 
-	void Update();
+SDL_Surface* Image::SetSurface(SDL_Surface* p) {
+	surface = p;
+	clip = {0, 0, (Uint16)surface->w, (Uint16)surface->h};
+	return surface;
+}
 
-	unsigned int SetFrame		(unsigned int);
-	unsigned int SetFrameCount	(unsigned int);
-	unsigned int GetFrame		();
-	unsigned int GetFrameCount	();
+SDL_Surface* Image::SetSurface(SDL_Surface* const p, SDL_Rect r) {
+	surface = p;
+	clip = r;
+	return surface;
+}
 
-	time_t SetInterval(time_t);
-	time_t GetInterval();
+SDL_Surface* Image::GetSurface() const {
+	return surface;
+}
 
-	bool SetActive(bool);
-	bool GetActive();
+void Image::DrawTo(SDL_Surface* dest, Sint16 x, Sint16 y) {
+	SDL_Rect sclip = clip, dclip = {x,y};
 
-private:
-	/* Private access members */
-	unsigned int m_frame;
-	unsigned int m_framecount;
-	time_t m_interval;
-	time_t m_tick;
-	bool m_active;
-};
-
-#endif
+	SDL_BlitSurface(surface, &sclip, dest, &dclip);
+}
