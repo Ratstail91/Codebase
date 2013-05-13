@@ -21,7 +21,7 @@
 */
 #include "raster_font.hpp"
 
-void RasterFont::DrawStringTo(SDL_Surface* const dest, Sint16 x, Sint16 y, std::string s) {
+void RasterFont::DrawStringTo(std::string s, SDL_Surface* const dest, Sint16 x, Sint16 y) {
 	if (!surface) {
 		return;
 	}

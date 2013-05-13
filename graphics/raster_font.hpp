@@ -31,7 +31,7 @@ public:
 	RasterFont() {}
 	RasterFont(SDL_Surface* p) {SetSurface(p);}
 	virtual ~RasterFont() {}
-	virtual void DrawStringTo(SDL_Surface* const, Sint16 x, Sint16 y, std::string);
+	virtual void DrawStringTo(std::string, SDL_Surface* const, Sint16 x, Sint16 y);
 	virtual SDL_Surface* SetSurface(SDL_Surface*) override;
 
 	using Image::GetSurface;
