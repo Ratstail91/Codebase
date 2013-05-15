@@ -55,6 +55,9 @@ SDL_Surface* Image::GetSurface() const {
 }
 
 void Image::DrawTo(SDL_Surface* dest, Sint16 x, Sint16 y) {
+	if (!surface) {
+		return;
+	}
 	SDL_Rect sclip = clip, dclip = {x,y};
 
 	SDL_BlitSurface(surface, &sclip, dest, &dclip);
