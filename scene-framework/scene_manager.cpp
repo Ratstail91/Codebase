@@ -52,6 +52,11 @@ void SceneManager::Init() {
 void SceneManager::Proc() {
 	LoadScene(SceneList::FIRST);
 
+	//prepare the time system
+	BaseScene::Clock::duration interval(16 * BaseScene::Clock::duration::period::den / std::milli::den);
+	BaseScene::Clock::time_point simTime = BaseScene::Clock::now();
+	BaseScene::Clock::time_point realTime;
+
 	//The main loop
 	while(activeScene->GetNextScene() != SceneList::QUIT) {
 		//switch scenes when necessary
@@ -60,8 +65,21 @@ void SceneManager::Proc() {
 			continue;
 		}
 
-		//call each user defined function
-		activeScene->RunFrame();
+		//update the current time
+		realTime = BaseScene::Clock::now();
+
+		//simulate 16 milliseconds of game time
+		while (simTime < realTime) {
+			//call each user defined function
+			activeScene->RunFrame(interval);
+			simTime += interval;
+		}
+
+		//draw the game to the screen
+		activeScene->RenderFrame();
+
+		//give the computer a break
+		SDL_Delay(10);
 	}
 
 	UnloadScene();

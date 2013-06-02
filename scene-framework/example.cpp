@@ -20,11 +20,11 @@ void Example::FrameStart() {
 	//
 }
 
-void Example::FrameEnd() {
+void Example::Update(Clock::duration delta) {
 	//
 }
 
-void Example::Update() {
+void Example::FrameEnd() {
 	//
 }
 

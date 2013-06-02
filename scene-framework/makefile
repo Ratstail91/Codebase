@@ -1,16 +1,37 @@
-CXXFLAGS+=-std=c++11
-DFLAGS=-DDEBUG
+#config
+INCLUDES=
+CXXFLAGS+=-std=c++11 -DDEBUG $(addprefix -I,$(INCLUDES))
 LIB=-lmingw32 -lSDLmain -lSDL
-OBJ=base_scene.o scene_manager.o main.o
-SRC=example.cpp
 
-all: debug
+#source
+SRC=$(wildcard *.cpp)
 
-release: $(OBJ)
-	$(CXX) $(CXXFLAGS) $(SRC) $(OBJ) $(LIB)
+#objects
+OBJDIR=obj
+OBJ=$(addprefix $(OBJDIR)/,$(SRC:.cpp=.o))
 
-debug: $(OBJ)
-	$(CXX) $(CXXFLAGS) $(DFLAGS) $(SRC) $(OBJ) $(LIB)
+#output
+OUTDIR=out
+OUT=$(addprefix $(OUTDIR)/,a)
+
+#targets
+all: $(OBJ) $(OUT)
+	$(CXX) $(CXXFLAGS) -o $(OUT) $(OBJ) $(LIB)
+
+$(OBJ): | $(OBJDIR)
+
+$(OUT): | $(OUTDIR)
+
+$(OBJDIR):
+	mkdir $(OBJDIR)
+
+$(OUTDIR):
+	mkdir $(OUTDIR)
+
+$(OBJDIR)/%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-	-$(RM) *.o *.a *.exe
+	$(RM) *.o *.a *.exe
+
+rebuild: clean all
