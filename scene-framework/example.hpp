@@ -12,7 +12,7 @@ public:
 protected:
 	/* Frame loop */
 	virtual void FrameStart();
-	virtual void Update(Clock::duration delta);
+	virtual void Update(double delta);
 	virtual void FrameEnd();
 	virtual void Render(SDL_Surface* const);
 

@@ -20,7 +20,7 @@ void Example::FrameStart() {
 	//
 }
 
-void Example::Update(Clock::duration delta) {
+void Example::Update(double delta) {
 	//
 }
 

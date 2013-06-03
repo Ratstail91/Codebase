@@ -26,13 +26,8 @@
 
 #include "SDL/SDL.h"
 
-#include <chrono>
-
 class BaseScene {
 public:
-	/* Utilities */
-	typedef std::chrono::high_resolution_clock Clock;
-
 	/* Public access members */
 	BaseScene();
 	virtual ~BaseScene();
@@ -45,13 +40,13 @@ public:
 	SceneList GetNextScene() const;
 
 	/* Frame loop */
-	virtual void RunFrame(Clock::duration delta);
+	virtual void RunFrame(double delta);
 	virtual void RenderFrame();
 
 protected:
 	virtual void FrameStart() {}
 	virtual void HandleEvents();
-	virtual void Update(Clock::duration delta) {}
+	virtual void Update(double delta) {}
 	virtual void FrameEnd() {}
 	virtual void Render(SDL_Surface* const screen) {}
 

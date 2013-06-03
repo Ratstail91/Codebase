@@ -22,6 +22,7 @@
 #include "scene_manager.hpp"
 
 #include <stdexcept>
+#include <chrono>
 
 //-------------------------
 //Scene headers
@@ -53,9 +54,11 @@ void SceneManager::Proc() {
 	LoadScene(SceneList::FIRST);
 
 	//prepare the time system
-	BaseScene::Clock::duration interval(16 * BaseScene::Clock::duration::period::den / std::milli::den);
-	BaseScene::Clock::time_point simTime = BaseScene::Clock::now();
-	BaseScene::Clock::time_point realTime;
+	typedef std::chrono::high_resolution_clock Clock;
+
+	Clock::duration delta(16 * Clock::duration::period::den / std::milli::den);
+	Clock::time_point simTime = Clock::now();
+	Clock::time_point realTime;
 
 	//The main loop
 	while(activeScene->GetNextScene() != SceneList::QUIT) {
@@ -66,13 +69,13 @@ void SceneManager::Proc() {
 		}
 
 		//update the current time
-		realTime = BaseScene::Clock::now();
+		realTime = Clock::now();
 
-		//simulate 16 milliseconds of game time
+		//simulate game time
 		while (simTime < realTime) {
 			//call each user defined function
-			activeScene->RunFrame(interval);
-			simTime += interval;
+			activeScene->RunFrame(double(delta.count()) / Clock::duration::period::den);
+			simTime += delta;
 		}
 
 		//draw the game to the screen
