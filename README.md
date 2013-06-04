@@ -4,7 +4,7 @@ This repository holds a collection of my generic reusable code modules.
 
 ## Instructions
 
-The Scene Framework requires C++11. The file "scene generator.lua" is provided to help automate the creation of scenes, otherwise it's useless.
+This project requires C++11.
 
 ## Copyright
 
