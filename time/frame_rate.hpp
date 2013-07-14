@@ -22,7 +22,7 @@
 #ifndef FRAMERATE_HPP_
 #define FRAMERATE_HPP_
 
-int ClockFrameRate();
-int GetFrameRate();
+int clockFrameRate();
+int getFrameRate();
 
 #endif
