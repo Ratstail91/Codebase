@@ -29,7 +29,7 @@
 class RasterFont {
 public:
 	RasterFont() = default;
-	RasterFont(SDL_Surface* p);
+	RasterFont(SDL_Surface* p) { SetSurface(p); }
 	~RasterFont() = default;
 
 	void DrawStringTo(std::string, SDL_Surface* const, Sint16 x, Sint16 y);

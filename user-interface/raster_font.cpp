@@ -23,10 +23,6 @@
 
 #include <stdexcept>
 
-RasterFont::RasterFont(SDL_Surface* p) {
-	SetSurface(p);
-}
-
 void RasterFont::DrawStringTo(std::string s, SDL_Surface* const dest, Sint16 x, Sint16 y) {
 	if (!image.GetSurface()) {
 		throw(std::runtime_error("RasterFont not loaded"));
