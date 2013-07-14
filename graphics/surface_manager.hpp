@@ -30,7 +30,7 @@
 class SurfaceManager {
 public:
 	SurfaceManager() = default;
-	~SurfaceManager() noexcept;
+	~SurfaceManager() noexcept { FreeAll(); }
 
 	SDL_Surface* Load(std::string key, std::string fname);
 	SDL_Surface* Reload(std::string key, std::string fname);
