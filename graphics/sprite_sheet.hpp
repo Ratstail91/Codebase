@@ -24,39 +24,43 @@
 
 #include "image.hpp"
 
-#include "SDL/SDL.h"
-
 class SpriteSheet {
 public:
 	SpriteSheet() = default;
-	SpriteSheet(SDL_Surface* s, Uint16 w, Uint16 h) { SetSurface(s, w, h); }
-	~SpriteSheet() = default;
+	SpriteSheet(std::string fname, Uint16 xCellCount, Uint16 yCellCount) { LoadSurface(fname, xCellCount, yCellCount); }
+	SpriteSheet(SDL_Surface* surface, Uint16 xCellCount, Uint16 yCellCount) { SetSurface(surface, xCellCount, yCellCount); }
+	~SpriteSheet() { FreeSurface(); };
 
 	void Update(double delta);
 
-	SDL_Surface* SetSurface(SDL_Surface* const, Uint16 w, Uint16 h);
-	SDL_Surface* GetSurface() const { return image.GetSurface(); }
+	SDL_Surface* LoadSurface(std::string fname, Uint16 xCellCount, Uint16 yCellCount);
+	SDL_Surface* SetSurface(SDL_Surface* surface, Uint16 xCellCount, Uint16 yCellCount);
+	SDL_Surface* GetSurface() { return image.GetSurface(); }
+	void FreeSurface();
 
 	void DrawTo(SDL_Surface* const dest, Sint16 x, Sint16 y) { image.DrawTo(dest, x, y); }
 
-	//Accessors and Mutators
-	double SetDelay(double i) { return delay = i; }
+	//accessors and mutators
+	Image* GetImage() { return &image; } //OO breaker
+
+	Uint16 SetXCount(Uint16);
+	Uint16 SetYCount(Uint16);
+	Uint16 SetXIndex(Uint16);
+	Uint16 SetYIndex(Uint16);
+
+	Uint16 GetXCount() const { return xCount; }
+	Uint16 GetYCount() const { return yCount; }
+	Uint16 GetXIndex() const { return xIndex; }
+	Uint16 GetYIndex() const { return yIndex; }
+
+	double SetDelay(double d);
 	double GetDelay() const { return delay; }
 
-	int SetCurrentFrame(int i) { return currentFrame = i; }
-	int SetCurrentStrip(int i) { return currentStrip = i; }
-
-	Uint16 GetFrameWidth() const { return image.GetClipW(); }
-	Uint16 GetFrameHeight() const { return image.GetClipH(); }
-	int GetCurrentFrame() const { return currentFrame; };
-	int GetCurrentStrip() const { return currentStrip; };
-	int GetMaxFrames() const { return maxFrames; }
-	int GetMaxStrips() const { return maxStrips; }
 private:
 	Image image;
-	int currentFrame = 0, maxFrames = 0;
-	int currentStrip = 0, maxStrips = 0;
-	 double delay = 0, ticks = 0;
+	Uint16 xCount = 0, yCount = 0; //number of cells
+	Uint16 xIndex = 0, yIndex = 0; //current cell being drawn
+	double delay = 0.0, tick = 0.0;
 };
 
 #endif

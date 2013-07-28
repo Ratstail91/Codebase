@@ -21,21 +21,82 @@
 */
 #include "sprite_sheet.hpp"
 
+#include <stdexcept>
+#include <sstream>
+
 void SpriteSheet::Update(double delta) {
-	if (delay && (ticks += delta) >= delay) {
-		if (++currentFrame >= maxFrames) {
-			currentFrame = 0;
+	if (delay && (tick += delta) >= delay) {
+		if (++xIndex >= xCount) {
+			xIndex = 0;
 		}
-		ticks = 0;
+		tick = 0;
 	}
-	image.SetClipX(currentFrame * image.GetClipW());
-	image.SetClipY(currentStrip * image.GetClipH());
+	image.SetClipX(xIndex * image.GetClipW());
+	image.SetClipY(yIndex * image.GetClipH());
 }
 
-SDL_Surface* SpriteSheet::SetSurface(SDL_Surface* const s, Uint16 w, Uint16 h) {
-	image.SetSurface(s);
-	image.SetClip({0, 0, w, h});
-	currentFrame = 0; maxFrames = image.GetSurface()->w / image.GetClipW();
-	currentStrip = 0; maxStrips = image.GetSurface()->h / image.GetClipH();
-	delay = ticks = 0;
+SDL_Surface* SpriteSheet::LoadSurface(std::string fname, Uint16 xCellCount, Uint16 yCellCount) {
+	image.LoadSurface(fname);
+
+	xCount = xCellCount;
+	yCount = yCellCount;
+
+	image.SetClipW(image.GetSurface()->w / xCount);
+	image.SetClipH(image.GetSurface()->h / yCount);
+
+	xIndex = yIndex = 0;
+	delay = tick = 0.0;
+}
+
+SDL_Surface* SpriteSheet::SetSurface(SDL_Surface* surface, Uint16 xCellCount, Uint16 yCellCount) {
+	image.SetSurface(surface);
+
+	xCount = xCellCount;
+	yCount = yCellCount;
+
+	image.SetClipW(image.GetSurface()->w / xCount);
+	image.SetClipH(image.GetSurface()->h / yCount);
+
+	xIndex = yIndex = 0;
+	delay = tick = 0.0;
+}
+
+void SpriteSheet::FreeSurface() {
+	image.FreeSurface();
+	xCount = yCount = 0;
+	xIndex = yIndex = 0;
+	delay = tick = 0.0;
+}
+
+Uint16 SpriteSheet::SetXCount(Uint16 i) {
+	xIndex = 0;
+	return xCount = i;
+}
+
+Uint16 SpriteSheet::SetYCount(Uint16 i) {
+	yIndex = 0;
+	return yCount = i;
+}
+
+Uint16 SpriteSheet::SetXIndex(Uint16 i) {
+	if (i > xCount) {
+		std::ostringstream os;
+		os << "Cannot set x index to " << i;
+		throw(std::invalid_argument(os.str()));
+	}
+	return xIndex = i;
+}
+
+Uint16 SpriteSheet::SetYIndex(Uint16 i) {
+	if (i > yCount) {
+		std::ostringstream os;
+		os << "Cannot set y index to " << i;
+		throw(std::invalid_argument(os.str()));
+	}
+	return yIndex = i;
+}
+
+double SpriteSheet::SetDelay(double d) {
+	tick = 0;
+	return delay = d;
 }
