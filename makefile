@@ -1,5 +1,5 @@
 #config
-LIB=-lmingw32 -lSDLmain -lSDL -llua
+LIB=-lmingw32 -lSDLmain -lSDL
 CXXFLAGS+=-std=c++11 -DDEBUG
 
 #source

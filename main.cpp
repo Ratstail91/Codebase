@@ -1,9 +1,11 @@
 #include "image.hpp"
+#include "sprite_sheet.hpp"
 
 #include "SDL/SDL.h"
 
 #include <stdexcept>
 #include <iostream>
+#include <chrono>
 
 void init();
 void loop();
@@ -11,7 +13,7 @@ void quit();
 
 void handleEvents(SDL_Event const&);
 
-void unit();
+void unit(double);
 
 int SDL_main(int, char**) {
 	try {
@@ -29,6 +31,8 @@ int SDL_main(int, char**) {
 SDL_Surface* screen = nullptr;
 bool running = true;
 
+SpriteSheet sprite;
+
 void init() {
 	if (SDL_Init(0)) {
 		throw(std::runtime_error("Failed to init SDL"));
@@ -39,15 +43,27 @@ void init() {
 	if (!screen) {
 		throw(std::runtime_error("Failed to create the screen"));
 	}
+
+	sprite.LoadSurface("elliot2.bmp", 4, 4);
+	sprite.SetDelay(.25); //one second
 }
 
 void loop() {
+	using namespace std::chrono;
+	steady_clock::time_point tick = steady_clock::now();
+
 	while(running) {
 		SDL_Event event;
 		while(SDL_PollEvent(&event)) {
 			handleEvents(event);
 		}
-		unit();
+
+		double delta = (double)(steady_clock::now()-tick).count() / steady_clock::duration::period::den;
+		tick = steady_clock::now();
+
+		unit(delta);
+
+		sprite.DrawTo(screen, 0, 0);
 		SDL_Flip(screen);
 	}
 }
@@ -71,17 +87,8 @@ void handleEvents(SDL_Event const& event) {
 	}
 }
 
-void unit() {
-	using std::cout;
-	using std::endl;
-
+void unit(double delta) {
 	SDL_FillRect(screen, 0, 0);
 
-	Image a("krstudios.bmp");
-	Image b = a;
-
-	cout << "a: " << a.GetLocal() << endl;
-	a.DrawTo(screen, 0, 0);
-	cout << "b: " << b.GetLocal() << endl;
-	b.DrawTo(screen, 50, 0);
+	sprite.Update(delta);
 }
