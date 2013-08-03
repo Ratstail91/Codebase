@@ -19,7 +19,7 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
 */
-#include "scene_manager.hpp"
+#include "application.hpp"
 
 #include <stdexcept>
 #include <iostream>
@@ -31,13 +31,13 @@ int main(int, char**) {
 	cout << "Beginning program" << endl;
 #endif
 	try {
-		SceneManager app;
+		Application app;
 		app.Init();
 		app.Proc();
 		app.Quit();
 	}
 	catch(exception& e) {
-		cerr << "Fatal error: " << e.what() << endl;
+		cerr << "Fatal exception thrown: " << e.what() << endl;
 		return 1;
 	}
 #ifdef DEBUG

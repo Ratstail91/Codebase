@@ -19,30 +19,28 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
 */
-#ifndef SCENEMANAGER_HPP_
-#define SCENEMANAGER_HPP_
+#ifndef APPLICATION_HPP_
+#define APPLICATION_HPP_
 
 #include "scene_list.hpp"
 #include "base_scene.hpp"
 
-#include "SDL/SDL.h"
-
-class SceneManager {
+class Application {
 public:
-	/* Public access members */
-	SceneManager();
-	~SceneManager();
+	//Public access members
+	Application();
+	~Application();
 
 	void Init();
 	void Proc();
 	void Quit();
 
 private:
-	/* Private access members */
+	//Private access members
 	void LoadScene(SceneList sceneIndex);
 	void UnloadScene();
 
-	BaseScene* activeScene;
+	BaseScene* activeScene = nullptr;
 };
 
 #endif

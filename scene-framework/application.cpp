@@ -19,7 +19,7 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
 */
-#include "scene_manager.hpp"
+#include "application.hpp"
 
 #include <stdexcept>
 #include <chrono>
@@ -35,26 +35,26 @@
 //Public access members
 //-------------------------
 
-SceneManager::SceneManager() {
-	activeScene = nullptr;
+Application::Application() {
+	//
 }
 
-SceneManager::~SceneManager() {
-	UnloadScene();
+Application::~Application() {
+	//
 }
 
-void SceneManager::Init() {
+void Application::Init() {
 	if (SDL_Init(SDL_INIT_VIDEO))
 		throw(std::runtime_error("Failed to initialize SDL"));
 
 	BaseScene::SetScreen(800, 600);
 }
 
-void SceneManager::Proc() {
+void Application::Proc() {
 	LoadScene(SceneList::FIRST);
 
 	//prepare the time system
-	typedef std::chrono::high_resolution_clock Clock;
+	typedef std::chrono::steady_clock Clock;
 
 	Clock::duration delta(16 * Clock::duration::period::den / std::milli::den);
 	Clock::time_point simTime = Clock::now();
@@ -88,8 +88,7 @@ void SceneManager::Proc() {
 	UnloadScene();
 }
 
-void SceneManager::Quit() {
-	UnloadScene();
+void Application::Quit() {
 	SDL_Quit();
 }
 
@@ -97,7 +96,7 @@ void SceneManager::Quit() {
 //Private access members
 //-------------------------
 
-void SceneManager::LoadScene(SceneList sceneIndex) {
+void Application::LoadScene(SceneList sceneIndex) {
 	UnloadScene();
 
 	switch(sceneIndex) {
@@ -112,7 +111,7 @@ void SceneManager::LoadScene(SceneList sceneIndex) {
 	}
 }
 
-void SceneManager::UnloadScene() {
+void Application::UnloadScene() {
 	delete activeScene;
 	activeScene = nullptr;
 }
