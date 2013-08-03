@@ -40,19 +40,29 @@ Button::Button(SDL_Surface* bg, SDL_Surface* f, std::string t, Sint16 _x, Sint16
 }
 
 SDL_Surface* Button::LoadSurface(std::string s) {
-	return image.LoadSurface(s);
+	image.LoadSurface(s);
+	image.SetClipH(image.GetClipH()/3); //3 phases, vertical storage
+	SetText(text); //reset textX & textY
+	return image.GetSurface();
 }
 
 SDL_Surface* Button::LoadFontSurface(std::string s) {
-	return font.LoadSurface(s);
+	font.LoadSurface(s);
+	SetText(text); //reset textX & textY
+	return font.GetSurface();
 }
 
 SDL_Surface* Button::SetSurface(SDL_Surface* p) {
-	return image.SetSurface(p);
+	image.SetSurface(p);
+	image.SetClipH(image.GetClipH()/3); //3 phases, vertical storage
+	SetText(text); //reset textX & textY
+	return image.GetSurface();
 }
 
 SDL_Surface* Button::SetFontSurface(SDL_Surface* p) {
-	return font.SetSurface(p);
+	font.SetSurface(p);
+	SetText(text); //reset textX & textY
+	return font.GetSurface();
 }
 
 Button::State Button::MouseMotion(SDL_MouseMotionEvent const& motion) {
