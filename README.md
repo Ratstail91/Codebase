@@ -4,7 +4,11 @@ This repository holds a collection of my generic reusable code modules.
 
 ## Instructions
 
-This project requires C++11.
+This project requires C++11 and SDL 1.2.
+
+Simply choose which files you want to include, and copy/paste them into your project. Some classes require other classes in this project, so make sure that you have all of the dependencies.
+
+Code reuse favours aggregation rather than inheritance.
 
 ## Copyright
 
