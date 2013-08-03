@@ -19,29 +19,30 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
 */
-#include "application.hpp"
+#ifndef EXAMPLE_HPP_
+#define EXAMPLE_HPP_
 
-#include <stdexcept>
-#include <iostream>
+#include "base_scene.hpp"
 
-using namespace std;
+class Example : public BaseScene {
+public:
+	//Public access members
+	Example();
+	~Example();
 
-int main(int, char**) {
-#ifdef DEBUG
-	cout << "Beginning program" << endl;
+protected:
+	//Frame loop
+	void FrameStart();
+	void Update(double delta);
+	void FrameEnd();
+	void Render(SDL_Surface* const);
+
+	//Event handlers
+	void MouseMotion(SDL_MouseMotionEvent const&);
+	void MouseButtonDown(SDL_MouseButtonEvent const&);
+	void MouseButtonUp(SDL_MouseButtonEvent const&);
+	void KeyDown(SDL_KeyboardEvent const&);
+	void KeyUp(SDL_KeyboardEvent const&);
+};
+
 #endif
-	try {
-		Application app;
-		app.Init();
-		app.Proc();
-		app.Quit();
-	}
-	catch(exception& e) {
-		cerr << "Fatal exception thrown: " << e.what() << endl;
-		return 1;
-	}
-#ifdef DEBUG
-	cout << "Clean exit" << endl;
-#endif
-	return 0;
-}

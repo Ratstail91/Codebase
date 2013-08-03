@@ -19,29 +19,17 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
 */
-#include "application.hpp"
+#ifndef SCENELIST_HPP_
+#define SCENELIST_HPP_
 
-#include <stdexcept>
-#include <iostream>
+enum class SceneList {
+	//these are reserved
+	QUIT,
+	CONTINUE,
+	FIRST,
 
-using namespace std;
+	//custom indexes
+	EXAMPLE,
+};
 
-int main(int, char**) {
-#ifdef DEBUG
-	cout << "Beginning program" << endl;
 #endif
-	try {
-		Application app;
-		app.Init();
-		app.Proc();
-		app.Quit();
-	}
-	catch(exception& e) {
-		cerr << "Fatal exception thrown: " << e.what() << endl;
-		return 1;
-	}
-#ifdef DEBUG
-	cout << "Clean exit" << endl;
-#endif
-	return 0;
-}

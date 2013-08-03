@@ -19,29 +19,28 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
 */
-#include "application.hpp"
+#ifndef APPLICATION_HPP_
+#define APPLICATION_HPP_
 
-#include <stdexcept>
-#include <iostream>
+#include "scene_list.hpp"
+#include "base_scene.hpp"
 
-using namespace std;
+class Application {
+public:
+	//Public access members
+	Application();
+	~Application();
 
-int main(int, char**) {
-#ifdef DEBUG
-	cout << "Beginning program" << endl;
+	void Init();
+	void Proc();
+	void Quit();
+
+private:
+	//Private access members
+	void LoadScene(SceneList sceneIndex);
+	void UnloadScene();
+
+	BaseScene* activeScene = nullptr;
+};
+
 #endif
-	try {
-		Application app;
-		app.Init();
-		app.Proc();
-		app.Quit();
-	}
-	catch(exception& e) {
-		cerr << "Fatal exception thrown: " << e.what() << endl;
-		return 1;
-	}
-#ifdef DEBUG
-	cout << "Clean exit" << endl;
-#endif
-	return 0;
-}

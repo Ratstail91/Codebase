@@ -19,29 +19,64 @@
  * 3. This notice may not be removed or altered from any source
  * distribution.
 */
-#include "application.hpp"
+#include "example.hpp"
 
-#include <stdexcept>
-#include <iostream>
+//-------------------------
+//Public access members
+//-------------------------
 
-using namespace std;
+Example::Example() {
+	//
+}
 
-int main(int, char**) {
-#ifdef DEBUG
-	cout << "Beginning program" << endl;
-#endif
-	try {
-		Application app;
-		app.Init();
-		app.Proc();
-		app.Quit();
+Example::~Example() {
+	//
+}
+
+//-------------------------
+//Frame loop
+//-------------------------
+
+void Example::FrameStart() {
+	//
+}
+
+void Example::Update(double delta) {
+	//
+}
+
+void Example::FrameEnd() {
+	//
+}
+
+void Example::Render(SDL_Surface* const screen) {
+	//
+}
+
+//-------------------------
+//Event handlers
+//-------------------------
+
+void Example::MouseMotion(SDL_MouseMotionEvent const& motion) {
+	//
+}
+
+void Example::MouseButtonDown(SDL_MouseButtonEvent const& button) {
+	//
+}
+
+void Example::MouseButtonUp(SDL_MouseButtonEvent const& button) {
+	//
+}
+
+void Example::KeyDown(SDL_KeyboardEvent const& key) {
+	switch(key.keysym.sym) {
+		case SDLK_ESCAPE:
+			QuitEvent();
+			break;
 	}
-	catch(exception& e) {
-		cerr << "Fatal exception thrown: " << e.what() << endl;
-		return 1;
-	}
-#ifdef DEBUG
-	cout << "Clean exit" << endl;
-#endif
-	return 0;
+}
+
+void Example::KeyUp(SDL_KeyboardEvent const& key) {
+	//
 }
