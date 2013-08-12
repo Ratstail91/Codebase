@@ -27,8 +27,13 @@
 
 class Vector2 {
 public:
-	double x = 0, y = 0;
+	double x, y;
+
+	//This is explicitly a POD
 	Vector2() = default;
+	Vector2(double i, double j): x(i), y(j) {};
+	~Vector2() = default;
+	Vector2& operator=(Vector2 const&) = default;
 
 	double Length() const {
 		return sqrt(x*x+y*y);
@@ -89,7 +94,7 @@ public:
 	bool operator==(Vector2 v) { return (x == v.x && y == v.y); }
 	bool operator!=(Vector2 v) { return (x != v.x || y != v.y); }
 
-	//member templates
+	//member templates (curry the above operators)
 	template<typename T> Vector2 operator+=(T t) { return *this = *this + t; }
 	template<typename T> Vector2 operator-=(T t) { return *this = *this - t; }
 	template<typename T> Vector2 operator*=(T t) { return *this = *this * t; }
@@ -98,7 +103,7 @@ public:
 	template<typename T> bool operator!=(T t) { return (x != t || y != t); }
 };
 
-//non-member templates
+//non-member templates (flip the order)
 template<typename T> Vector2 operator+(T t, Vector2 v) { return v + t; }
 template<typename T> Vector2 operator-(T t, Vector2 v) { return v - t; }
 template<typename T> Vector2 operator*(T t, Vector2 v) { return v * t; }
