@@ -27,9 +27,14 @@
 class RasterFont {
 public:
 	RasterFont() = default;
+	RasterFont(RasterFont const& rhs) { *this = rhs; }
+	RasterFont(RasterFont&& rhs) { *this = std::move(rhs); }
 	RasterFont(std::string fname) { LoadSurface(fname); }
 	RasterFont(SDL_Surface* p) { SetSurface(p); }
 	~RasterFont() = default;
+
+	RasterFont& operator=(RasterFont const& rhs) { image = rhs.image; }
+	RasterFont& operator=(RasterFont&& rhs) { image = std::move(rhs.image); }
 
 	void DrawStringTo(std::string, SDL_Surface* const, Sint16 x, Sint16 y);
 

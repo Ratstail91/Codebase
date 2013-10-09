@@ -23,48 +23,6 @@
 
 #include <stdexcept>
 
-Button::Button(std::string bgname, std::string fname, std::string t, Sint16 _x, Sint16 _y) {
-	LoadSurface(bgname);
-	LoadFontSurface(fname);
-	SetText(t);
-	SetX(x);
-	SetY(y);
-}
-
-Button::Button(SDL_Surface* bg, SDL_Surface* f, std::string t, Sint16 _x, Sint16 _y) {
-	SetSurface(bg);
-	SetFontSurface(f);
-	SetText(t);
-	SetX(x);
-	SetY(y);
-}
-
-SDL_Surface* Button::LoadSurface(std::string s) {
-	image.LoadSurface(s);
-	image.SetClipH(image.GetClipH()/3); //3 phases, vertical storage
-	SetText(text); //reset textX & textY
-	return image.GetSurface();
-}
-
-SDL_Surface* Button::LoadFontSurface(std::string s) {
-	font.LoadSurface(s);
-	SetText(text); //reset textX & textY
-	return font.GetSurface();
-}
-
-SDL_Surface* Button::SetSurface(SDL_Surface* p) {
-	image.SetSurface(p);
-	image.SetClipH(image.GetClipH()/3); //3 phases, vertical storage
-	SetText(text); //reset textX & textY
-	return image.GetSurface();
-}
-
-SDL_Surface* Button::SetFontSurface(SDL_Surface* p) {
-	font.SetSurface(p);
-	SetText(text); //reset textX & textY
-	return font.GetSurface();
-}
-
 Button::State Button::MouseMotion(SDL_MouseMotionEvent const& motion) {
 	return CalcState(motion.x, motion.y, motion.state & SDL_BUTTON_LMASK);
 }
@@ -84,31 +42,40 @@ Button::State Button::MouseButtonUp(SDL_MouseButtonEvent const& button) {
 }
 
 void Button::DrawTo(SDL_Surface* const dest) {
-	image.DrawTo(dest, x, y);
-	font.DrawStringTo(text, dest, textX + x, textY + y);
+	if (!image || !font) {
+		throw(std::runtime_error("Surface not set for Button"));
+	}
+	image->SetClipY(state * image->GetClipH());
+	image->DrawTo(dest, x, y);
+	font->DrawStringTo(text, dest, textX + x, textY + y);
 }
 
 std::string Button::SetText(std::string t) {
+	if (!image || !font) {
+		throw(std::runtime_error("Surface not set for Button"));
+	}
 	//one line, cache the position
 	text = t;
-	textX = (image.GetClipW() / 2) - (font.GetCharW() * text.size() / 2);
-	textY = (image.GetClipH() / 2) - (font.GetCharH() / 2);
+	textX = (image->GetClipW() / 2) - (font->GetCharW() * text.size() / 2);
+	textY = (image->GetClipH() / 2) - (font->GetCharH() / 2);
 	return text;
 }
 
 Button::State Button::CalcState(Sint16 i, Sint16 j, bool leftPressed) {
-	if (i < x || i > (x + image.GetClipW()) ||
-		j < y || j > (y + image.GetClipH())
+	if (!image || !font) {
+		throw(std::runtime_error("Surface not set for Button"));
+	}
+	//if out of bounds
+	if (i < x || i > (x + image->GetClipW()) ||
+		j < y || j > (y + image->GetClipH())
 		) {
-		image.SetClipY(0);
 		return state = State::NORMAL;
 	}
+
 	if (leftPressed) {
-		image.SetClipY(image.GetClipH()*2);
 		return state = State::PRESSED;
 	}
 	else {
-		image.SetClipY(image.GetClipH());
 		return state = State::HOVER;
 	}
 }
