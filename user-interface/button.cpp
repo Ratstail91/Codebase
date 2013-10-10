@@ -66,8 +66,8 @@ Button::State Button::CalcState(Sint16 i, Sint16 j, bool leftPressed) {
 		throw(std::runtime_error("Surface not set for Button"));
 	}
 	//if out of bounds
-	if (i < x || i > (x + image->GetClipW()) ||
-		j < y || j > (y + image->GetClipH())
+	if (i < x || i >= (x + image->GetClipW()) ||
+		j < y || j >= (y + image->GetClipH())
 		) {
 		return state = State::NORMAL;
 	}

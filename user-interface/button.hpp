@@ -79,8 +79,8 @@ private:
 	State CalcState(Sint16 x, Sint16 y, bool leftPressed);
 
 	//point to the provided external objects
-	Image* image;
-	RasterFont* font;
+	Image* image = nullptr;
+	RasterFont* font = nullptr;
 
 	//positions
 	Sint16 x = 0, y = 0;

@@ -24,42 +24,6 @@
 #include <stdexcept>
 #include <sstream>
 
-MenuBar::MenuBar(std::string bgname, std::string fontname, std::vector<std::vector<std::string>> info) {
-	LoadSurface(bgname);
-	LoadFontSurface(fontname);
-	SetEntries(info);
-}
-
-MenuBar::MenuBar(SDL_Surface* background, SDL_Surface* font, std::vector<std::vector<std::string>> info) {
-	SetSurface(background);
-	SetFontSurface(font);
-	SetEntries(info);
-}
-
-SDL_Surface* MenuBar::LoadSurface(std::string s) {
-	image.LoadSurface(s);
-	ResetSurfaces();
-	return image.GetSurface();
-}
-
-SDL_Surface* MenuBar::LoadFontSurface(std::string s) {
-	fontImage.LoadSurface(s);
-	ResetSurfaces();
-	return fontImage.GetSurface();
-}
-
-SDL_Surface* MenuBar::SetSurface(SDL_Surface* p) {
-	image.SetSurface(p);
-	ResetSurfaces();
-	return image.GetSurface();
-}
-
-SDL_Surface* MenuBar::SetFontSurface(SDL_Surface* p) {
-	fontImage.SetSurface(p);
-	ResetSurfaces();
-	return fontImage.GetSurface();
-}
-
 void MenuBar::DrawTo(SDL_Surface* const dest) {
 	for (auto& i : entries) {
 		i.DrawTo(dest);
@@ -79,11 +43,12 @@ void MenuBar::MouseButtonDown(SDL_MouseButtonEvent const& button) {
 }
 
 void MenuBar::MouseButtonUp(SDL_MouseButtonEvent const& button, int* entry, int* butt) {
+	*entry = *butt = -1;
 	int ret = -1;
 	for (auto& i : entries) {
 		ret = i.MouseButtonUp(button);
 
-		if (ret != -1 && entry && butt) {
+		if (ret != -1) {
 			*entry = (&i - entries.data());
 			*butt = ret;
 		}
@@ -91,127 +56,27 @@ void MenuBar::MouseButtonUp(SDL_MouseButtonEvent const& button, int* entry, int*
 }
 
 void MenuBar::SetEntries(std::vector<std::vector<std::string>> info) {
+	if (!image || !font) {
+		throw(std::runtime_error("Surfaces not loaded into the menu bar"));
+	}
+
 	entries.clear();
-	for (auto& i : info) {
-		NewEntry(i);
-	}
-	ResetPositions();
-}
-
-int MenuBar::NewEntry(std::vector<std::string> info) {
-	if (info.size() < 1) {
-		std::ostringstream msg;
-		msg << "Cannot create a menu entry without information for it";
-		throw(std::logic_error(msg.str()));
-	}
-
-	//create the entry itself
-	MenuBarEntry e;
-	e.mainButton.SetSurface(image.GetSurface());
-	e.mainButton.SetFontSurface(fontImage.GetSurface());
-	e.mainButton.SetText(info[0]);
-	e.mainButton.SetX(entries.size() * image.GetClipW());
-	e.mainButton.SetY(0);
-
-	//push the entry onto the menu bar
-	info.erase(info.begin());
-	entries.push_back(e);
-
-	//create each button
-	for (auto& i : info) {
-		NewButton(entries.size()-1, i);
-	}
-
-	return entries.size() -1;
-}
-
-void MenuBar::EraseEntry(int entry) {
-	if (entry >= entries.size()) {
-		std::ostringstream msg;
-		msg << "No menu entry of index " << entry;
-		throw(std::out_of_range(msg.str()));
-	}
-	entries.erase(entries.begin()+entry);
-	ResetPositions();
-}
-
-int MenuBar::GetEntryCount() {
-	return entries.size();
-}
-
-int MenuBar::NewButton(int entry, std::string text) {
-	if (entry >= entries.size()) {
-		std::ostringstream msg;
-		msg << "No menu entry of index " << entry;
-		throw(std::out_of_range(msg.str()));
-	}
-
-	//may the programmer gods forgive my sins
-	entries[entry].dropButtons.push_back(
-		Button(
-			image.GetSurface(),
-			fontImage.GetSurface(),
-			text,
-			entry * image.GetClipW(), //x
-			(entries[entry].dropButtons.size() +1) * (image.GetClipH()/3) //y, +1 to account for the main button's position
-		)
-	);
-}
-
-void MenuBar::EraseButton(int entry, int button) {
-	if (entry >= entries.size()) {
-		std::ostringstream msg;
-		msg << "No menu entry of index " << entry;
-		throw(std::out_of_range(msg.str()));
-	}
-	if (button >= entries[entry].dropButtons.size()) {
-		std::ostringstream msg;
-		msg << "No button of index " << button << " present in menu entry index " << entry;
-		throw(std::out_of_range(msg.str()));
-	}
-	entries[entry].dropButtons.erase(entries[entry].dropButtons.begin()+button);
-	ResetPositions();
-}
-
-void MenuBar::ClearButtons(int entry) {
-	if (entry >= entries.size()) {
-		std::ostringstream msg;
-		msg << "No menu entry of index " << entry;
-		throw(std::out_of_range(msg.str()));
-	}
-	entries[entry].dropButtons.clear();
-	ResetPositions();
-}
-
-int MenuBar::GetButtonCount(int entry) {
-	if (entry >= entries.size()) {
-		std::ostringstream msg;
-		msg << "No menu entry of index " << entry;
-		throw(std::out_of_range(msg.str()));
-	}
-	return entries[entry].dropButtons.size();
-}
-
-void MenuBar::ResetPositions() {
-	for (int i = 0; i < entries.size(); i++) {
-		entries[i].mainButton.SetX(i * image.GetClipW());
+	for (int i = 0; i < info.size(); i++) {
+		//create the entry & the main button
+		entries.push_back(MenuBarEntry());
+		entries[i].mainButton.SetImage(image);
+		entries[i].mainButton.SetFont(font);
+		entries[i].mainButton.SetText(info[i][0]);
+		entries[i].mainButton.SetX(i * image->GetClipW());
 		entries[i].mainButton.SetY(0);
-
-		for (int j = 0; j < entries[i].dropButtons.size(); j++) {
-			entries[i].dropButtons[j].SetX(i * image.GetClipW());
-			entries[i].dropButtons[j].SetY((j+1) * (image.GetClipH()/3));
-		}
-	}
-}
-
-void MenuBar::ResetSurfaces() {
-	for (auto& i : entries) {
-		i.mainButton.SetSurface(image.GetSurface());
-		i.mainButton.SetFontSurface(fontImage.GetSurface());
-
-		for (auto& j : i.dropButtons) {
-			j.SetSurface(image.GetSurface());
-			j.SetFontSurface(fontImage.GetSurface());
+		for (int j = 0; j < info[i].size()-1; j++) {
+			//create each drop button in this entry
+			entries[i].dropButtons.push_back(Button());
+			entries[i].dropButtons[j].SetImage(image);
+			entries[i].dropButtons[j].SetFont(font);
+			entries[i].dropButtons[j].SetText(info[i][j+1]);
+			entries[i].dropButtons[j].SetX(i * image->GetClipW());
+			entries[i].dropButtons[j].SetY((j+1) * image->GetClipH());
 		}
 	}
 }
